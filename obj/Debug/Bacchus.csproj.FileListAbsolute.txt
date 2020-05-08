@@ -1,0 +1,11 @@
+C:\Users\Félix\source\repos\Bacchus\Bacchus\bin\Debug\Bacchus.exe.config
+C:\Users\Félix\source\repos\Bacchus\Bacchus\bin\Debug\Bacchus.exe
+C:\Users\Félix\source\repos\Bacchus\Bacchus\bin\Debug\Bacchus.pdb
+C:\Users\Félix\source\repos\Bacchus\Bacchus\obj\Debug\Bacchus.csprojAssemblyReference.cache
+C:\Users\Félix\source\repos\Bacchus\Bacchus\obj\Debug\Bacchus.FormMain.resources
+C:\Users\Félix\source\repos\Bacchus\Bacchus\obj\Debug\Bacchus.Properties.Resources.resources
+C:\Users\Félix\source\repos\Bacchus\Bacchus\obj\Debug\Bacchus.csproj.GenerateResource.cache
+C:\Users\Félix\source\repos\Bacchus\Bacchus\obj\Debug\Bacchus.csproj.CoreCompileInputs.cache
+C:\Users\Félix\source\repos\Bacchus\Bacchus\obj\Debug\Bacchus.exe
+C:\Users\Félix\source\repos\Bacchus\Bacchus\obj\Debug\Bacchus.pdb
+C:\Users\Félix\source\repos\Bacchus\Bacchus\obj\Debug\Bacchus.FromImporter.resources

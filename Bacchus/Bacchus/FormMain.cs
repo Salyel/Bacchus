@@ -46,5 +46,17 @@ namespace Bacchus
         {
 
         }
+
+        private void actualiserToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void importerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ModaleImporter FenetreImporter = new ModaleImporter();
+            FenetreImporter.StartPosition = FormStartPosition.CenterParent;
+            FenetreImporter.ShowDialog(this);
+        }
     }
 }

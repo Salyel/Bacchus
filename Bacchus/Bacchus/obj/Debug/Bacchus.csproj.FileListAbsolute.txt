@@ -18,3 +18,5 @@ D:\Programmes Visual\Bacchus\Bacchus\Bacchus\Bacchus\bin\Debug\EntityFramework.S
 D:\Programmes Visual\Bacchus\Bacchus\Bacchus\Bacchus\bin\Debug\System.Data.SQLite.xml
 D:\Programmes Visual\Bacchus\Bacchus\Bacchus\Bacchus\bin\Debug\System.Data.SQLite.dll.config
 D:\Programmes Visual\Bacchus\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.csproj.CopyComplete
+D:\Programmes Visual\Bacchus\Bacchus\Bacchus\Bacchus\bin\Debug\Bacchus.SQLite
+D:\Programmes Visual\Bacchus\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.ModaleImporter.resources

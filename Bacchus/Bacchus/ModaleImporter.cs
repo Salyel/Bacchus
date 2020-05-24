@@ -12,9 +12,25 @@ namespace Bacchus
 {
     public partial class ModaleImporter : Form
     {
+        /*Attributs*/
+        private String FileName;
+
+        /*Constructor*/
         public ModaleImporter()
         {
             InitializeComponent();
+        }
+
+
+        /*Other methods*/
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //opening a file selector
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

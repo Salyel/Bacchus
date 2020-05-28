@@ -32,5 +32,15 @@ namespace Bacchus
         {
 
         }
+
+        private void CrushRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AddRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

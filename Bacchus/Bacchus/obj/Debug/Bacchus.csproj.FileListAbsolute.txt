@@ -19,7 +19,6 @@ D:\Programmes Visual\Bacchus\Bacchus\Bacchus\Bacchus\bin\Debug\System.Data.SQLit
 D:\Programmes Visual\Bacchus\Bacchus\Bacchus\Bacchus\bin\Debug\System.Data.SQLite.dll.config
 D:\Programmes Visual\Bacchus\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.csproj.CopyComplete
 D:\Programmes Visual\Bacchus\Bacchus\Bacchus\Bacchus\bin\Debug\Bacchus.SQLite
-D:\Programmes Visual\Bacchus\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.ModaleImporter.resources
 D:\Félix\Documents\Polytech 4A\S8\.Net\TP\Ressources\Bacchus\Bacchus\Bacchus\bin\Debug\Bacchus.SQLite
 D:\Félix\Documents\Polytech 4A\S8\.Net\TP\Ressources\Bacchus\Bacchus\Bacchus\bin\Debug\Bacchus.exe.config
 D:\Félix\Documents\Polytech 4A\S8\.Net\TP\Ressources\Bacchus\Bacchus\Bacchus\bin\Debug\Bacchus.exe
@@ -42,3 +41,4 @@ D:\Félix\Documents\Polytech 4A\S8\.Net\TP\Ressources\Bacchus\Bacchus\Bacchus\ob
 D:\Félix\Documents\Polytech 4A\S8\.Net\TP\Ressources\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.csproj.CopyComplete
 D:\Félix\Documents\Polytech 4A\S8\.Net\TP\Ressources\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.exe
 D:\Félix\Documents\Polytech 4A\S8\.Net\TP\Ressources\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.pdb
+D:\Programmes Visual\Bacchus\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.ModaleImporter.resources

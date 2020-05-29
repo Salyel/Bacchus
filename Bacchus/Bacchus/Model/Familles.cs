@@ -16,6 +16,10 @@ namespace Bacchus.Model
             this.RefFamille = RefFamille;
             this.Nom = Nom;
         }
+        public Familles(String Nom)
+        {
+            this.Nom = Nom;
+        }
 
         public int GetRefFamille()
         {

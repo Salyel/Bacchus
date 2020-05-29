@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bacchus.DAO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,7 +29,7 @@ namespace Bacchus
         {
             String FileName;
 
-            //opening a file selector*
+            //opening a file selector
             OpenFileDialog Picker = new OpenFileDialog();
             Picker.Title = "Selectionne ton fichier .csv";
             Picker.InitialDirectory = Directory.GetCurrentDirectory();
@@ -37,6 +38,8 @@ namespace Bacchus
 
             FileName = Picker.FileName;
             label2.Text = FileName;
+
+            ImporterEcrasement Ecrasement = new ImporterEcrasement(Picker);
         }
 
         private void label1_Click(object sender, EventArgs e)

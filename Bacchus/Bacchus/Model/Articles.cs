@@ -24,7 +24,16 @@ namespace Bacchus.Model
             this.PrixHT = PrixHT;
             this.Quantite = Quantite;
         }
-        
+
+        public Articles(String Description, int RefSousFamille, int RefMarque, float PrixHT, int Quantite)
+        {
+            this.Description = Description;
+            this.RefSousFamille = RefSousFamille;
+            this.RefMarque = RefMarque;
+            this.PrixHT = PrixHT;
+            this.Quantite = Quantite;
+        }
+
         public String GetRefArticle()
         {
             return RefArticle;

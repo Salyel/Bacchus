@@ -65,6 +65,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\MenuFichierController.cs" />
+    <Compile Include="Controller\ImportButtonController.cs" />
+    <Compile Include="DAO\ArticlesDAO.cs" />
+    <Compile Include="DAO\DatabaseDirectory.cs" />
+    <Compile Include="DAO\ImporterAjout.cs" />
+    <Compile Include="DAO\FamillesDAO.cs" />
+    <Compile Include="DAO\MarquesDAO.cs" />
+    <Compile Include="DAO\SousFamillesDAO.cs" />
+    <Compile Include="DAO\ImporterEcrasement.cs" />
+    <Compile Include="Model\Articles.cs" />
+    <Compile Include="Model\SousFamilles.cs" />
+    <Compile Include="Model\Marques.cs" />
+    <Compile Include="Model\Familles.cs" />
     <Compile Include="View\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,6 +124,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

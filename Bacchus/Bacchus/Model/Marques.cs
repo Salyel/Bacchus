@@ -17,6 +17,11 @@ namespace Bacchus.Model
             this.Nom = Nom;
         }
 
+        public Marques(String Nom)
+        {
+            this.Nom = Nom;
+        }
+
         public int GetRefMarque()
         {
             return RefMarque;
@@ -36,4 +41,4 @@ namespace Bacchus.Model
         }
     }
 }
-}
+

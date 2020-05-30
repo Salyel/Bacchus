@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Bacchus.Controller;
+using Bacchus.DAO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,7 +16,7 @@ namespace Bacchus
     public partial class ModaleImporter : Form
     {
         /*Attributs*/
-        private String FileName;
+        private String ButtonsValue = "";
 
         /*Constructor*/
         public ModaleImporter()
@@ -26,17 +28,7 @@ namespace Bacchus
         /*Other methods*/
         private void button1_Click(object sender, EventArgs e)
         {
-            String FileName;
-
-            //opening a file selector*
-            OpenFileDialog Picker = new OpenFileDialog();
-            Picker.Title = "Selectionne ton fichier .csv";
-            Picker.InitialDirectory = Directory.GetCurrentDirectory();
-            Picker.Filter = "CSV files (*.csv)|*.csv";
-            Picker.ShowDialog();
-
-            FileName = Picker.FileName;
-            label2.Text = FileName;
+            ImportButtonController Listener = new ImportButtonController(this);
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -46,12 +38,12 @@ namespace Bacchus
 
         private void CrushRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-
+            ButtonsValue = "Ecrasement";
         }
 
         private void AddRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-
+            ButtonsValue = "Ajout";
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -62,6 +54,21 @@ namespace Bacchus
         private void label2_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        public void SetProgressBarValue(int Value)
+        {
+            ProgressBar.Value = Value;
+        }
+
+        public string GetButtonsValue()
+        {
+            return ButtonsValue;
+        }
+
+        public Label GetLabel2()
+        {
+            return label2;
         }
     }
 }

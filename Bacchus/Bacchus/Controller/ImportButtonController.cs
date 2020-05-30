@@ -21,7 +21,7 @@ namespace Bacchus.Controller
 
             if (Modale.GetButtonsValue().Equals(""))
             {
-                Modale.GetLabel2().Text = "Veuillez choisir un mode d'intégration pour la base de données";
+                Modale.GetLabelFileName().Text = "Veuillez choisir un mode d'intégration pour la base de données";
             }
             else
             {
@@ -32,7 +32,7 @@ namespace Bacchus.Controller
                 Picker.ShowDialog();
 
                 FileName = Picker.FileName;
-                Modale.GetLabel2().Text = FileName;
+                Modale.GetLabelFileName().Text = FileName;
 
                 if (Modale.GetButtonsValue().Equals("Ecrasement"))
                 {

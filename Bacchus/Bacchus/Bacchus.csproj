@@ -65,6 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\ExportButtonController.cs" />
     <Compile Include="Controller\MenuFichierController.cs" />
     <Compile Include="Controller\ImportButtonController.cs" />
     <Compile Include="DAO\ArticlesDAO.cs" />
@@ -78,6 +79,12 @@
     <Compile Include="Model\SousFamilles.cs" />
     <Compile Include="Model\Marques.cs" />
     <Compile Include="Model\Familles.cs" />
+    <Compile Include="View\ModaleExporter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ModaleExporter.Designer.cs">
+      <DependentUpon>ModaleExporter.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,6 +101,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="View\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ModaleExporter.resx">
+      <DependentUpon>ModaleExporter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\ModaleImporter.resx">
       <DependentUpon>ModaleImporter.cs</DependentUpon>

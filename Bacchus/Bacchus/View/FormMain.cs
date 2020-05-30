@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bacchus.Controller;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -54,9 +55,12 @@ namespace Bacchus
 
         private void importerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ModaleImporter FenetreImporter = new ModaleImporter();
-            FenetreImporter.StartPosition = FormStartPosition.CenterParent;
-            FenetreImporter.ShowDialog(this);
+            MenuFichierController Menu = new MenuFichierController(this, "importer");
+        }
+
+        private void exporterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //MenuFichierController Menu = new MenuFichierController(this, "exporter");
         }
     }
 }

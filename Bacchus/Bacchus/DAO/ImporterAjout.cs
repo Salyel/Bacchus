@@ -10,43 +10,13 @@ using System.Windows.Forms;
 
 namespace Bacchus.DAO
 {
-    class ImporterEcrasement
+    class ImporterAjout
     {
         private OpenFileDialog Picker;
         private ModaleImporter Modale;
 
-        public ImporterEcrasement(OpenFileDialog Picker, ModaleImporter Modale)
+        public ImporterAjout(OpenFileDialog Picker, ModaleImporter Modale)
         {
-            SQLiteConnection M_dbConnection = new SQLiteConnection(DatabaseDirectory.Database);
-            M_dbConnection.Open();
-
-            String Sql = "DELETE FROM 'Marques'";
-            Console.WriteLine(Sql);
-            SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection);
-            Command.ExecuteNonQuery();
-
-            Sql = "DELETE FROM 'Familles'";
-            Console.WriteLine(Sql);
-            Command = new SQLiteCommand(Sql, M_dbConnection);
-            Command.ExecuteNonQuery();
-
-            Sql = "DELETE FROM 'SousFamilles'";
-            Console.WriteLine(Sql);
-            Command = new SQLiteCommand(Sql, M_dbConnection);
-            Command.ExecuteNonQuery();
-
-            Sql = "DELETE FROM 'Articles'";
-            Console.WriteLine(Sql);
-            Command = new SQLiteCommand(Sql, M_dbConnection);
-            Command.ExecuteNonQuery();
-
-            Sql = "delete from sqlite_sequence";
-            Console.WriteLine(Sql);
-            Command = new SQLiteCommand(Sql, M_dbConnection);
-            Command.ExecuteNonQuery();
-
-            M_dbConnection.Close();
-
             this.Picker = Picker;
             this.Modale = Modale;
             ImporterBDD();
@@ -98,30 +68,53 @@ namespace Bacchus.DAO
                 }
             }
             Modale.SetProgressBarValue(50);
-            for (int Index = 0;  Index < AllMarques.Count; Index++)
+            for (int Index = 0; Index < AllMarques.Count; Index++)
             {
-                Marques Marque = new Marques(AllMarques[Index]);
-                MarquesD.AjouterMarque(Marque);
+                if(!MarquesD.CheckIfExists(AllMarques[Index]))
+                {
+                    Marques Marque = new Marques(AllMarques[Index]);
+                    MarquesD.AjouterMarque(Marque);
+                }
             }
             Modale.SetProgressBarValue(60);
             for (int Index = 0; Index < AllFamilles.Count; Index++)
             {
-                Familles Famille = new Familles(AllFamilles[Index]);
-                FamillesD.AjouterFamille(Famille);
+                if(!FamillesD.CheckIfExists(AllFamilles[Index]))
+                {
+                    Familles Famille = new Familles(AllFamilles[Index]);
+                    FamillesD.AjouterFamille(Famille);
+                }
             }
             Modale.SetProgressBarValue(70);
             for (int Index = 0; Index < AllSousFamilles.Count; Index++)
             {
-                SousFamilles SousFamille = new SousFamilles(FamillesD.GetRefByName(AllSousFamillesFamilles[Index]), AllSousFamilles[Index]);
-                SousFamillesD.AjouterSousFamille(SousFamille);
+                //Là je devais m'occuper d'ajouter la sous famille si elle était pas là, ou la modifier si sa famille avait changé (jsp si c'est possible)
+                if(!SousFamillesD.CheckIfExists(AllSousFamilles[Index]))
+                {
+                    SousFamilles SousFamille = new SousFamilles(FamillesD.GetRefByName(AllSousFamillesFamilles[Index]), AllSousFamilles[Index]);
+                    SousFamillesD.AjouterSousFamille(SousFamille);
+                }
+                else
+                {
+                    SousFamillesD.Update(FamillesD.GetRefByName(AllSousFamillesFamilles[Index]), AllSousFamilles[Index]);
+                }
             }
             Modale.SetProgressBarValue(80);
             for (int Index = 0; Index < AllArticlesRefArticle.Count; Index++)
             {
-                int RefSousFamille = SousFamillesD.GetRefByName(AllArticlesSousFamilleNom[Index]);
-                int RefMarque = MarquesD.GetRefByName(AllArticlesMarqueNom[Index]);
-                Articles Article = new Articles(AllArticlesRefArticle[Index], AllArticlesDescription[Index], RefSousFamille, RefMarque, AllArticlesPrixHT[Index], 0);
-                ArticlesD.AjouterArticle(Article);
+                if(!ArticlesD.CheckIfExists(AllArticlesRefArticle[Index]))
+                {
+                    int RefSousFamille = SousFamillesD.GetRefByName(AllArticlesSousFamilleNom[Index]);
+                    int RefMarque = MarquesD.GetRefByName(AllArticlesMarqueNom[Index]);
+                    Articles Article = new Articles(AllArticlesRefArticle[Index], AllArticlesDescription[Index], RefSousFamille, RefMarque, AllArticlesPrixHT[Index], 0);
+                    ArticlesD.AjouterArticle(Article);
+                }
+                else
+                {
+                    int RefSousFamille = SousFamillesD.GetRefByName(AllArticlesSousFamilleNom[Index]);
+                    int RefMarque = MarquesD.GetRefByName(AllArticlesMarqueNom[Index]);
+                    ArticlesD.Update(AllArticlesRefArticle[Index], AllArticlesDescription[Index], RefSousFamille, RefMarque, AllArticlesPrixHT[Index], 0);
+                }
             }
             Modale.SetProgressBarValue(100);
         }

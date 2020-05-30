@@ -60,7 +60,7 @@ namespace Bacchus
 
         private void exporterToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //MenuFichierController Menu = new MenuFichierController(this, "exporter");
+            MenuFichierController Menu = new MenuFichierController(this, "exporter");
         }
     }
 }

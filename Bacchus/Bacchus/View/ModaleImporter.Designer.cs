@@ -29,34 +29,33 @@
         private void InitializeComponent()
         {
             this.SelectButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.LabelIntegration = new System.Windows.Forms.Label();
             this.CrushRadioButton = new System.Windows.Forms.RadioButton();
             this.AddRadioButton = new System.Windows.Forms.RadioButton();
             this.ProgressBar = new System.Windows.Forms.ProgressBar();
-            this.label2 = new System.Windows.Forms.Label();
+            this.LabelFileName = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // SelectButton
             // 
-            this.SelectButton.Location = new System.Drawing.Point(109, 11);
+            this.SelectButton.Location = new System.Drawing.Point(9, 11);
             this.SelectButton.Margin = new System.Windows.Forms.Padding(2);
             this.SelectButton.Name = "SelectButton";
-            this.SelectButton.Size = new System.Drawing.Size(143, 25);
+            this.SelectButton.Size = new System.Drawing.Size(348, 25);
             this.SelectButton.TabIndex = 0;
-            this.SelectButton.Text = "Sélectionner un fichier .csv";
+            this.SelectButton.Text = "Sélectionner un fichier .csv à importer";
             this.SelectButton.UseVisualStyleBackColor = true;
             this.SelectButton.Click += new System.EventHandler(this.button1_Click);
             // 
-            // label1
+            // LabelIntegration
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 99);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(166, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Choisissez un mode d\'intégration :";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.LabelIntegration.AutoSize = true;
+            this.LabelIntegration.Location = new System.Drawing.Point(7, 99);
+            this.LabelIntegration.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LabelIntegration.Name = "LabelIntegration";
+            this.LabelIntegration.Size = new System.Drawing.Size(166, 13);
+            this.LabelIntegration.TabIndex = 1;
+            this.LabelIntegration.Text = "Choisissez un mode d\'intégration :";
             // 
             // CrushRadioButton
             // 
@@ -92,24 +91,24 @@
             this.ProgressBar.Size = new System.Drawing.Size(348, 28);
             this.ProgressBar.TabIndex = 4;
             // 
-            // label2
+            // LabelFileName
             // 
-            this.label2.Location = new System.Drawing.Point(9, 41);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(348, 58);
-            this.label2.TabIndex = 5;
-            this.label2.Click += new System.EventHandler(this.label2_Click_1);
+            this.LabelFileName.Location = new System.Drawing.Point(9, 44);
+            this.LabelFileName.Name = "LabelFileName";
+            this.LabelFileName.Size = new System.Drawing.Size(348, 48);
+            this.LabelFileName.TabIndex = 5;
+            this.LabelFileName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ModaleImporter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(366, 278);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.LabelFileName);
             this.Controls.Add(this.ProgressBar);
             this.Controls.Add(this.AddRadioButton);
             this.Controls.Add(this.CrushRadioButton);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.LabelIntegration);
             this.Controls.Add(this.SelectButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ModaleImporter";
@@ -122,10 +121,10 @@
         #endregion
 
         private System.Windows.Forms.Button SelectButton;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label LabelIntegration;
         private System.Windows.Forms.RadioButton CrushRadioButton;
         private System.Windows.Forms.RadioButton AddRadioButton;
         private System.Windows.Forms.ProgressBar ProgressBar;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label LabelFileName;
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bacchus.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +26,9 @@ namespace Bacchus.Controller
             }
             else if(Type.Equals("exporter"))
             {
-
+                ModaleExporter FenetreExporter = new ModaleExporter();
+                FenetreExporter.StartPosition = FormStartPosition.CenterParent;
+                FenetreExporter.ShowDialog(Form);
             }
 
         }

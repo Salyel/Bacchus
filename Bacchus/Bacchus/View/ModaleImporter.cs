@@ -28,12 +28,7 @@ namespace Bacchus
         /*Other methods*/
         private void button1_Click(object sender, EventArgs e)
         {
-            ImportButtonController Listener = new ImportButtonController(this);
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
+            ImportButtonController Controller = new ImportButtonController(this);
         }
 
         private void CrushRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -46,16 +41,6 @@ namespace Bacchus
             ButtonsValue = "Ajout";
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
         public void SetProgressBarValue(int Value)
         {
             ProgressBar.Value = Value;
@@ -66,9 +51,9 @@ namespace Bacchus
             return ButtonsValue;
         }
 
-        public Label GetLabel2()
+        public Label GetLabelFileName()
         {
-            return label2;
+            return LabelFileName;
         }
     }
 }

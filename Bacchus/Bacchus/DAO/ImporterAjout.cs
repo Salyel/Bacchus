@@ -17,9 +17,12 @@ namespace Bacchus.DAO
 
         public ImporterAjout(OpenFileDialog Picker, ModaleImporter Modale)
         {
-            this.Picker = Picker;
-            this.Modale = Modale;
-            ImporterBDD();
+            if(!Picker.FileName.Equals(""))
+            {
+                this.Picker = Picker;
+                this.Modale = Modale;
+                ImporterBDD();
+            }
         }
 
         public void ImporterBDD()
@@ -45,6 +48,7 @@ namespace Bacchus.DAO
             using (var reader = new StreamReader(Picker.FileName))
             {
                 reader.ReadLine();                      //On passe la première ligne (les headers du fichier)
+                //On stocke tous dans des listes en parcourant notre fichier, on créera après (on ne stocke qu'une occurence de chaque item)
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
@@ -67,6 +71,7 @@ namespace Bacchus.DAO
                     AllArticlesPrixHT.Add(float.Parse(values[5]));
                 }
             }
+            //Maintenant on crée tout en base 
             Modale.SetProgressBarValue(50);
             for (int Index = 0; Index < AllMarques.Count; Index++)
             {

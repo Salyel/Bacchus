@@ -17,39 +17,42 @@ namespace Bacchus.DAO
 
         public ImporterEcrasement(OpenFileDialog Picker, ModaleImporter Modale)
         {
-            SQLiteConnection M_dbConnection = new SQLiteConnection(DatabaseDirectory.Database);
-            M_dbConnection.Open();
+            if (!Picker.FileName.Equals(""))
+            {
+                SQLiteConnection M_dbConnection = new SQLiteConnection(DatabaseDirectory.Database);
+                M_dbConnection.Open();
 
-            String Sql = "DELETE FROM 'Marques'";
-            Console.WriteLine(Sql);
-            SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection);
-            Command.ExecuteNonQuery();
+                String Sql = "DELETE FROM 'Marques'";
+                Console.WriteLine(Sql);
+                SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection);
+                Command.ExecuteNonQuery();
 
-            Sql = "DELETE FROM 'Familles'";
-            Console.WriteLine(Sql);
-            Command = new SQLiteCommand(Sql, M_dbConnection);
-            Command.ExecuteNonQuery();
+                Sql = "DELETE FROM 'Familles'";
+                Console.WriteLine(Sql);
+                Command = new SQLiteCommand(Sql, M_dbConnection);
+                Command.ExecuteNonQuery();
 
-            Sql = "DELETE FROM 'SousFamilles'";
-            Console.WriteLine(Sql);
-            Command = new SQLiteCommand(Sql, M_dbConnection);
-            Command.ExecuteNonQuery();
+                Sql = "DELETE FROM 'SousFamilles'";
+                Console.WriteLine(Sql);
+                Command = new SQLiteCommand(Sql, M_dbConnection);
+                Command.ExecuteNonQuery();
 
-            Sql = "DELETE FROM 'Articles'";
-            Console.WriteLine(Sql);
-            Command = new SQLiteCommand(Sql, M_dbConnection);
-            Command.ExecuteNonQuery();
+                Sql = "DELETE FROM 'Articles'";
+                Console.WriteLine(Sql);
+                Command = new SQLiteCommand(Sql, M_dbConnection);
+                Command.ExecuteNonQuery();
 
-            Sql = "delete from sqlite_sequence";
-            Console.WriteLine(Sql);
-            Command = new SQLiteCommand(Sql, M_dbConnection);
-            Command.ExecuteNonQuery();
+                Sql = "delete from sqlite_sequence";
+                Console.WriteLine(Sql);
+                Command = new SQLiteCommand(Sql, M_dbConnection);
+                Command.ExecuteNonQuery();
 
-            M_dbConnection.Close();
+                M_dbConnection.Close();
 
-            this.Picker = Picker;
-            this.Modale = Modale;
-            ImporterBDD();
+                this.Picker = Picker;
+                this.Modale = Modale;
+                ImporterBDD();
+            }
         }
 
         public void ImporterBDD()
@@ -75,6 +78,7 @@ namespace Bacchus.DAO
             using (var reader = new StreamReader(Picker.FileName))
             {
                 reader.ReadLine();                      //On passe la première ligne (les headers du fichier)
+                //On stocke tous dans des listes en parcourant notre fichier, on créera après (on ne stocke qu'une occurence de chaque item)
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
@@ -97,6 +101,7 @@ namespace Bacchus.DAO
                     AllArticlesPrixHT.Add(float.Parse(values[5]));
                 }
             }
+            //Maintenant on crée tout en base 
             Modale.SetProgressBarValue(50);
             for (int Index = 0;  Index < AllMarques.Count; Index++)
             {

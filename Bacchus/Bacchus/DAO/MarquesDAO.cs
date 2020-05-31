@@ -11,14 +11,16 @@ namespace Bacchus.DAO
 {
     class MarquesDAO
     {
-        public MarquesDAO()
-        {
+        private string DatabasePath;
 
+        public MarquesDAO(string Path)
+        {
+            DatabasePath = Path;
         }
 
         public void AjouterMarque(Marques Marque)
         {
-            SQLiteConnection M_dbConnection = new SQLiteConnection(DatabaseDirectory.Database);
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
             
             M_dbConnection.Open();
 
@@ -36,7 +38,7 @@ namespace Bacchus.DAO
 
         public int GetRefByName(String Nom)
         {
-            SQLiteConnection M_dbConnection = new SQLiteConnection(DatabaseDirectory.Database);
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
 
             M_dbConnection.Open();
 
@@ -59,9 +61,34 @@ namespace Bacchus.DAO
             return Ref;
         }
 
+        public string GetNameByRef(int Ref)
+        {
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+
+            String Sql = "select Nom from marques where RefMarque=" + Ref;
+            Console.WriteLine(Sql);
+
+            string Nom = "";
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                using (SQLiteDataReader Reader = Command.ExecuteReader())
+                {
+                    Reader.Read();
+                    Nom = Reader.GetString(0);
+                }
+            }
+
+            M_dbConnection.Close();
+
+            return Nom;
+        }
+
         public bool CheckIfExists(String Nom)
         {
-            SQLiteConnection M_dbConnection = new SQLiteConnection(DatabaseDirectory.Database);
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
 
             M_dbConnection.Open();
 

@@ -10,14 +10,16 @@ namespace Bacchus.DAO
 {
     class FamillesDAO
     {
-        public FamillesDAO()
-        {
+        private string DatabasePath;
 
+        public FamillesDAO(string Path)
+        {
+            DatabasePath = Path;
         }
 
         public void AjouterFamille(Familles Famille)
         {
-            SQLiteConnection M_dbConnection = new SQLiteConnection(DatabaseDirectory.Database);
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
 
             M_dbConnection.Open();
 
@@ -35,7 +37,7 @@ namespace Bacchus.DAO
 
         public int GetRefByName(String Nom)
         {
-            SQLiteConnection M_dbConnection = new SQLiteConnection(DatabaseDirectory.Database);
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
 
             M_dbConnection.Open();
 
@@ -58,9 +60,34 @@ namespace Bacchus.DAO
             return Ref;
         }
 
+        public string GetNameByRef(int Ref)
+        {
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+
+            String Sql = "select Nom from Familles where RefFamille=" + Ref;
+            Console.WriteLine(Sql);
+
+            string Nom = "";
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                using (SQLiteDataReader Reader = Command.ExecuteReader())
+                {
+                    Reader.Read();
+                    Nom = Reader.GetString(0);
+                }
+            }
+
+            M_dbConnection.Close();
+
+            return Nom;
+        }
+
         public bool CheckIfExists(String Nom)
         {
-            SQLiteConnection M_dbConnection = new SQLiteConnection(DatabaseDirectory.Database);
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
 
             M_dbConnection.Open();
 

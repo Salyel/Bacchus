@@ -12,25 +12,20 @@ namespace Bacchus.DAO
 {
     class ImporterAjout
     {
-        private OpenFileDialog Picker;
         private ModaleImporter Modale;
 
-        public ImporterAjout(OpenFileDialog Picker, ModaleImporter Modale)
+        public ImporterAjout(ModaleImporter Modale)
         {
-            if(!Picker.FileName.Equals(""))
-            {
-                this.Picker = Picker;
-                this.Modale = Modale;
-                ImporterBDD();
-            }
+             this.Modale = Modale;
+             ImporterBDD();
         }
 
         public void ImporterBDD()
         {
-            MarquesDAO MarquesD = new MarquesDAO();
-            FamillesDAO FamillesD = new FamillesDAO();
-            SousFamillesDAO SousFamillesD = new SousFamillesDAO();
-            ArticlesDAO ArticlesD = new ArticlesDAO();
+            MarquesDAO MarquesD = new MarquesDAO(Modale.GetPathToSave());
+            FamillesDAO FamillesD = new FamillesDAO(Modale.GetPathToSave());
+            SousFamillesDAO SousFamillesD = new SousFamillesDAO(Modale.GetPathToSave());
+            ArticlesDAO ArticlesD = new ArticlesDAO(Modale.GetPathToSave());
 
             List<string> AllMarques = new List<string>();
             List<string> AllFamilles = new List<string>();
@@ -45,7 +40,7 @@ namespace Bacchus.DAO
             List<float> AllArticlesPrixHT = new List<float>();
 
             Modale.SetProgressBarValue(25);
-            using (var reader = new StreamReader(Picker.FileName))
+            using (var reader = new StreamReader(Modale.GetPathToImport()))
             {
                 reader.ReadLine();                      //On passe la première ligne (les headers du fichier)
                 //On stocke tous dans des listes en parcourant notre fichier, on créera après (on ne stocke qu'une occurence de chaque item)
@@ -122,6 +117,7 @@ namespace Bacchus.DAO
                 }
             }
             Modale.SetProgressBarValue(100);
+            Modale.GetLabelImport().Text = "Importation en mode Ajout terminé !";
         }
     }
 }

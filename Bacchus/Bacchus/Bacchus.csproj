@@ -65,11 +65,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\ChooseSQLButtonControllerExport.cs" />
+    <Compile Include="Controller\ChooseCSVButtonControllerExport.cs" />
+    <Compile Include="Controller\ImportButtonController.cs" />
+    <Compile Include="Controller\SelectSQLButtonImportController.cs" />
     <Compile Include="Controller\ExportButtonController.cs" />
     <Compile Include="Controller\MenuFichierController.cs" />
-    <Compile Include="Controller\ImportButtonController.cs" />
+    <Compile Include="Controller\SelectCSVButtonImportController.cs" />
     <Compile Include="DAO\ArticlesDAO.cs" />
-    <Compile Include="DAO\DatabaseDirectory.cs" />
     <Compile Include="DAO\ImporterAjout.cs" />
     <Compile Include="DAO\FamillesDAO.cs" />
     <Compile Include="DAO\MarquesDAO.cs" />

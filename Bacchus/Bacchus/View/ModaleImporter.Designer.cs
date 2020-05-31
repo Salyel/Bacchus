@@ -34,6 +34,10 @@
             this.AddRadioButton = new System.Windows.Forms.RadioButton();
             this.ProgressBar = new System.Windows.Forms.ProgressBar();
             this.LabelFileName = new System.Windows.Forms.Label();
+            this.LabelImport = new System.Windows.Forms.Label();
+            this.ImportButton = new System.Windows.Forms.Button();
+            this.SQLButton = new System.Windows.Forms.Button();
+            this.LabelSQL = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // SelectButton
@@ -50,7 +54,7 @@
             // LabelIntegration
             // 
             this.LabelIntegration.AutoSize = true;
-            this.LabelIntegration.Location = new System.Drawing.Point(7, 99);
+            this.LabelIntegration.Location = new System.Drawing.Point(7, 192);
             this.LabelIntegration.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LabelIntegration.Name = "LabelIntegration";
             this.LabelIntegration.Size = new System.Drawing.Size(166, 13);
@@ -60,7 +64,7 @@
             // CrushRadioButton
             // 
             this.CrushRadioButton.AutoSize = true;
-            this.CrushRadioButton.Location = new System.Drawing.Point(9, 136);
+            this.CrushRadioButton.Location = new System.Drawing.Point(9, 229);
             this.CrushRadioButton.Margin = new System.Windows.Forms.Padding(2);
             this.CrushRadioButton.Name = "CrushRadioButton";
             this.CrushRadioButton.Size = new System.Drawing.Size(80, 17);
@@ -73,7 +77,7 @@
             // AddRadioButton
             // 
             this.AddRadioButton.AutoSize = true;
-            this.AddRadioButton.Location = new System.Drawing.Point(9, 173);
+            this.AddRadioButton.Location = new System.Drawing.Point(9, 266);
             this.AddRadioButton.Margin = new System.Windows.Forms.Padding(2);
             this.AddRadioButton.Name = "AddRadioButton";
             this.AddRadioButton.Size = new System.Drawing.Size(48, 17);
@@ -85,7 +89,7 @@
             // 
             // ProgressBar
             // 
-            this.ProgressBar.Location = new System.Drawing.Point(9, 240);
+            this.ProgressBar.Location = new System.Drawing.Point(9, 380);
             this.ProgressBar.Margin = new System.Windows.Forms.Padding(2);
             this.ProgressBar.Name = "ProgressBar";
             this.ProgressBar.Size = new System.Drawing.Size(348, 28);
@@ -97,13 +101,55 @@
             this.LabelFileName.Name = "LabelFileName";
             this.LabelFileName.Size = new System.Drawing.Size(348, 48);
             this.LabelFileName.TabIndex = 5;
+            this.LabelFileName.Text = "Pas de fichier selectionné";
             this.LabelFileName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // LabelImport
+            // 
+            this.LabelImport.Location = new System.Drawing.Point(91, 344);
+            this.LabelImport.Name = "LabelImport";
+            this.LabelImport.Size = new System.Drawing.Size(181, 34);
+            this.LabelImport.TabIndex = 6;
+            this.LabelImport.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // ImportButton
+            // 
+            this.ImportButton.Location = new System.Drawing.Point(94, 318);
+            this.ImportButton.Name = "ImportButton";
+            this.ImportButton.Size = new System.Drawing.Size(178, 23);
+            this.ImportButton.TabIndex = 7;
+            this.ImportButton.Text = "IMPORTER";
+            this.ImportButton.UseVisualStyleBackColor = true;
+            this.ImportButton.Click += new System.EventHandler(this.ImportButton_Click);
+            // 
+            // SQLButton
+            // 
+            this.SQLButton.Location = new System.Drawing.Point(9, 105);
+            this.SQLButton.Name = "SQLButton";
+            this.SQLButton.Size = new System.Drawing.Size(348, 23);
+            this.SQLButton.TabIndex = 8;
+            this.SQLButton.Text = "Selectionner le fichier .sqlite dans lequel importer le .csv";
+            this.SQLButton.UseVisualStyleBackColor = true;
+            this.SQLButton.Click += new System.EventHandler(this.SQLButton_Click);
+            // 
+            // LabelSQL
+            // 
+            this.LabelSQL.Location = new System.Drawing.Point(9, 135);
+            this.LabelSQL.Name = "LabelSQL";
+            this.LabelSQL.Size = new System.Drawing.Size(348, 57);
+            this.LabelSQL.TabIndex = 9;
+            this.LabelSQL.Text = "Pas de fichier selectionné";
+            this.LabelSQL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ModaleImporter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(366, 278);
+            this.ClientSize = new System.Drawing.Size(366, 419);
+            this.Controls.Add(this.LabelSQL);
+            this.Controls.Add(this.SQLButton);
+            this.Controls.Add(this.ImportButton);
+            this.Controls.Add(this.LabelImport);
             this.Controls.Add(this.LabelFileName);
             this.Controls.Add(this.ProgressBar);
             this.Controls.Add(this.AddRadioButton);
@@ -113,6 +159,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ModaleImporter";
             this.Text = "Importer";
+            this.Load += new System.EventHandler(this.ModaleImporter_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -126,5 +173,9 @@
         private System.Windows.Forms.RadioButton AddRadioButton;
         private System.Windows.Forms.ProgressBar ProgressBar;
         private System.Windows.Forms.Label LabelFileName;
+        private System.Windows.Forms.Label LabelImport;
+        private System.Windows.Forms.Button ImportButton;
+        private System.Windows.Forms.Button SQLButton;
+        private System.Windows.Forms.Label LabelSQL;
     }
 }

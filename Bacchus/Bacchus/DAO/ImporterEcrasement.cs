@@ -12,55 +12,52 @@ namespace Bacchus.DAO
 {
     class ImporterEcrasement
     {
-        private OpenFileDialog Picker;
         private ModaleImporter Modale;
 
-        public ImporterEcrasement(OpenFileDialog Picker, ModaleImporter Modale)
+        public ImporterEcrasement(ModaleImporter Modale)
         {
-            if (!Picker.FileName.Equals(""))
-            {
-                SQLiteConnection M_dbConnection = new SQLiteConnection(DatabaseDirectory.Database);
-                M_dbConnection.Open();
+            this.Modale = Modale;
 
-                String Sql = "DELETE FROM 'Marques'";
-                Console.WriteLine(Sql);
-                SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection);
-                Command.ExecuteNonQuery();
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + Modale.GetPathToSave());
+            M_dbConnection.Open();
 
-                Sql = "DELETE FROM 'Familles'";
-                Console.WriteLine(Sql);
-                Command = new SQLiteCommand(Sql, M_dbConnection);
-                Command.ExecuteNonQuery();
+            String Sql = "DELETE FROM 'Marques'";
+            Console.WriteLine(Sql);
+            SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection);
+            Command.ExecuteNonQuery();
 
-                Sql = "DELETE FROM 'SousFamilles'";
-                Console.WriteLine(Sql);
-                Command = new SQLiteCommand(Sql, M_dbConnection);
-                Command.ExecuteNonQuery();
+            Sql = "DELETE FROM 'Familles'";
+            Console.WriteLine(Sql);
+            Command = new SQLiteCommand(Sql, M_dbConnection);
+            Command.ExecuteNonQuery();
 
-                Sql = "DELETE FROM 'Articles'";
-                Console.WriteLine(Sql);
-                Command = new SQLiteCommand(Sql, M_dbConnection);
-                Command.ExecuteNonQuery();
+            Sql = "DELETE FROM 'SousFamilles'";
+            Console.WriteLine(Sql);
+            Command = new SQLiteCommand(Sql, M_dbConnection);
+            Command.ExecuteNonQuery();
 
-                Sql = "delete from sqlite_sequence";
-                Console.WriteLine(Sql);
-                Command = new SQLiteCommand(Sql, M_dbConnection);
-                Command.ExecuteNonQuery();
+            Sql = "DELETE FROM 'Articles'";
+            Console.WriteLine(Sql);
+            Command = new SQLiteCommand(Sql, M_dbConnection);
+            Command.ExecuteNonQuery();
 
-                M_dbConnection.Close();
+            Sql = "delete from sqlite_sequence";
+            Console.WriteLine(Sql);
+            Command = new SQLiteCommand(Sql, M_dbConnection);
+            Command.ExecuteNonQuery();
 
-                this.Picker = Picker;
-                this.Modale = Modale;
-                ImporterBDD();
-            }
+            M_dbConnection.Close();
+
+            ImporterBDD();
         }
 
         public void ImporterBDD()
         {
-            MarquesDAO MarquesD = new MarquesDAO();
-            FamillesDAO FamillesD = new FamillesDAO();
-            SousFamillesDAO SousFamillesD = new SousFamillesDAO();
-            ArticlesDAO ArticlesD = new ArticlesDAO();
+            Modale.SetProgressBarValue(10);
+            MarquesDAO MarquesD = new MarquesDAO(Modale.GetPathToSave());
+            FamillesDAO FamillesD = new FamillesDAO(Modale.GetPathToSave());
+            SousFamillesDAO SousFamillesD = new SousFamillesDAO(Modale.GetPathToSave());
+            ArticlesDAO ArticlesD = new ArticlesDAO(Modale.GetPathToSave());
 
             List<string> AllMarques = new List<string>();
             List<string> AllFamilles = new List<string>();
@@ -75,7 +72,7 @@ namespace Bacchus.DAO
             List<float> AllArticlesPrixHT = new List<float>();
 
             Modale.SetProgressBarValue(25);
-            using (var reader = new StreamReader(Picker.FileName))
+            using (var reader = new StreamReader(Modale.GetPathToImport()))
             {
                 reader.ReadLine();                      //On passe la première ligne (les headers du fichier)
                 //On stocke tous dans des listes en parcourant notre fichier, on créera après (on ne stocke qu'une occurence de chaque item)
@@ -129,6 +126,7 @@ namespace Bacchus.DAO
                 ArticlesD.AjouterArticle(Article);
             }
             Modale.SetProgressBarValue(100);
+            Modale.GetLabelImport().Text = "Importation en mode Ecrasement terminé !";
         }
     }
 }

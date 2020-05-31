@@ -10,14 +10,16 @@ namespace Bacchus.DAO
 {
     class ArticlesDAO
     {
-        public ArticlesDAO()
-        {
+        private string DatabasePath;
 
+        public ArticlesDAO(string Path)
+        {
+            DatabasePath = Path;
         }
 
         public void AjouterArticle(Articles Article)
         {
-            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=D:/Programmes Visual/Bacchus/Bacchus/Bacchus.sqlite");
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source="+DatabasePath);
 
             M_dbConnection.Open();
 
@@ -35,7 +37,7 @@ namespace Bacchus.DAO
 
         public Articles GetArticleByRef(string RefArt)
         {
-            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=D:/Programmes Visual/Bacchus/Bacchus/Bacchus.sqlite");
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
 
             M_dbConnection.Open();
 
@@ -60,7 +62,7 @@ namespace Bacchus.DAO
 
         public bool CheckIfExists(String RefArticle)
         {
-            SQLiteConnection M_dbConnection = new SQLiteConnection(DatabaseDirectory.Database);
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
 
             M_dbConnection.Open();
 
@@ -88,7 +90,7 @@ namespace Bacchus.DAO
 
         public void Update(String RefArticle, String Description, int RefSousFamille, int RefMarque, float PrixHT, int Quantite)
         {
-            SQLiteConnection M_dbConnection = new SQLiteConnection(DatabaseDirectory.Database);
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
 
             M_dbConnection.Open();
 

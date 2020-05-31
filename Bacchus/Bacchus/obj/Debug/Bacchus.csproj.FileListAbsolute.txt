@@ -43,3 +43,4 @@ D:\Félix\Documents\Polytech 4A\S8\.Net\TP\Ressources\Bacchus\Bacchus\Bacchus\ob
 D:\Félix\Documents\Polytech 4A\S8\.Net\TP\Ressources\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.pdb
 D:\Programmes Visual\Bacchus\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.ModaleImporter.resources
 D:\Programmes Visual\Bacchus\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.View.ModaleExporter.resources
+D:\Félix\Documents\Polytech 4A\S8\.Net\TP\Ressources\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.View.ModaleExporter.resources

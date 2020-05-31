@@ -8,15 +8,30 @@ using System.Threading.Tasks;
 
 namespace Bacchus.DAO
 {
+    /// <summary>
+    /// Classe DAO pour les objets de la classe Famille
+    /// </summary>
     class FamillesDAO
     {
+        //Attributs
+
         private string DatabasePath;
 
+        //Constructeur
+
+        /// <summary>
+        /// Constructeur pour le DAO des familles
+        /// </summary>
+        /// <param name="Path"> Chemin vers le fichier SQLite </param>
         public FamillesDAO(string Path)
         {
             DatabasePath = Path;
         }
 
+        /// <summary>
+        /// DAO pour ajouter une famille dans la base de données
+        /// </summary>
+        /// <param name="Famille"> Objet Famille à ajouter </param>
         public void AjouterFamille(Familles Famille)
         {
             SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
@@ -35,6 +50,11 @@ namespace Bacchus.DAO
             M_dbConnection.Close();
         }
 
+        /// <summary>
+        /// DAO pour récupérer la référence d'une famille en fonction de son nom
+        /// </summary>
+        /// <param name="Nom"> Nom de la famille dont on veut obtenir la référence </param>
+        /// <returns> Référence de la famille </returns>
         public int GetRefByName(String Nom)
         {
             SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
@@ -60,6 +80,11 @@ namespace Bacchus.DAO
             return Ref;
         }
 
+        /// <summary>
+        /// DAO pour récupérer le nom d'une famille en fonction de sa référence
+        /// </summary>
+        /// <param name="Ref"> référence de la famille dont on veut obtenir le nom </param>
+        /// <returns> Le nom de la famille </returns>
         public string GetNameByRef(int Ref)
         {
             SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
@@ -85,6 +110,11 @@ namespace Bacchus.DAO
             return Nom;
         }
 
+        /// <summary>
+        /// DAO pour vérifier si une famille existe
+        /// </summary>
+        /// <param name="Nom"> nom de la famille </param>
+        /// <returns> true si la famille existe, false sinon </returns>
         public bool CheckIfExists(String Nom)
         {
             SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);

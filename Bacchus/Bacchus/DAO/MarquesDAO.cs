@@ -9,35 +9,60 @@ using System.Threading.Tasks;
 
 namespace Bacchus.DAO
 {
+    /// <summary>
+    /// Classe DAO pour les objets de la classe Marque
+    /// </summary>
     class MarquesDAO
     {
+        //Attributs
+
         private string DatabasePath;
 
+        //Constructeur
+
+        // <summary>
+        /// Constructeur pour le DAO des marques
+        /// </summary>
+        /// <param name="Path"> Chemin vers le fichier SQLite </param>
         public MarquesDAO(string Path)
         {
             DatabasePath = Path;
         }
 
+        /// <summary>
+        /// DAO pour ajouter une marque dans la base de données
+        /// </summary>
+        /// <param name="Marque"> Objet Marque à ajouter </param>
         public void AjouterMarque(Marques Marque)
         {
+            //ouverture de la connexion avec la bdd & creation de la requete
+
             SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
             
             M_dbConnection.Open();
-
             String Sql = "insert into marques (Nom) values ('" + Marque.GetNom() + "')";
 
             Console.WriteLine(Sql);
 
             using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
             {
+                //ajout de la marque
                 Command.ExecuteNonQuery();
             }
             
+            //fermeture de la connexion
             M_dbConnection.Close();
         }
 
+        /// <summary>
+        /// DAO pour récupérer la référence d'une marque en fonction de son nom
+        /// </summary>
+        /// <param name="Nom"> Nom de la marque dont on veut obtenir la référence </param>
+        /// <returns> Référence de la marque </returns>
         public int GetRefByName(String Nom)
         {
+            //ouverture de la connexion avec la bdd & creation de la requete
+
             SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
 
             M_dbConnection.Open();
@@ -51,18 +76,26 @@ namespace Bacchus.DAO
             {
                 using (SQLiteDataReader Reader = Command.ExecuteReader())
                 {
+                    //récupération de la référence
                     Reader.Read();
                     Ref = Reader.GetInt32(0);
                 }
             }
 
+            //fermeture de la connextion
             M_dbConnection.Close();
 
             return Ref;
         }
 
+        /// <summary>
+        /// DAO pour récupérer le nom d'une marque en fonction de sa référence
+        /// </summary>
+        /// <param name="Ref"> référence de la marque dont on veut obtenir le nom </param>
+        /// <returns> Le nom de la marque </returns>
         public string GetNameByRef(int Ref)
         {
+
             SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
 
             M_dbConnection.Open();
@@ -86,6 +119,11 @@ namespace Bacchus.DAO
             return Nom;
         }
 
+        /// <summary>
+        /// DAO pour vérifier si une marquee existe
+        /// </summary>
+        /// <param name="Nom"> nom de la marque </param>
+        /// <returns> true si la marque existe, false sinon </returns>
         public bool CheckIfExists(String Nom)
         {
             SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);

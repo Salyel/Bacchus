@@ -10,14 +10,28 @@ using System.Windows.Forms;
 
 namespace Bacchus.DAO
 {
+    /// <summary>
+    /// Classe pour importer la base de données en mode écrasement
+    /// Toute la base de données locale sera vidée et remplacée par celle du fichier SQLite
+    /// </summary>
     class ImporterEcrasement
     {
+        //Attributs
+
         private ModaleImporter Modale;
 
+        //Constructeur
+
+        /// <summary>
+        /// Constructeur permettant de faire l'importation
+        /// </summary>
+        /// <param name="Modale"> fenêtre d'import </param>
         public ImporterEcrasement(ModaleImporter Modale)
         {
             this.Modale = Modale;
 
+            //création de la connexion avec la base de données
+            //suppression des tables de la base locale
             SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + Modale.GetPathToSave());
             M_dbConnection.Open();
 
@@ -51,6 +65,9 @@ namespace Bacchus.DAO
             ImporterBDD();
         }
 
+        /// <summary>
+        /// Import de la base de données
+        /// </summary>
         public void ImporterBDD()
         {
             Modale.SetProgressBarValue(10);

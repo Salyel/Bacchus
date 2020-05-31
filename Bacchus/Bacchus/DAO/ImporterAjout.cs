@@ -10,16 +10,31 @@ using System.Windows.Forms;
 
 namespace Bacchus.DAO
 {
+    /// <summary>
+    /// Classe pour importer la base de données en mode ajout
+    /// Les éléments communs seront conservées, ceux de la base SQLite qui ne sont pas présents dans la base locale seront ajoutés
+    /// </summary>
     class ImporterAjout
     {
+        //Atributs
+
         private ModaleImporter Modale;
 
+        //Constructeur
+
+        /// <summary>
+        /// Constructeur permettant de faire l'importation
+        /// </summary>
+        /// <param name="Modale"> fenêtre d'import </param>
         public ImporterAjout(ModaleImporter Modale)
         {
              this.Modale = Modale;
              ImporterBDD();
         }
 
+        /// <summary>
+        /// Importer la base de données SQLite en mode ajout
+        /// </summary>
         public void ImporterBDD()
         {
             MarquesDAO MarquesD = new MarquesDAO(Modale.GetPathToSave());

@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace Bacchus.Model
 {
+    /// <summary>
+    /// Classe qui permet de manipuler les articles
+    /// </summary>
     class Articles
     {
+        //Attributs
         private String RefArticle;
         private String Description;
         private int RefSousFamille;
@@ -15,6 +19,17 @@ namespace Bacchus.Model
         private float PrixHT;
         private int Quantite;
 
+        //Constructeurs
+
+        /// <summary>
+        /// Constructeur permettant d'instancier un article (avec une référence)
+        /// </summary>
+        /// <param name="RefArticle"> référence de l'article </param>
+        /// <param name="Description"> description de l'article </param>
+        /// <param name="RefSousFamille"> référence de la sous famille </param>
+        /// <param name="RefMarque"> référence de la marque </param>
+        /// <param name="PrixHT"> prix hors taxes </param>
+        /// <param name="Quantite"> quantité disponible </param>
         public Articles(String RefArticle, String Description, int RefSousFamille, int RefMarque, float PrixHT, int Quantite)
         {
             this.RefArticle = RefArticle;
@@ -25,6 +40,14 @@ namespace Bacchus.Model
             this.Quantite = Quantite;
         }
 
+        /// <summary>
+        /// Constructeur permettant d'instancier un article (sans référence)
+        /// </summary>
+        /// <param name="Description"> description de l'article </param>
+        /// <param name="RefSousFamille"> référence de la sous famille </param>
+        /// <param name="RefMarque"> référence de la marque </param>
+        /// <param name="PrixHT"> prix hors taxes </param>
+        /// <param name="Quantite"> quantité disponible </param>
         public Articles(String Description, int RefSousFamille, int RefMarque, float PrixHT, int Quantite)
         {
             this.Description = Description;
@@ -33,6 +56,8 @@ namespace Bacchus.Model
             this.PrixHT = PrixHT;
             this.Quantite = Quantite;
         }
+
+        //Getters & setters
 
         public String GetRefArticle()
         {

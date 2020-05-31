@@ -8,15 +8,31 @@ using System.Threading.Tasks;
 
 namespace Bacchus.DAO
 {
+    /// <summary>
+    /// Classe DAO pour les objets de la classe Article
+    /// </summary>
     class ArticlesDAO
     {
+        //Attributs
+
         private string DatabasePath;
 
+        //Constructeur
+
+
+        /// <summary>
+        /// Constructeur pour le DAO des articles
+        /// </summary>
+        /// <param name="Path"> Chemin vers le fichier SQLite </param>
         public ArticlesDAO(string Path)
         {
             DatabasePath = Path;
         }
 
+        /// <summary>
+        /// DAO pour ajouter un article dans la base de données
+        /// </summary>
+        /// <param name="Article"> Objet Article à ajouter </param>
         public void AjouterArticle(Articles Article)
         {
             SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source="+DatabasePath);
@@ -35,6 +51,11 @@ namespace Bacchus.DAO
             M_dbConnection.Close();
         }
 
+        /// <summary>
+        /// DAO pour récupérer un article en fonction de sa référence
+        /// </summary>
+        /// <param name="RefArt"> référence de l'article que l'on veut récupérer </param>
+        /// <returns> l'objet Article </returns>
         public Articles GetArticleByRef(string RefArt)
         {
             SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
@@ -60,6 +81,11 @@ namespace Bacchus.DAO
             return Article;
         }
 
+        /// <summary>
+        /// DAO pour vérifier si un article existe
+        /// </summary>
+        /// <param name="Nom"> nom de l'article </param>
+        /// <returns> true si l'article existe, false sinon </returns>
         public bool CheckIfExists(String RefArticle)
         {
             SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
@@ -88,6 +114,15 @@ namespace Bacchus.DAO
             return Exists;
         }
 
+        /// <summary>
+        /// DAO pour update un article
+        /// </summary>
+        /// <param name="RefArticle"> référence </param>
+        /// <param name="Description"> description </param>
+        /// <param name="RefSousFamille"> référence de la sous famille </param>
+        /// <param name="RefMarque"> référence de la marque </param>
+        /// <param name="PrixHT"> prix hors taxes </param>
+        /// <param name="Quantite"> quantité disponible </param>
         public void Update(String RefArticle, String Description, int RefSousFamille, int RefMarque, float PrixHT, int Quantite)
         {
             SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);

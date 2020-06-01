@@ -26,7 +26,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        private void InitializeComponent(FormMain FormMain)
         {
             this.SelectButton = new System.Windows.Forms.Button();
             this.LabelIntegration = new System.Windows.Forms.Label();
@@ -162,6 +162,9 @@
             this.Load += new System.EventHandler(this.ModaleImporter_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
+
+            //link avec le FormMain
+            this.FormMain = FormMain;
 
         }
 

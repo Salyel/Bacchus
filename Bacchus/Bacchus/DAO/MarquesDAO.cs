@@ -151,5 +151,34 @@ namespace Bacchus.DAO
 
             return Exists;
         }
+
+        /// <summary>
+        /// DAO pour récupérer les noms de toutes les marques
+        /// </summary>
+        /// <returns> la liste de tous les noms </returns>
+        public List<string> GetAllNames()
+        {
+            List<string> AllNames = new List<string>();
+
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+
+            String Sql = "select Nom from Marques";
+            Console.WriteLine(Sql);
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                using (SQLiteDataReader Reader = Command.ExecuteReader())
+                {
+                    Reader.Read();
+                    AllNames.Add(Reader.GetString(1));
+                }
+            }
+
+            M_dbConnection.Close();
+
+            return AllNames;
+        }
     }
 }

@@ -46,6 +46,10 @@ namespace Bacchus.Controller
                     Modale.GetLabelImport().Text = "Import en mode Ajout en cours ...";
                     ImporterAjout ImportAjout = new ImporterAjout(Modale);
                 }
+
+                //mise à jour de la treeView
+                FamillesDAO AllFamilles = new FamillesDAO(Modale.GetPathToImport());
+                List<string> AllNoms = AllFamilles.GetAllNomsFamilles();
             }
         }
     }

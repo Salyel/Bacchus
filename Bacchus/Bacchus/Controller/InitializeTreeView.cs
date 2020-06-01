@@ -1,4 +1,5 @@
 ﻿using Bacchus.DAO;
+using Bacchus.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -44,20 +45,45 @@ namespace Bacchus.Controller
         /// <summary>
         /// Permet de créer les noeuds des familles 
         /// </summary>
-        public void CreateFamillesNodes(List<string> FamillesNames)
+        public void CreateFamillesNodes(string Path)
         {
-            FamillesDAO famillesDAO = new FamillesDAO()
+            FamillesDAO famillesDAO = new FamillesDAO(Path);
+
+            List<string> FamillesNames = famillesDAO.GetAllNomsFamilles();
 
             Tree.BeginUpdate();
-
             Tree.Nodes[1].Nodes.Clear();
             foreach(string Names in FamillesNames)
             {
                 Tree.Nodes[1].Nodes.Add(Names);
             }
-
             Tree.EndUpdate();
         }
 
+        public void CreateMarquesNodes(string Path)
+        {
+            MarquesDAO marquesDAO = new MarquesDAO(Path);
+
+            List<string> MarquesNames = marquesDAO.GetAllNames();
+
+            Tree.BeginUpdate();
+            Tree.Nodes[2].Nodes.Clear();
+            foreach (string Names in MarquesNames)
+            {
+                Tree.Nodes[2].Nodes.Add(Names);
+            }
+            Tree.EndUpdate();
+        }
+
+        
+
+        /// <summary>
+        /// Construit la tree view à partir des éléments de la bdd SQLite
+        /// </summary>
+        public void ConstructTree(string Path)
+        {
+            CreateFamillesNodes(Path);
+            CreateMarquesNodes(Path);
+        }
     }
 }

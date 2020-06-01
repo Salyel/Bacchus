@@ -32,7 +32,7 @@ namespace Bacchus.Controller
 
             if(Type.Equals("importer"))
             {
-                ModaleImporter FenetreImporter = new ModaleImporter();
+                ModaleImporter FenetreImporter = new ModaleImporter(Form);
                 FenetreImporter.StartPosition = FormStartPosition.CenterParent;
                 FenetreImporter.ShowDialog(Form);
             }

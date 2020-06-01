@@ -22,9 +22,9 @@ namespace Bacchus
         private FormMain FormMain;
 
         /*Constructor*/
-        public ModaleImporter()
+        public ModaleImporter(FormMain FormMain)
         {
-            InitializeComponent();
+            InitializeComponent(FormMain);
         }
 
 
@@ -37,7 +37,11 @@ namespace Bacchus
         private void ImportButton_Click(object sender, EventArgs e)
         {
             ImportButtonController Controller = new ImportButtonController(this);
-            InitializeTreeView initializeTree = new InitializeTreeView(this);
+
+            //mise à jour du treeView du FormMain
+            InitializeTreeView InitTree = new InitializeTreeView(FormMain.GetTreeView());
+            InitTree.ConstructTree(PathToImport);
+
         }
 
         private void SQLButton_Click(object sender, EventArgs e)

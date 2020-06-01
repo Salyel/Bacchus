@@ -144,6 +144,12 @@ namespace Bacchus.DAO
             }
             Modale.SetProgressBarValue(100);
             Modale.GetLabelImport().Text = "Importation en mode Ecrasement terminé !";
+
+            string message = ArticlesD.GetNbArticle() + " articles ont été ajoutés à la base de données.";
+            const string caption = "Intégration en mode Ecrasement terminé !";
+            var result = MessageBox.Show(message, caption,
+                                         MessageBoxButtons.OK,
+                                         MessageBoxIcon.Information);
         }
     }
 }

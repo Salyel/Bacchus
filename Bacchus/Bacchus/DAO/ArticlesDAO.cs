@@ -1,10 +1,7 @@
 ﻿using Bacchus.Model;
 using System;
-using System.Collections.Generic;
 using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Bacchus.DAO
 {
@@ -66,13 +63,23 @@ namespace Bacchus.DAO
 
             Console.WriteLine(Sql);
 
-            Articles Article;
+            Articles Article = null ;
             using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
             {
                 using (SQLiteDataReader Reader = Command.ExecuteReader())
                 {
                     Reader.Read();
-                    Article = new Articles(Reader.GetString(0), Reader.GetString(1), Reader.GetInt32(2), Reader.GetInt32(3), Reader.GetFloat(4), Reader.GetInt32(5));
+                    for (int i = 0; i < 6; i++)
+                    {
+                        Console.WriteLine(Reader.IsDBNull(i));
+                    }
+                    string RefArticle = Reader.GetString(0);
+                    string Description = Reader.GetString(1);
+                    int SousFamille = Reader.GetInt32(2);
+                    int Marque = Reader.GetInt32(3);
+                    float Prix = float.Parse(Reader.GetString(4));
+                    int Quantite = Reader.GetInt32(5);
+                    Article = new Articles(RefArticle, Description, SousFamille, Marque, Prix, Quantite);
                 }
             }
 
@@ -112,6 +119,42 @@ namespace Bacchus.DAO
             M_dbConnection.Close();
 
             return Exists;
+        }
+
+        /// <summary>
+        /// DAO pour compter le nombre d'article dans la base de données
+        /// </summary>
+        /// <returns> le nombre d'article dans la base de données</returns>
+        public int GetNbArticle()
+        {
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+
+            String Sql = "SELECT COUNT(*) FROM articles";
+            Console.WriteLine(Sql);
+
+            int Nombre = 0;
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                using (SQLiteDataReader Reader = Command.ExecuteReader())
+                {
+                    Reader.Read();
+                    if (Reader == null || !Reader.HasRows)
+                    {
+
+                    }
+                    else
+                    {
+                        Nombre = Reader.GetInt32(0);
+                    }
+                }
+            }
+
+            M_dbConnection.Close();
+
+            return Nombre;
         }
 
         /// <summary>

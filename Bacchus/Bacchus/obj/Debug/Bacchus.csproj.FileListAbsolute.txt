@@ -44,3 +44,26 @@ D:\Félix\Documents\Polytech 4A\S8\.Net\TP\Ressources\Bacchus\Bacchus\Bacchus\ob
 D:\Programmes Visual\Bacchus\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.ModaleImporter.resources
 D:\Programmes Visual\Bacchus\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.View.ModaleExporter.resources
 D:\Félix\Documents\Polytech 4A\S8\.Net\TP\Ressources\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.View.ModaleExporter.resources
+C:\Users\Florent\Documents\Cours\S8\PointNet\Bacchus\Bacchus\Bacchus\bin\Debug\Bacchus.SQLite
+C:\Users\Florent\Documents\Cours\S8\PointNet\Bacchus\Bacchus\Bacchus\bin\Debug\Bacchus.exe.config
+C:\Users\Florent\Documents\Cours\S8\PointNet\Bacchus\Bacchus\Bacchus\bin\Debug\Bacchus.exe
+C:\Users\Florent\Documents\Cours\S8\PointNet\Bacchus\Bacchus\Bacchus\bin\Debug\Bacchus.pdb
+C:\Users\Florent\Documents\Cours\S8\PointNet\Bacchus\Bacchus\Bacchus\bin\Debug\EntityFramework.dll
+C:\Users\Florent\Documents\Cours\S8\PointNet\Bacchus\Bacchus\Bacchus\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Florent\Documents\Cours\S8\PointNet\Bacchus\Bacchus\Bacchus\bin\Debug\System.Data.SQLite.dll
+C:\Users\Florent\Documents\Cours\S8\PointNet\Bacchus\Bacchus\Bacchus\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\Florent\Documents\Cours\S8\PointNet\Bacchus\Bacchus\Bacchus\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\Florent\Documents\Cours\S8\PointNet\Bacchus\Bacchus\Bacchus\bin\Debug\EntityFramework.xml
+C:\Users\Florent\Documents\Cours\S8\PointNet\Bacchus\Bacchus\Bacchus\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Florent\Documents\Cours\S8\PointNet\Bacchus\Bacchus\Bacchus\bin\Debug\System.Data.SQLite.xml
+C:\Users\Florent\Documents\Cours\S8\PointNet\Bacchus\Bacchus\Bacchus\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\Florent\Documents\Cours\S8\PointNet\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.csprojAssemblyReference.cache
+C:\Users\Florent\Documents\Cours\S8\PointNet\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.FormMain.resources
+C:\Users\Florent\Documents\Cours\S8\PointNet\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.View.ModaleExporter.resources
+C:\Users\Florent\Documents\Cours\S8\PointNet\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.ModaleImporter.resources
+C:\Users\Florent\Documents\Cours\S8\PointNet\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.Properties.Resources.resources
+C:\Users\Florent\Documents\Cours\S8\PointNet\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.csproj.GenerateResource.cache
+C:\Users\Florent\Documents\Cours\S8\PointNet\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.csproj.CoreCompileInputs.cache
+C:\Users\Florent\Documents\Cours\S8\PointNet\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.csproj.CopyComplete
+C:\Users\Florent\Documents\Cours\S8\PointNet\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.exe
+C:\Users\Florent\Documents\Cours\S8\PointNet\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.pdb

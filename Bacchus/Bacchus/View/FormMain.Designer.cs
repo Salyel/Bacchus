@@ -1,4 +1,7 @@
-﻿namespace Bacchus
+﻿using System;
+using System.Windows.Forms;
+
+namespace Bacchus
 {
     partial class FormMain
     {
@@ -159,7 +162,41 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
+            //Initialisation du handler pour les touches
+            this.listView1.KeyDown += ListView_KeyDown;
+
+            this.listView1.Click += new EventHandler(this.ListView_Click);
         }
+
+        void ListView_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.F5:
+                    Console.WriteLine("F5");
+                    //appel methode
+                    break;
+                case Keys.Delete:
+                    Console.WriteLine("Suppr");
+                    //appel methode
+                    break;
+                case Keys.Return:
+                    Console.WriteLine("Entree");
+                    //appel methode
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        void ListView_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine("nique la police");
+            MouseEventArgs me = (MouseEventArgs)e;
+            if (me.Button == System.Windows.Forms.MouseButtons.Right) { Console.WriteLine("Right click"); }
+            else { Console.WriteLine("Left click"); }
+        }
+
 
         #endregion
 

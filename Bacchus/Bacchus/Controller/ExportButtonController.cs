@@ -12,9 +12,21 @@ using System.Windows.Forms;
 
 namespace Bacchus.Controller
 {
+    /// <summary>
+    /// Constroller pour lancer l'exportation du fichier
+    /// </summary>
     class ExportButtonController
     {
+        //Attribut
+
         private ModaleExporter Modale;
+        
+        //Constructeur
+
+        /// <summary>
+        /// Constructeur pour lancer l'exportation
+        /// </summary>
+        /// <param name="Modale"> fenetre d'exportation </param>
         public ExportButtonController(ModaleExporter Modale)
         {
             this.Modale = Modale;
@@ -28,6 +40,9 @@ namespace Bacchus.Controller
             }
         }
 
+        /// <summary>
+        /// Exportation
+        /// </summary>
         public void Export()
         {
             Modale.GetLabelExport().Text = "Export en cours...";

@@ -8,10 +8,21 @@ using System.Windows.Forms;
 
 namespace Bacchus.Controller
 {
+    /// <summary>
+    /// Controller pour la selection du fichier SQLite
+    /// </summary>
     class SelectSQLButtonImportController
     {
+        //Attributs
+
         private ModaleImporter Modale;
 
+        //Constructuers
+
+        /// <summary>
+        /// Constructeur pour lancer la fenetre de selection du fichier SQLite
+        /// </summary>
+        /// <param name="Modale"> fenetre d'importation </param>
         public SelectSQLButtonImportController(ModaleImporter Modale)
         {
             this.Modale = Modale;

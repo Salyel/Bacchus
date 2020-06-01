@@ -16,6 +16,7 @@ namespace Bacchus.Controller
 
         private ModaleImporter Modale;
 
+
         //Constructeur
 
         /// <summary>
@@ -25,7 +26,6 @@ namespace Bacchus.Controller
         public ImportButtonController(ModaleImporter Modale)
         {
             this.Modale = Modale;
-
             //si on a pas choisi un mode d'importation
             if (Modale.GetButtonsValue().Equals("") || Modale.GetPathToImport().Equals("") || Modale.GetPathToSave().Equals(""))
             {

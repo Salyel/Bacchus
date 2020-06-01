@@ -62,5 +62,10 @@ namespace Bacchus
         {
             MenuFichierController Menu = new MenuFichierController(this, "exporter");
         }
+
+        private void treeView1_AfterSelect_1(object sender, TreeViewEventArgs e)
+        {
+
+        }
     }
 }

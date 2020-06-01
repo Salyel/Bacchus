@@ -1,4 +1,5 @@
-﻿using Bacchus.Model;
+﻿using Bacchus.Controller;
+using Bacchus.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
@@ -142,6 +143,7 @@ namespace Bacchus.DAO
                 Articles Article = new Articles(AllArticlesRefArticle[Index], AllArticlesDescription[Index], RefSousFamille, RefMarque, AllArticlesPrixHT[Index], 0);
                 ArticlesD.AjouterArticle(Article);
             }
+
             Modale.SetProgressBarValue(100);
             Modale.GetLabelImport().Text = "Importation en mode Ecrasement terminé !";
         }

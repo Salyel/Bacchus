@@ -19,6 +19,7 @@ namespace Bacchus
         private String ButtonsValue = "";
         private string PathToImport = "";
         private string PathToSave = "";
+        private FormMain FormMain;
 
         /*Constructor*/
         public ModaleImporter()
@@ -36,6 +37,7 @@ namespace Bacchus
         private void ImportButton_Click(object sender, EventArgs e)
         {
             ImportButtonController Controller = new ImportButtonController(this);
+            InitializeTreeView initializeTree = new InitializeTreeView(this);
         }
 
         private void SQLButton_Click(object sender, EventArgs e)

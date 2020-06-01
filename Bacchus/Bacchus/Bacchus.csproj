@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="Controller\ChooseSQLButtonControllerExport.cs" />
     <Compile Include="Controller\ChooseCSVButtonControllerExport.cs" />
+    <Compile Include="Controller\InitializeTreeView.cs" />
     <Compile Include="Controller\ImportButtonController.cs" />
     <Compile Include="Controller\SelectSQLButtonImportController.cs" />
     <Compile Include="Controller\ExportButtonController.cs" />

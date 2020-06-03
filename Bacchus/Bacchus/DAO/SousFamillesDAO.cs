@@ -222,5 +222,32 @@ namespace Bacchus.DAO
             //fermeture de la connexion
             M_dbConnection.Close();
         }
+
+        /// <summary>
+        /// DAO pour récupérer le nom de toutes les sous familles
+        /// </summary>
+        /// <returns> list de tout les noms des sous familles </returns>
+        public List<string> GetAllSousFamillesNames()
+        {
+            List<string> AllNoms = new List<string>();
+
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+            M_dbConnection.Open();
+            String Sql = "select Nom from SousFamilles";
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                using (SQLiteDataReader Reader = Command.ExecuteReader())
+                {
+                    while (Reader.Read())
+                    {
+                        AllNoms.Add(Reader.GetString(0));
+                    }
+                }
+            }
+            M_dbConnection.Close();
+
+            return AllNoms;
+        }
     }
 }

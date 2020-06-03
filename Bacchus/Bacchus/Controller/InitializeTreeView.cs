@@ -45,6 +45,7 @@ namespace Bacchus.Controller
         /// <summary>
         /// Permet de créer les noeuds des familles 
         /// </summary>
+        /// <param name="Path"> chemin vers la bdd SQLite </param>
         public void CreateFamillesNodes(string Path)
         {
             FamillesDAO famillesDAO = new FamillesDAO(Path);
@@ -60,6 +61,10 @@ namespace Bacchus.Controller
             Tree.EndUpdate();
         }
 
+        /// <summary>
+        /// Permet de créer les noeuds des marques 
+        /// </summary>
+        /// <param name="Path"> chemin vers la bdd SQLite </param>
         public void CreateMarquesNodes(string Path)
         {
             MarquesDAO marquesDAO = new MarquesDAO(Path);
@@ -75,7 +80,39 @@ namespace Bacchus.Controller
             Tree.EndUpdate();
         }
 
-        
+        /// <summary>
+        /// Permet de créer les noeuds des sous familles dans la branch Familles
+        /// </summary>
+        /// <param name="Path"> chemin vers la bdd SQLite </param>
+        public void CreateSousFamillesNodes(string Path)
+        {
+            string FamilleNom = "";
+            int SousFamilleRef = -1;
+            TreeNode[] currentNode;
+
+            SousFamillesDAO sousFamillesDAO = new SousFamillesDAO(Path);
+            List<String> SousFamillesNoms = sousFamillesDAO.GetAllSousFamillesNames();
+
+            Tree.BeginUpdate();
+            foreach(string Nom in SousFamillesNoms)
+            {
+                SousFamilleRef = sousFamillesDAO.GetRefByName(Nom);
+                FamilleNom = sousFamillesDAO.GetFamilleNameBySousFamilleRef(SousFamilleRef);
+
+                //Console.WriteLine("famille ___> " + FamilleNom);
+
+                //on récupère le noeud correspondant au nom de la famille
+                currentNode = Tree.Nodes.Find(FamilleNom, true);
+
+                Console.WriteLine("currentNode len ->>>>>>>>>> " + currentNode.Length);
+
+                foreach(TreeNode node in currentNode)
+                {
+                    node.Nodes.Add(Nom);
+                }
+            }
+            Tree.EndUpdate();
+        }
 
         /// <summary>
         /// Construit la tree view à partir des éléments de la bdd SQLite
@@ -84,6 +121,7 @@ namespace Bacchus.Controller
         {
             CreateFamillesNodes(Path);
             CreateMarquesNodes(Path);
+            CreateSousFamillesNodes(Path);
         }
     }
 }

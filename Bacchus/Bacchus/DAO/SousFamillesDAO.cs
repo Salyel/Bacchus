@@ -45,7 +45,7 @@ namespace Bacchus.DAO
             M_dbConnection.Open();
 
             String Sql = "insert into Sousfamilles (Nom, RefFamille) values ('" + SousFamille.GetNom() + "'" + ", " + SousFamille.GetRefFamille() + ")";
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
 
             using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
             {
@@ -69,7 +69,7 @@ namespace Bacchus.DAO
             M_dbConnection.Open();
 
             String Sql = "select RefSousFamille from sousfamilles where Nom= ('" + Nom + "')";
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
 
             int Ref = -1;
 
@@ -103,7 +103,7 @@ namespace Bacchus.DAO
             M_dbConnection.Open();
 
             String Sql = "select Nom from sousfamilles where RefSousFamille=" + Ref;
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
 
             string Nom = "";
 
@@ -137,7 +137,7 @@ namespace Bacchus.DAO
             M_dbConnection.Open();
 
             String Sql = "select RefFamille from sousfamilles where RefSousFamille=" + Ref;
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
 
             int RefFamille = -1;
 
@@ -175,7 +175,7 @@ namespace Bacchus.DAO
             M_dbConnection.Open();
 
             String Sql = "select RefSousFamille from SousFamilles where Nom= ('" + Nom + "')";
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
 
             bool Exists = true;
 
@@ -212,7 +212,7 @@ namespace Bacchus.DAO
             M_dbConnection.Open();
 
             String Sql = "update Sousfamilles set RefFamille=" + RefFamille + " where Nom=" + "'" + Nom + "'";
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
 
             using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
             {

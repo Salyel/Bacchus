@@ -41,7 +41,7 @@ namespace Bacchus.DAO
 
             String Sql = "insert into Articles (RefArticle, Description, RefSousFamille, RefMarque, PrixHT, Quantite) values ('" + Article.GetRefArticle() + "', '" + Article.GetDescription() + "', " + Article.GetRefSousFamille() + ", " + Article.GetRefMarque() + ", '" + Article.GetPrixHT() + "', " + Article.GetQuantite() + ")";
 
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
 
             using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
             {
@@ -64,7 +64,7 @@ namespace Bacchus.DAO
 
             String Sql = "select * from Articles where RefArticle='"+RefArt+"'";
 
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
 
             Articles Article;
             using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
@@ -93,7 +93,7 @@ namespace Bacchus.DAO
             M_dbConnection.Open();
 
             String Sql = "select Description from articles where RefArticle= ('" + RefArticle + "')";
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
 
             bool Exists = true;
 
@@ -131,7 +131,7 @@ namespace Bacchus.DAO
 
             String Sql = "update Articles set Description=" + "'" + Description + "'" + ", RefSousFamille=" + RefSousFamille + ", RefMarque=" + RefMarque + ", PrixHT=" + "'" + PrixHT + "'" + ", Quantite=" + Quantite + " where RefArticle=" + "'" + RefArticle + "'";
 
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
 
             using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
             {

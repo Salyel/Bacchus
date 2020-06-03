@@ -42,7 +42,7 @@ namespace Bacchus.DAO
             M_dbConnection.Open();
             String Sql = "insert into marques (Nom) values ('" + Marque.GetNom() + "')";
 
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
 
             using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
             {
@@ -68,7 +68,7 @@ namespace Bacchus.DAO
             M_dbConnection.Open();
 
             String Sql = "select RefMarque from marques where Nom= ('" + Nom + "')";
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
 
             int Ref = -1;
 
@@ -101,7 +101,7 @@ namespace Bacchus.DAO
             M_dbConnection.Open();
 
             String Sql = "select Nom from marques where RefMarque=" + Ref;
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
 
             string Nom = "";
 
@@ -131,7 +131,7 @@ namespace Bacchus.DAO
             M_dbConnection.Open();
 
             String Sql = "select RefMarque from marques where Nom= ('" + Nom + "')";
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
 
             bool Exists = true;
 
@@ -165,14 +165,16 @@ namespace Bacchus.DAO
             M_dbConnection.Open();
 
             String Sql = "select Nom from Marques";
-            Console.WriteLine(Sql);
+           // Console.WriteLine(Sql);
 
             using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
             {
                 using (SQLiteDataReader Reader = Command.ExecuteReader())
                 {
-                    Reader.Read();
-                    AllNames.Add(Reader.GetString(1));
+                    while (Reader.Read())
+                    {
+                        AllNames.Add(Reader.GetString(0));
+                    }
                 }
             }
 

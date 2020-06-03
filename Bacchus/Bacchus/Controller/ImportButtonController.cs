@@ -48,8 +48,8 @@ namespace Bacchus.Controller
                 }
 
                 //mise à jour de la treeView
-                FamillesDAO AllFamilles = new FamillesDAO(Modale.GetPathToImport());
-                List<string> AllNoms = AllFamilles.GetAllNomsFamilles();
+                InitializeTreeView initializeTree = new InitializeTreeView(Modale.GetFormMain().GetTreeView());
+                initializeTree.ConstructTree(Modale.GetPathToSave());
             }
         }
     }

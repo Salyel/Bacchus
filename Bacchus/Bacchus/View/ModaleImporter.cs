@@ -37,11 +37,6 @@ namespace Bacchus
         private void ImportButton_Click(object sender, EventArgs e)
         {
             ImportButtonController Controller = new ImportButtonController(this);
-
-            //mise à jour du treeView du FormMain
-            InitializeTreeView InitTree = new InitializeTreeView(FormMain.GetTreeView());
-            InitTree.ConstructTree(PathToImport);
-
         }
 
         private void SQLButton_Click(object sender, EventArgs e)
@@ -100,6 +95,16 @@ namespace Bacchus
         public void SetPathToImport(string Path)
         {
             PathToImport = Path;
+        }
+
+        public FormMain GetFormMain()
+        {
+            return FormMain;
+        }
+
+        public void SetFormMain(FormMain Form)
+        {
+            FormMain = Form;
         }
 
         private void ModaleImporter_Load(object sender, EventArgs e)

@@ -1,4 +1,7 @@
 ﻿using Bacchus.Controller;
+using Bacchus.Model;
+using System;
+using System.Data.Entity.Core.Common.EntitySql;
 using System.Windows.Forms;
 
 namespace Bacchus
@@ -134,6 +137,7 @@ namespace Bacchus
             this.treeView1.Size = new System.Drawing.Size(313, 378);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect_1);
+            this.treeView1.NodeMouseClick += new TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
 
             //create treeView Root nodes
             InitializeTreeView initializeTree = new InitializeTreeView(this.treeView1);
@@ -174,6 +178,27 @@ namespace Bacchus
             this.ResumeLayout(false);
             this.PerformLayout();
 
+        }
+
+        void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            TreeNode EventNode = e.Node;
+
+            switch(EventNode.Tag)
+            {
+                case String s:
+                    //appel
+                    break;
+                case Familles f:
+                    //appel
+                    break;
+                case SousFamilles sf:
+                    //appel
+                    break;
+                case Marques m:
+                    //appel
+                    break;
+            }
         }
 
         #endregion

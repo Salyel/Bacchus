@@ -224,46 +224,19 @@ namespace Bacchus.DAO
         }
 
         /// <summary>
-        /// DAO pour récupérer le nom de toutes les sous familles
-        /// </summary>
-        /// <returns> list de tout les noms des sous familles </returns>
-        public List<string> GetAllSousFamillesNames()
-        {
-            List<string> AllNoms = new List<string>();
-
-            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
-            M_dbConnection.Open();
-            String Sql = "select Nom from SousFamilles";
-
-            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
-            {
-                using (SQLiteDataReader Reader = Command.ExecuteReader())
-                {
-                    while (Reader.Read())
-                    {
-                        AllNoms.Add(Reader.GetString(0));
-                    }
-                }
-            }
-            M_dbConnection.Close();
-
-            return AllNoms;
-        }
-
-        /// <summary>
         /// Renvoie tous les noms d'une sous famille en fonction de leur famille
         /// </summary>
         /// <param name="idFamille"> ref de la famille dont on vaut connaitre les noms des sous familles </param>
         /// <returns> les noms des sous familles </returns>
-        public List<string> GetSousFamillesByFamilleName(string FamilleName)
+        public List<SousFamilles> GetSousFamillesByFamilles(int FamillesRef)
         {
-            List<string> AllNoms = new List<string>();
+            List<SousFamilles> AllSousFamilles = new List<SousFamilles>();
 
             SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
             M_dbConnection.Open();
-            String Sql =    "select SF.Nom " +
+            String Sql = "select SF.RefSousFamille, SF.RefFamille, SF.Nom " +
                             "from SousFamilles SF inner join Familles F on SF.RefFamille = F.RefFamille " +
-                            "where F.Nom = '"+FamilleName+"'";
+                            "where SF.RefFamille = "+ FamillesRef;
 
             using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
             {
@@ -271,13 +244,14 @@ namespace Bacchus.DAO
                 {
                     while (Reader.Read())
                     {
-                        AllNoms.Add(Reader.GetString(0));
+                        SousFamilles sf = new SousFamilles(Reader.GetInt32(0), Reader.GetInt32(1), Reader.GetString(2));
+                        AllSousFamilles.Add(sf);
                     }
                 }
             }
             M_dbConnection.Close();
 
-            return AllNoms;
+            return AllSousFamilles;
         }
     }
 }

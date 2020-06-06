@@ -148,9 +148,9 @@ namespace Bacchus.DAO
         /// Permet de récupérer les noms de ttes les familles dans la bdd SQLite
         /// </summary>
         /// <returns> la liste des noms des familles </returns>
-        public List<string> GetAllNomsFamilles()
+        public List<Familles> GetAllFamilles()
         {
-            List<string> AllNoms = new List<string>();
+            List<Familles> AllFamilles = new List<Familles>();
 
             SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
 
@@ -158,7 +158,7 @@ namespace Bacchus.DAO
 
             M_dbConnection.Open();
 
-            String Sql = "select Nom from Familles";
+            String Sql = "select RefFamille, Nom from Familles";
             //Console.WriteLine(Sql);
 
             using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
@@ -167,14 +167,15 @@ namespace Bacchus.DAO
                 {
                     while(Reader.Read())
                     {
-                        AllNoms.Add(Reader.GetString(0));
+                        Familles f = new Familles(Reader.GetInt32(0), Reader.GetString(1));
+                        AllFamilles.Add(f);
                     }
                 }
             }
 
             M_dbConnection.Close();
 
-            return AllNoms;
+            return AllFamilles;
         }
     }
 }

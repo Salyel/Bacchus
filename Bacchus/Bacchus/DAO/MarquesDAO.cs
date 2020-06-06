@@ -156,15 +156,15 @@ namespace Bacchus.DAO
         /// DAO pour récupérer les noms de toutes les marques
         /// </summary>
         /// <returns> la liste de tous les noms </returns>
-        public List<string> GetAllNames()
+        public List<Marques> GetAllMarques()
         {
-            List<string> AllNames = new List<string>();
+            List<Marques> AllMarques = new List<Marques>();
 
             SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
 
             M_dbConnection.Open();
 
-            String Sql = "select Nom from Marques";
+            String Sql = "select RefMarque, Nom from Marques";
            // Console.WriteLine(Sql);
 
             using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
@@ -173,14 +173,15 @@ namespace Bacchus.DAO
                 {
                     while (Reader.Read())
                     {
-                        AllNames.Add(Reader.GetString(0));
+                        Marques m = new Marques(Reader.GetInt32(0), Reader.GetString(1));
+                        AllMarques.Add(m);
                     }
                 }
             }
 
             M_dbConnection.Close();
 
-            return AllNames;
+            return AllMarques;
         }
     }
 }

@@ -36,8 +36,11 @@ namespace Bacchus.Controller
             Tree.BeginUpdate();
 
             Tree.Nodes.Add("Tous les articles");
+            Tree.Nodes[0].Tag = "articles";
             Tree.Nodes.Add("Familles");
+            Tree.Nodes[1].Tag = "familles";
             Tree.Nodes.Add("Marques");
+            Tree.Nodes[2].Tag = "marques";
 
             Tree.EndUpdate();
         }
@@ -50,13 +53,14 @@ namespace Bacchus.Controller
         {
             FamillesDAO famillesDAO = new FamillesDAO(Path);
 
-            List<string> FamillesNames = famillesDAO.GetAllNomsFamilles();
+            List<Familles> Familles = famillesDAO.GetAllFamilles();
 
             Tree.BeginUpdate();
             Tree.Nodes[1].Nodes.Clear();
-            foreach(string Names in FamillesNames)
+            foreach(Familles f in Familles)
             {
-                Tree.Nodes[1].Nodes.Add(Names);
+                Tree.Nodes[1].Nodes.Add(f.GetNom());
+                Tree.Nodes[1].LastNode.Tag = f;
             }
             Tree.EndUpdate();
         }
@@ -69,13 +73,14 @@ namespace Bacchus.Controller
         {
             MarquesDAO marquesDAO = new MarquesDAO(Path);
 
-            List<string> MarquesNames = marquesDAO.GetAllNames();
+            List<Marques> Marques = marquesDAO.GetAllMarques();
 
             Tree.BeginUpdate();
             Tree.Nodes[2].Nodes.Clear();
-            foreach (string Names in MarquesNames)
+            foreach (Marques m in Marques)
             {
-                Tree.Nodes[2].Nodes.Add(Names);
+                Tree.Nodes[2].Nodes.Add(m.GetNom());
+                Tree.Nodes[2].LastNode.Tag = m;
             }
             Tree.EndUpdate();
         }
@@ -87,20 +92,22 @@ namespace Bacchus.Controller
         public void CreateSousFamillesNodes(string Path)
         {
 
-            List<string> sousFamillesNames = new List<string>();
+            List<SousFamilles> SousFamilles = new List<SousFamilles>();
             SousFamillesDAO sfDAO = new SousFamillesDAO(Path);
             TreeNode famillesNodes = Tree.Nodes[1];
 
             Tree.BeginUpdate();          
             foreach(TreeNode n in famillesNodes.Nodes)
             {
-                sousFamillesNames = sfDAO.GetSousFamillesByFamilleName(n.Text);
+                Familles f = (Familles)n.Tag;
+                SousFamilles = sfDAO.GetSousFamillesByFamilles(f.GetRefFamille());
 
-                foreach(string sfName in sousFamillesNames)
+                foreach(SousFamilles sf in SousFamilles)
                 {
-                    n.Nodes.Add(sfName);
+                    n.Nodes.Add(sf.GetNom());
+                    n.LastNode.Tag = sf;
                 }
-                sousFamillesNames.Clear();
+                SousFamilles.Clear();
             }
             Tree.EndUpdate();
         }

@@ -55,6 +55,8 @@ namespace Bacchus.Controller
                 case Marques m:
                     LoadArticlesOfMarque(m);
                     break;
+                default:
+                    break;
             }
         }
 

@@ -159,6 +159,10 @@ namespace Bacchus
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.GridLines = true;
+            this.listView1.KeyDown += ListView_KeyDown;
+            this.listView1.MouseClick += new MouseEventHandler(this.ListView_ItemClick);
+            this.listView1.MouseDoubleClick += new MouseEventHandler(this.ListView_ItemDoubleClick);
+
             // 
             // FormMain
             // 
@@ -182,42 +186,16 @@ namespace Bacchus
             this.ResumeLayout(false);
             this.PerformLayout();
 
-            //Initialisation du handler pour les touches
-            this.listView1.KeyDown += ListView_KeyDown;
-        }
-
-        void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-        { 
-            if (PathToSave != null)
-            {
-                TreeNode EventNode = e.Node;
-                ListViewController Controller = new ListViewController(this.listView1, PathToSave);
-                Controller.LoadListView(EventNode);
-            }
-        }
-
-        void ListView_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (PathToSave != null)
-            {
-                switch (e.KeyCode)
-                {
-                    case Keys.F5:
-                        ListViewController Controller = new ListViewController(this.listView1, PathToSave);
-                        Controller.LoadListView(treeView1.SelectedNode);
-                        break;
-                    case Keys.Delete:
-                        Console.WriteLine("Suppr");
-                        //appel methode
-                        break;
-                    case Keys.Return:
-                        Console.WriteLine("Entree");
-                        //appel methode
-                        break;
-                    default:
-                        break;
-                }
-            }
+            //
+            // ContextMenuStrip
+            //
+            this.contextMenuStrip1 = new ContextMenuStrip();
+            contextMenuStrip1.Items.Add("Ajouter article");
+            contextMenuStrip1.Items[0].Click += new EventHandler(this.ContextMenuStrip_Ajouter);
+            contextMenuStrip1.Items.Add("Modifier article");
+            contextMenuStrip1.Items[1].Click += new EventHandler(this.ContextMenuStrip_Modifier);
+            contextMenuStrip1.Items.Add("Supprimer article");
+            contextMenuStrip1.Items[2].Click += new EventHandler(this.ContextMenuStrip_Supprimer);
         }
 
         private System.Windows.Forms.MenuStrip menuStrip1;
@@ -229,6 +207,7 @@ namespace Bacchus
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
 
 
         public TreeView GetTreeView()

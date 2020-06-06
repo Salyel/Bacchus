@@ -2,6 +2,7 @@
 using Bacchus.Model;
 using System;
 using System.Data.Entity.Core.Common.EntitySql;
+﻿using System;
 using System.Windows.Forms;
 
 namespace Bacchus
@@ -178,13 +179,17 @@ namespace Bacchus
             this.ResumeLayout(false);
             this.PerformLayout();
 
+            //Initialisation du handler pour les touches
+            this.listView1.KeyDown += ListView_KeyDown;
+
+            this.listView1.Click += new EventHandler(this.ListView_Click);
         }
 
         void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             TreeNode EventNode = e.Node;
 
-            switch(EventNode.Tag)
+            switch (EventNode.Tag)
             {
                 case String s:
                     //appel
@@ -201,7 +206,34 @@ namespace Bacchus
             }
         }
 
-        #endregion
+        void ListView_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.F5:
+                    Console.WriteLine("F5");
+                    //appel methode
+                    break;
+                case Keys.Delete:
+                    Console.WriteLine("Suppr");
+                    //appel methode
+                    break;
+                case Keys.Return:
+                    Console.WriteLine("Entree");
+                    //appel methode
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        void ListView_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine("nique la police");
+            MouseEventArgs me = (MouseEventArgs)e;
+            if (me.Button == System.Windows.Forms.MouseButtons.Right) { Console.WriteLine("Right click"); }
+            else { Console.WriteLine("Left click"); }
+        }
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fichierToolStripMenuItem;
@@ -221,3 +253,4 @@ namespace Bacchus
     }
 }
 
+#endregion

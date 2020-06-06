@@ -141,6 +141,10 @@ namespace Bacchus.DAO
             M_dbConnection.Close();
         }
 
+        /// <summary>
+        /// Recupere tous les articles dans la base de donnees
+        /// </summary>
+        /// <returns></returns>
         public List<Articles> GetAllArticles()
         {
             List<Articles> AllArticles = new List<Articles>();
@@ -169,6 +173,11 @@ namespace Bacchus.DAO
             return AllArticles;
         }
 
+        /// <summary>
+        /// Recupere dans la base de donnees tous les articles d'une marque
+        /// </summary>
+        /// <param name="RefMarque"></param>
+        /// <returns></returns>
         public List<Articles> GetArticlesOfMarque(int RefMarque)
         {
             List<Articles> AllArticles = new List<Articles>();
@@ -197,6 +206,11 @@ namespace Bacchus.DAO
             return AllArticles;
         }
 
+        /// <summary>
+        /// Recupere dans la base de donnees tous les articles d'une sous-famille
+        /// </summary>
+        /// <param name="RefSousFamille"></param>
+        /// <returns></returns>
         public List<Articles> GetArticlesOfSousFamille(int RefSousFamille)
         {
             List<Articles> AllArticles = new List<Articles>();

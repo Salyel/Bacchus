@@ -224,7 +224,7 @@ namespace Bacchus.DAO
         }
 
         /// <summary>
-        /// Renvoie tous les noms d'une sous famille en fonction de leur famille
+        /// Renvoie toutes les sous familles appartenant à une famille dans la base de donnees
         /// </summary>
         /// <param name="idFamille"> ref de la famille dont on vaut connaitre les noms des sous familles </param>
         /// <returns> les noms des sous familles </returns>

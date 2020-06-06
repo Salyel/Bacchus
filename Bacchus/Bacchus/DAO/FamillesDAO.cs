@@ -145,7 +145,7 @@ namespace Bacchus.DAO
         }
 
         /// <summary>
-        /// Permet de récupérer les noms de ttes les familles dans la bdd SQLite
+        /// Permet de récupérer toutes les familles dans la base de donnees
         /// </summary>
         /// <returns> la liste des noms des familles </returns>
         public List<Familles> GetAllFamilles()

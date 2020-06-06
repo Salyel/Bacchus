@@ -13,16 +13,29 @@ namespace Bacchus.Controller
     class ListViewController
     {
         //Attributs
+
         private  ListView List;
         private string PathBdd;
 
         //Constructeur
+
+        /// <summary>
+        /// Recupere la ListView et le chemin d'acces a la base de donnees
+        /// </summary>
+        /// <param name="List"></param>
+        /// <param name="PathToSave"></param>
         public ListViewController(ListView List, string PathToSave)
         {
             this.List = List;
             this.PathBdd = PathToSave;
         }
 
+        //Methodes
+
+        /// <summary>
+        /// Determine quelle methode on va appeler pour remplir la ListView en fonction de la node qui a ete clickee
+        /// </summary>
+        /// <param name="EventNode"></param>
         public void LoadListView(TreeNode EventNode)
         {
             switch (EventNode.Tag)
@@ -45,6 +58,9 @@ namespace Bacchus.Controller
             }
         }
 
+        /// <summary>
+        /// Recupere tous les articles et les affiche dans la ListView
+        /// </summary>
         public void LoadAllArticles()
         {
             List.BeginUpdate();
@@ -59,6 +75,10 @@ namespace Bacchus.Controller
             List.EndUpdate();
         }
 
+        /// <summary>
+        /// Recupere tous les articles d'une marque et les affiche dans la ListView
+        /// </summary>
+        /// <param name="Marque"></param>
         public void LoadArticlesOfMarque(Marques Marque)
         {
             List.BeginUpdate();
@@ -73,6 +93,10 @@ namespace Bacchus.Controller
             List.EndUpdate();
         }
 
+        /// <summary>
+        /// Recupere tous les articles d'une sous-famille et les affiche dans la ListView
+        /// </summary>
+        /// <param name="SousFamille"></param>
         public void LoadArticleOfSousFamille(SousFamilles SousFamille)
         {
             List.BeginUpdate();
@@ -87,6 +111,10 @@ namespace Bacchus.Controller
             List.EndUpdate();
         }
 
+        /// <summary>
+        /// Recupere tous les noeuds enfants du noeud clicke et affiche leur nom dans la ListView
+        /// </summary>
+        /// <param name="EventNode"></param>
         public void LoadNoeudsEnfant(TreeNode EventNode)
         {
             List.BeginUpdate();
@@ -104,6 +132,9 @@ namespace Bacchus.Controller
             List.EndUpdate();
         }
 
+        /// <summary>
+        /// Cree les headers de colonnes dans les cas ou on affiche que le nom
+        /// </summary>
         public void InitializeColumnNom()
         {
             List.Columns.Clear();
@@ -113,6 +144,9 @@ namespace Bacchus.Controller
 
         }
 
+        /// <summary>
+        /// Cree les headers de colonnes dans le cas ou on affiche des articles
+        /// </summary>
         public void InitializeColumnArticle()
         {
             List.Columns.Clear();
@@ -127,6 +161,10 @@ namespace Bacchus.Controller
 
         }
 
+        /// <summary>
+        /// Prend une liste d'article passee en parametre et remplit la ListView avec
+        /// </summary>
+        /// <param name="AllArticles"></param>
         public void FillListView(List<Articles> AllArticles)
         {
             SousFamillesDAO sfDAO = new SousFamillesDAO(PathBdd);

@@ -153,7 +153,7 @@ namespace Bacchus.DAO
         }
 
         /// <summary>
-        /// DAO pour récupérer les noms de toutes les marques
+        /// DAO pour récupérer toutes les marques dans la base de donnees 
         /// </summary>
         /// <returns> la liste de tous les noms </returns>
         public List<Marques> GetAllMarques()

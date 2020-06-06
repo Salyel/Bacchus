@@ -91,7 +91,6 @@ namespace Bacchus.Controller
         /// <param name="Path"> chemin vers la bdd SQLite </param>
         public void CreateSousFamillesNodes(string Path)
         {
-
             List<SousFamilles> SousFamilles = new List<SousFamilles>();
             SousFamillesDAO sfDAO = new SousFamillesDAO(Path);
             TreeNode famillesNodes = Tree.Nodes[1];

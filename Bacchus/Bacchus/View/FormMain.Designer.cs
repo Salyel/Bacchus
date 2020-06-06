@@ -4,6 +4,7 @@ using System;
 using System.Data.Entity.Core.Common.EntitySql;
 ﻿using System;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Bacchus
 {
@@ -13,6 +14,7 @@ namespace Bacchus
         /// Variable nécessaire au concepteur.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private string PathToSave = null;
 
         /// <summary>
         /// Nettoyage des ressources utilisées.
@@ -156,6 +158,7 @@ namespace Bacchus
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.GridLines = true;
             // 
             // FormMain
             // 
@@ -181,58 +184,40 @@ namespace Bacchus
 
             //Initialisation du handler pour les touches
             this.listView1.KeyDown += ListView_KeyDown;
-
-            this.listView1.Click += new EventHandler(this.ListView_Click);
         }
 
         void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            TreeNode EventNode = e.Node;
-
-            switch (EventNode.Tag)
+        { 
+            if (PathToSave != null)
             {
-                case String s:
-                    //appel
-                    break;
-                case Familles f:
-                    //appel
-                    break;
-                case SousFamilles sf:
-                    //appel
-                    break;
-                case Marques m:
-                    //appel
-                    break;
+                TreeNode EventNode = e.Node;
+                ListViewController Controller = new ListViewController(this.listView1, PathToSave);
+                Controller.LoadListView(EventNode);
             }
         }
 
         void ListView_KeyDown(object sender, KeyEventArgs e)
         {
-            switch (e.KeyCode)
+            if (PathToSave != null)
             {
-                case Keys.F5:
-                    Console.WriteLine("F5");
-                    //appel methode
-                    break;
-                case Keys.Delete:
-                    Console.WriteLine("Suppr");
-                    //appel methode
-                    break;
-                case Keys.Return:
-                    Console.WriteLine("Entree");
-                    //appel methode
-                    break;
-                default:
-                    break;
+                switch (e.KeyCode)
+                {
+                    case Keys.F5:
+                        ListViewController Controller = new ListViewController(this.listView1, PathToSave);
+                        Controller.LoadListView(treeView1.SelectedNode);
+                        break;
+                    case Keys.Delete:
+                        Console.WriteLine("Suppr");
+                        //appel methode
+                        break;
+                    case Keys.Return:
+                        Console.WriteLine("Entree");
+                        //appel methode
+                        break;
+                    default:
+                        break;
+                }
             }
-        }
-
-        void ListView_Click(object sender, EventArgs e)
-        {
-            Console.WriteLine("nique la police");
-            MouseEventArgs me = (MouseEventArgs)e;
-            if (me.Button == System.Windows.Forms.MouseButtons.Right) { Console.WriteLine("Right click"); }
-            else { Console.WriteLine("Left click"); }
         }
 
         private System.Windows.Forms.MenuStrip menuStrip1;
@@ -249,6 +234,16 @@ namespace Bacchus
         public TreeView GetTreeView()
         {
             return this.treeView1;
+        }
+
+        public string GetPathToSave()
+        {
+            return this.PathToSave;
+        }
+
+        public void SetPathToSave(string PathToSave)
+        {
+            this.PathToSave = PathToSave;
         }
     }
 }

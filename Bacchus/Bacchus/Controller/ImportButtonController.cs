@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Bacchus.Controller
 {
@@ -50,6 +51,9 @@ namespace Bacchus.Controller
                 //mise à jour de la treeView
                 InitializeTreeView initializeTree = new InitializeTreeView(Modale.GetFormMain().GetTreeView());
                 initializeTree.ConstructTree(Modale.GetPathToSave());
+
+                //stockage du chemin de la bdd
+                Modale.GetFormMain().SetPathToSave(Modale.GetPathToSave());
             }
         }
     }

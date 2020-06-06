@@ -140,5 +140,90 @@ namespace Bacchus.DAO
 
             M_dbConnection.Close();
         }
+
+        public List<Articles> GetAllArticles()
+        {
+            List<Articles> AllArticles = new List<Articles>();
+
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+
+            String Sql = "select RefArticle, Description, RefSousFamille, RefMarque, PrixHT, Quantite from Articles";
+            // Console.WriteLine(Sql);
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                using (SQLiteDataReader Reader = Command.ExecuteReader())
+                {
+                    while (Reader.Read())
+                    {
+                        Articles a = new Articles(Reader.GetString(0), Reader.GetString(1), Reader.GetInt32(2), Reader.GetInt32(3), 0, Reader.GetInt32(5));
+                        AllArticles.Add(a);
+                    }
+                }
+            }
+
+            M_dbConnection.Close();
+
+            return AllArticles;
+        }
+
+        public List<Articles> GetArticlesOfMarque(int RefMarque)
+        {
+            List<Articles> AllArticles = new List<Articles>();
+
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+
+            String Sql = "select RefArticle, Description, RefSousFamille, RefMarque, PrixHT, Quantite from Articles WHERE Refmarque = " + RefMarque;
+            // Console.WriteLine(Sql);
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                using (SQLiteDataReader Reader = Command.ExecuteReader())
+                {
+                    while (Reader.Read())
+                    {
+                        Articles a = new Articles(Reader.GetString(0), Reader.GetString(1), Reader.GetInt32(2), Reader.GetInt32(3), 0, Reader.GetInt32(5));
+                        AllArticles.Add(a);
+                    }
+                }
+            }
+
+            M_dbConnection.Close();
+
+            return AllArticles;
+        }
+
+        public List<Articles> GetArticlesOfSousFamille(int RefSousFamille)
+        {
+            List<Articles> AllArticles = new List<Articles>();
+
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+
+            String Sql = "select RefArticle, Description, RefSousFamille, RefMarque, PrixHT, Quantite from Articles WHERE RefSousFamille = " + RefSousFamille;
+            // Console.WriteLine(Sql);
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                using (SQLiteDataReader Reader = Command.ExecuteReader())
+                {
+                    while (Reader.Read())
+                    {
+                        Articles a = new Articles(Reader.GetString(0), Reader.GetString(1), Reader.GetInt32(2), Reader.GetInt32(3), 0, Reader.GetInt32(5));
+                        AllArticles.Add(a);
+                    }
+                }
+            }
+
+            M_dbConnection.Close();
+
+            return AllArticles;
+        }
+
     }
 }

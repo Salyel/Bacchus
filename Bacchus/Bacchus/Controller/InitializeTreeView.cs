@@ -86,32 +86,49 @@ namespace Bacchus.Controller
         /// <param name="Path"> chemin vers la bdd SQLite </param>
         public void CreateSousFamillesNodes(string Path)
         {
-            string FamilleNom = "";
-            int SousFamilleRef = -1;
-            TreeNode[] currentNode;
 
-            SousFamillesDAO sousFamillesDAO = new SousFamillesDAO(Path);
-            List<String> SousFamillesNoms = sousFamillesDAO.GetAllSousFamillesNames();
+            List<string> sousFamillesNames = new List<string>();
+            SousFamillesDAO sfDAO = new SousFamillesDAO(Path);
+            TreeNode famillesNodes = Tree.Nodes[1];
 
-            Tree.BeginUpdate();
-            foreach(string Nom in SousFamillesNoms)
+            Tree.BeginUpdate();          
+            foreach(TreeNode n in famillesNodes.Nodes)
             {
-                SousFamilleRef = sousFamillesDAO.GetRefByName(Nom);
-                FamilleNom = sousFamillesDAO.GetFamilleNameBySousFamilleRef(SousFamilleRef);
+                sousFamillesNames = sfDAO.GetSousFamillesByFamilleName(n.Text);
 
-                //Console.WriteLine("famille ___> " + FamilleNom);
-
-                //on récupère le noeud correspondant au nom de la famille
-                currentNode = Tree.Nodes.Find(FamilleNom, true);
-
-                Console.WriteLine("currentNode len ->>>>>>>>>> " + currentNode.Length);
-
-                foreach(TreeNode node in currentNode)
+                foreach(string sfName in sousFamillesNames)
                 {
-                    node.Nodes.Add(Nom);
+                    n.Nodes.Add(sfName);
                 }
+                sousFamillesNames.Clear();
             }
             Tree.EndUpdate();
+        }
+
+        /// <summary>
+        /// Affichage de l'arbre dans la console
+        /// </summary>
+        public void PrintTreeView()
+        {
+            TreeNodeCollection nodes = Tree.Nodes;
+            foreach(TreeNode n in nodes)
+            {
+                PrintRecu(n);
+            }
+        }
+
+        /// <summary>
+        /// Affichage récusif d'un noeud et de ses enfants
+        /// </summary>
+        /// <param name="treenode"></param>
+        public void PrintRecu(TreeNode treenode)
+        {
+            Console.WriteLine(treenode.Text);
+
+            foreach(TreeNode n in treenode.Nodes)
+            {
+                PrintRecu(n);
+            }
         }
 
         /// <summary>
@@ -122,6 +139,8 @@ namespace Bacchus.Controller
             CreateFamillesNodes(Path);
             CreateMarquesNodes(Path);
             CreateSousFamillesNodes(Path);
+
+            //PrintTreeView();
         }
     }
 }

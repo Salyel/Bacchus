@@ -55,7 +55,7 @@ namespace Bacchus.DAO
             List<float> AllArticlesPrixHT = new List<float>();
 
             Modale.SetProgressBarValue(25);
-            using (var reader = new StreamReader(Modale.GetPathToImport()))
+            using (var reader = new StreamReader(Modale.GetPathToImport(), Encoding.Default))
             {
                 reader.ReadLine();                      //On passe la première ligne (les headers du fichier)
                 //On stocke tous dans des listes en parcourant notre fichier, on créera après (on ne stocke qu'une occurence de chaque item)

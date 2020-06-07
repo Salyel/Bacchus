@@ -56,6 +56,11 @@ namespace Bacchus.Model
         {
             this.Nom = Nom;
         }
+
+        public override string ToString()
+        {
+            return Nom;
+        }
     }
 }
 

@@ -37,6 +37,9 @@ namespace Bacchus.DAO
         /// </summary>
         public void ImporterBDD()
         {
+            int NombreArticleAjout = 0;
+            int NombreArticleUpdated = 0;
+
             MarquesDAO MarquesD = new MarquesDAO(Modale.GetPathToSave());
             FamillesDAO FamillesD = new FamillesDAO(Modale.GetPathToSave());
             SousFamillesDAO SousFamillesD = new SousFamillesDAO(Modale.GetPathToSave());
@@ -123,16 +126,28 @@ namespace Bacchus.DAO
                     int RefMarque = MarquesD.GetRefByName(AllArticlesMarqueNom[Index]);
                     Articles Article = new Articles(AllArticlesRefArticle[Index], AllArticlesDescription[Index], RefSousFamille, RefMarque, AllArticlesPrixHT[Index], 0);
                     ArticlesD.AjouterArticle(Article);
+                    NombreArticleAjout++;
                 }
                 else
                 {
                     int RefSousFamille = SousFamillesD.GetRefByName(AllArticlesSousFamilleNom[Index]);
                     int RefMarque = MarquesD.GetRefByName(AllArticlesMarqueNom[Index]);
-                    ArticlesD.Update(AllArticlesRefArticle[Index], AllArticlesDescription[Index], RefSousFamille, RefMarque, AllArticlesPrixHT[Index], 0);
+                    Articles monArticle = ArticlesD.GetArticleByRef(AllArticlesRefArticle[Index]);
+                    if (monArticle.GetDescription() != AllArticlesDescription[Index] || monArticle.GetRefSousFamille() != RefSousFamille || monArticle.GetRefMarque() != RefMarque || monArticle.GetPrixHT() != AllArticlesPrixHT[Index])
+                    {
+                        ArticlesD.Update(AllArticlesRefArticle[Index], AllArticlesDescription[Index], RefSousFamille, RefMarque, AllArticlesPrixHT[Index], 0);
+                        NombreArticleUpdated++;
+                    }
                 }
             }
             Modale.SetProgressBarValue(100);
             Modale.GetLabelImport().Text = "Importation en mode Ajout terminé !";
+
+            string message = NombreArticleAjout + " articles ont été ajoutés à la base de données et " + NombreArticleUpdated + " articles ont été mis à jour.";
+            const string caption = "Intégration en mode Ajout terminé !";
+            var result = MessageBox.Show(message, caption,
+                                         MessageBoxButtons.OK,
+                                         MessageBoxIcon.Information);
         }
     }
 }

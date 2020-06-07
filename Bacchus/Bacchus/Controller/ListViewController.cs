@@ -127,8 +127,12 @@ namespace Bacchus.Controller
             int Compteur = 0;
             foreach(TreeNode Node in EventNode.Nodes)
             {
-                List.Items.Add(Node.Text);
-                List.Items[Compteur].Tag = Node.Tag;
+                ListViewItem Item = new ListViewItem(Node.Text);
+                Item.Name = Node.Text;
+
+                List.Items.Add(Item);
+                //List.Items[Compteur].Tag = Node.Tag;
+                List.Items.Find(Node.Text, false)[0].Tag = Node.Tag;
                 Compteur++;
             }
 

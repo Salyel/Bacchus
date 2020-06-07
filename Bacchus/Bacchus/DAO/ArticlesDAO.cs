@@ -2,9 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Bacchus.DAO
 {
@@ -88,13 +86,23 @@ namespace Bacchus.DAO
 
             //Console.WriteLine(Sql);
 
-            Articles Article;
+            Articles Article = null ;
             using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
             {
                 using (SQLiteDataReader Reader = Command.ExecuteReader())
                 {
                     Reader.Read();
-                    Article = new Articles(Reader.GetString(0), Reader.GetString(1), Reader.GetInt32(2), Reader.GetInt32(3), Reader.GetFloat(4), Reader.GetInt32(5));
+                    for (int i = 0; i < 6; i++)
+                    {
+                        Console.WriteLine(Reader.IsDBNull(i));
+                    }
+                    string RefArticle = Reader.GetString(0);
+                    string Description = Reader.GetString(1);
+                    int SousFamille = Reader.GetInt32(2);
+                    int Marque = Reader.GetInt32(3);
+                    float Prix = float.Parse(Reader.GetString(4));
+                    int Quantite = Reader.GetInt32(5);
+                    Article = new Articles(RefArticle, Description, SousFamille, Marque, Prix, Quantite);
                 }
             }
 
@@ -134,6 +142,42 @@ namespace Bacchus.DAO
             M_dbConnection.Close();
 
             return Exists;
+        }
+
+        /// <summary>
+        /// DAO pour compter le nombre d'article dans la base de données
+        /// </summary>
+        /// <returns> le nombre d'article dans la base de données</returns>
+        public int GetNbArticle()
+        {
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+
+            String Sql = "SELECT COUNT(*) FROM articles";
+            Console.WriteLine(Sql);
+
+            int Nombre = 0;
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                using (SQLiteDataReader Reader = Command.ExecuteReader())
+                {
+                    Reader.Read();
+                    if (Reader == null || !Reader.HasRows)
+                    {
+
+                    }
+                    else
+                    {
+                        Nombre = Reader.GetInt32(0);
+                    }
+                }
+            }
+
+            M_dbConnection.Close();
+
+            return Nombre;
         }
 
         /// <summary>
@@ -193,6 +237,37 @@ namespace Bacchus.DAO
             M_dbConnection.Close();
 
             return AllArticles;
+        }
+
+        /// <summary>
+        /// Recupere toutes les refs des articles dans la base de donnees
+        /// </summary>
+        /// <returns></returns>
+        public List<String> GetAllArticlesRef()
+        {
+            List<String> AllArticlesRef = new List<String>();
+
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+
+            String Sql = "select RefArticle from Articles";
+            // Console.WriteLine(Sql);
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                using (SQLiteDataReader Reader = Command.ExecuteReader())
+                {
+                    while (Reader.Read())
+                    {
+                        AllArticlesRef.Add(Reader.GetString(0));
+                    }
+                }
+            }
+
+            M_dbConnection.Close();
+
+            return AllArticlesRef;
         }
 
         /// <summary>
@@ -321,6 +396,33 @@ namespace Bacchus.DAO
             M_dbConnection.Close();
 
             return nbArticles;
+        }
+
+        /// <summary>
+        /// DAO pour modifier un article à partir de son ancienne description
+        /// </summary>
+        /// <param name="AncienNom"> Nom de la sous famille dont on veut modifier le nom </param>
+        /// <param name="NouveauNom"> Nouveau nom de la sous famille après modification </param>
+        /// <param name="Famille"> Nouvelle famille de la sous famille après modification </param>
+        public void ModifierArticle(String AncienneDescription, String NouvelleDescription, SousFamilles SousFamille, Marques Marque, int Quantite)
+        {
+            //ouverture de la connexion avec la bdd & creation de la requete
+
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+            String Sql = "update articles set description='" + NouvelleDescription + "', RefSousFamille=" + SousFamille.GetRefSousFamille() + ", RefMarque=" + Marque.GetRefMarque() + ", Quantite=" + Quantite +  " where description='" + AncienneDescription + "'";
+
+            Console.WriteLine(Sql);
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                //ajout de la marque
+                Command.ExecuteNonQuery();
+            }
+
+            //fermeture de la connexion
+            M_dbConnection.Close();
         }
     }
 }

@@ -73,6 +73,32 @@ namespace Bacchus.DAO
         }
 
         /// <summary>
+        /// DAO pour modifier le nom d'une famille à partir de son ancien nom
+        /// </summary>
+        /// <param name="AncienNom"> Nom de la famille dont on veut modifier le nom </param>
+        /// <param name="NouveauNom"> Nouveau nom de la famille après modification </param>
+        public void ModifierNomFamilles(String AncienNom, String NouveauNom)
+        {
+            //ouverture de la connexion avec la bdd & creation de la requete
+
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+            String Sql = "update familles set nom='" + NouveauNom + "' where nom='" + AncienNom + "'";
+
+            //Console.WriteLine(Sql);
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                //ajout de la marque
+                Command.ExecuteNonQuery();
+            }
+
+            //fermeture de la connexion
+            M_dbConnection.Close();
+        }
+
+        /// <summary>
         /// DAO pour récupérer la référence d'une famille en fonction de son nom
         /// </summary>
         /// <param name="Nom"> Nom de la famille dont on veut obtenir la référence </param>

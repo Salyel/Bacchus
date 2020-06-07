@@ -27,6 +27,7 @@ namespace Bacchus.Controller
         public ImportButtonController(ModaleImporter Modale)
         {
             this.Modale = Modale;
+            Modale.GetFormMain().GetLabelAjouter().Text = "";
             //si on a pas choisi un mode d'importation
             if (Modale.GetButtonsValue().Equals("") || Modale.GetPathToImport().Equals("") || Modale.GetPathToSave().Equals(""))
             {

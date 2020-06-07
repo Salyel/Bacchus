@@ -1,5 +1,6 @@
 ﻿using Bacchus.Model;
 using System;
+using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Xml.Linq;
 
@@ -239,6 +240,37 @@ namespace Bacchus.DAO
         }
 
         /// <summary>
+        /// Recupere toutes les refs des articles dans la base de donnees
+        /// </summary>
+        /// <returns></returns>
+        public List<String> GetAllArticlesRef()
+        {
+            List<String> AllArticlesRef = new List<String>();
+
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+
+            String Sql = "select RefArticle from Articles";
+            // Console.WriteLine(Sql);
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                using (SQLiteDataReader Reader = Command.ExecuteReader())
+                {
+                    while (Reader.Read())
+                    {
+                        AllArticlesRef.Add(Reader.GetString(0));
+                    }
+                }
+            }
+
+            M_dbConnection.Close();
+
+            return AllArticlesRef;
+        }
+
+        /// <summary>
         /// Recupere dans la base de donnees tous les articles d'une marque
         /// </summary>
         /// <param name="RefMarque"></param>
@@ -364,6 +396,33 @@ namespace Bacchus.DAO
             M_dbConnection.Close();
 
             return nbArticles;
+        }
+
+        /// <summary>
+        /// DAO pour modifier un article à partir de son ancienne description
+        /// </summary>
+        /// <param name="AncienNom"> Nom de la sous famille dont on veut modifier le nom </param>
+        /// <param name="NouveauNom"> Nouveau nom de la sous famille après modification </param>
+        /// <param name="Famille"> Nouvelle famille de la sous famille après modification </param>
+        public void ModifierArticle(String AncienneDescription, String NouvelleDescription, SousFamilles SousFamille, Marques Marque, int Quantite)
+        {
+            //ouverture de la connexion avec la bdd & creation de la requete
+
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+            String Sql = "update articles set description='" + NouvelleDescription + "', RefSousFamille=" + SousFamille.GetRefSousFamille() + ", RefMarque=" + Marque.GetRefMarque() + ", Quantite=" + Quantite +  " where description='" + AncienneDescription + "'";
+
+            Console.WriteLine(Sql);
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                //ajout de la marque
+                Command.ExecuteNonQuery();
+            }
+
+            //fermeture de la connexion
+            M_dbConnection.Close();
         }
     }
 }

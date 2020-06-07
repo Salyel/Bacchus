@@ -36,11 +36,11 @@ namespace Bacchus.Controller
             Tree.BeginUpdate();
 
             Tree.Nodes.Add("Tous les articles");
-            Tree.Nodes[0].Tag = "articles";
+            Tree.Nodes[0].Tag = "Articles";
             Tree.Nodes.Add("Familles");
-            Tree.Nodes[1].Tag = "familles";
+            Tree.Nodes[1].Tag = "Familles";
             Tree.Nodes.Add("Marques");
-            Tree.Nodes[2].Tag = "marques";
+            Tree.Nodes[2].Tag = "Marques";
 
             Tree.EndUpdate();
         }
@@ -61,6 +61,7 @@ namespace Bacchus.Controller
             {
                 Tree.Nodes[1].Nodes.Add(f.GetNom(), f.GetNom());
                 Tree.Nodes[1].LastNode.Tag = f;
+                //Tree.Nodes[1].Nodes.Find(f.GetNom(), false)[0].Tag = f;
             }
             Tree.EndUpdate();
         }

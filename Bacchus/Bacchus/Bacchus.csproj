@@ -69,6 +69,9 @@
   <ItemGroup>
     <Compile Include="Controller\ChooseSQLButtonControllerExport.cs" />
     <Compile Include="Controller\ChooseCSVButtonControllerExport.cs" />
+    <Compile Include="Controller\AddButtonController.cs" />
+    <Compile Include="Controller\MenuAjouterController.cs" />
+    <Compile Include="Controller\ModifyButtonController.cs" />
     <Compile Include="Controller\ListViewItemComparer.cs" />
     <Compile Include="Controller\ListViewController.cs" />
     <Compile Include="Controller\InitializeTreeView.cs" />
@@ -87,6 +90,54 @@
     <Compile Include="Model\SousFamilles.cs" />
     <Compile Include="Model\Marques.cs" />
     <Compile Include="Model\Familles.cs" />
+    <Compile Include="View\AjouterMarque.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\AjouterMarque.Designer.cs">
+      <DependentUpon>AjouterMarque.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\AjouterFamille.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\AjouterFamille.Designer.cs">
+      <DependentUpon>AjouterFamille.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\AjouterSousFamille.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\AjouterSousFamille.Designer.cs">
+      <DependentUpon>AjouterSousFamille.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\AjouterArticle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\AjouterArticle.Designer.cs">
+      <DependentUpon>AjouterArticle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ModifierArticle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ModifierArticle.Designer.cs">
+      <DependentUpon>ModifierArticle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ModifierSousFamille.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ModifierSousFamille.Designer.cs">
+      <DependentUpon>ModifierSousFamille.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ModifierFamille.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ModifierFamille.Designer.cs">
+      <DependentUpon>ModifierFamille.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ModifierMarque.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ModifierMarque.Designer.cs">
+      <DependentUpon>ModifierMarque.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\ModaleExporter.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +158,30 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="View\AjouterArticle.resx">
+      <DependentUpon>AjouterArticle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\AjouterFamille.resx">
+      <DependentUpon>AjouterFamille.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\AjouterMarque.resx">
+      <DependentUpon>AjouterMarque.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\AjouterSousFamille.resx">
+      <DependentUpon>AjouterSousFamille.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ModifierArticle.resx">
+      <DependentUpon>ModifierArticle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ModifierSousFamille.resx">
+      <DependentUpon>ModifierSousFamille.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ModifierFamille.resx">
+      <DependentUpon>ModifierFamille.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ModifierMarque.resx">
+      <DependentUpon>ModifierMarque.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>

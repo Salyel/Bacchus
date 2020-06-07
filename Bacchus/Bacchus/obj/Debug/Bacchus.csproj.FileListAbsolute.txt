@@ -67,3 +67,11 @@ C:\Users\Florent\Documents\Cours\S8\PointNet\Bacchus\Bacchus\Bacchus\obj\Debug\B
 C:\Users\Florent\Documents\Cours\S8\PointNet\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.csproj.CopyComplete
 C:\Users\Florent\Documents\Cours\S8\PointNet\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.exe
 C:\Users\Florent\Documents\Cours\S8\PointNet\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.pdb
+D:\Programmes Visual\Bacchus\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.View.ModifierMarque.resources
+D:\Programmes Visual\Bacchus\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.View.ModifierFamille.resources
+D:\Programmes Visual\Bacchus\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.View.ModifierSousFamille.resources
+D:\Programmes Visual\Bacchus\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.View.ModifierArticle.resources
+D:\Programmes Visual\Bacchus\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.View.AjouterMarque.resources
+D:\Programmes Visual\Bacchus\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.View.AjouterFamille.resources
+D:\Programmes Visual\Bacchus\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.View.AjouterSousFamille.resources
+D:\Programmes Visual\Bacchus\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.View.AjouterArticle.resources

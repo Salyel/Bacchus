@@ -42,6 +42,14 @@ namespace Bacchus.Controller
                 FenetreExporter.StartPosition = FormStartPosition.CenterParent;
                 FenetreExporter.ShowDialog(Form);
             }
+            else if(Type.Equals("actualiser"))
+            {
+                InitializeTreeView TreeViewInit = new InitializeTreeView(Form.GetTreeView());
+                TreeViewInit.ConstructTree(Form.GetPathToSave());
+
+                ListViewController ListViewInit = new ListViewController(Form.GetListView(), Form.GetPathToSave());
+                ListViewInit.LoadListView(Form.GetTreeView().SelectedNode);
+            }
 
         }
     }

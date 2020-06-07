@@ -1,4 +1,6 @@
 ﻿using Bacchus.Controller;
+using Bacchus.Model;
+using Bacchus.View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +19,15 @@ namespace Bacchus
         public FormMain()
         {
             InitializeComponent();
+            this.listView1.KeyDown += ListView_KeyDown;
+            this.listView1.MouseClick += new MouseEventHandler(this.ListView_ItemClick);
+            this.listView1.MouseDoubleClick += new MouseEventHandler(this.ListView_ItemDoubleClick);
+
+            this.contextMenuStrip1 = new ContextMenuStrip();
+            contextMenuStrip1.Items.Add("Ajouter");
+            contextMenuStrip1.Items.Add("Modifier");
+            contextMenuStrip1.Items.Add("Supprimer");
+            contextMenuStrip1.ItemClicked += new ToolStripItemClickedEventHandler(this.ContextMenuStrip_ItemClicked);
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -51,7 +62,10 @@ namespace Bacchus
 
         private void actualiserToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if(PathToSave != null)
+            {
+                MenuFichierController Menu = new MenuFichierController(this, "actualiser");
+            }
         }
 
         private void importerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -110,7 +124,31 @@ namespace Bacchus
                         Console.WriteLine("Entree");
                         if(this.listView1.SelectedItems.Count > 0)
                         {
-                            //ouvrir la fenêtre de modification
+                            switch (this.listView1.SelectedItems[0].Tag)
+                            {
+                                case Articles a:
+                                    ModifierArticle ModifierA = new ModifierArticle(this, PathToSave);
+                                    ModifierA.StartPosition = FormStartPosition.CenterParent;
+                                    ModifierA.ShowDialog(this);
+                                    break;
+                                case Familles f:
+                                    ModifierFamille ModifierF = new ModifierFamille(this, PathToSave);
+                                    ModifierF.StartPosition = FormStartPosition.CenterParent;
+                                    ModifierF.ShowDialog(this);
+                                    break;
+                                case SousFamilles sf:
+                                    ModifierSousFamille ModifierSf = new ModifierSousFamille(this, PathToSave);
+                                    ModifierSf.StartPosition = FormStartPosition.CenterParent;
+                                    ModifierSf.ShowDialog(this);
+                                    break;
+                                case Marques m:
+                                    ModifierMarque ModifierM = new ModifierMarque(this, PathToSave);
+                                    ModifierM.StartPosition = FormStartPosition.CenterParent;
+                                    ModifierM.ShowDialog(this);
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
                         break;
 
@@ -147,15 +185,69 @@ namespace Bacchus
 
             switch (e.ClickedItem.Text)
             {
-                case "Ajouter article":
-                    //ouvrir fenetre d'ajout
+                case "Ajouter":
+                    if (this.listView1.SelectedItems.Count > 0)
+                    {
+                        switch (this.listView1.SelectedItems[0].Tag)
+                        {
+                            case Articles a:
+                                AjouterArticle AjouterA = new AjouterArticle(this, PathToSave);
+                                AjouterA.StartPosition = FormStartPosition.CenterParent;
+                                AjouterA.ShowDialog(this);
+                                break;
+                            case Familles f:
+                                AjouterFamille AjouterF = new AjouterFamille(this, PathToSave);
+                                AjouterF.StartPosition = FormStartPosition.CenterParent;
+                                AjouterF.ShowDialog(this);
+                                break;
+                            case SousFamilles sf:
+                                AjouterSousFamille AjouterSf = new AjouterSousFamille(this, PathToSave);
+                                AjouterSf.StartPosition = FormStartPosition.CenterParent;
+                                AjouterSf.ShowDialog(this);
+                                break;
+                            case Marques m:
+                                AjouterMarque AjouterM = new AjouterMarque(this, PathToSave);
+                                AjouterM.StartPosition = FormStartPosition.CenterParent;
+                                AjouterM.ShowDialog(this);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
                     break;
 
-                case "Modifier article":
-                    //ouvrir fenetre de modification
+                case "Modifier":
+                    if (this.listView1.SelectedItems.Count > 0)
+                    {
+                        switch (this.listView1.SelectedItems[0].Tag)
+                        {
+                            case Articles a:
+                                ModifierArticle ModifierA = new ModifierArticle(this, PathToSave);
+                                ModifierA.StartPosition = FormStartPosition.CenterParent;
+                                ModifierA.ShowDialog(this);
+                                break;
+                            case Familles f:
+                                ModifierFamille ModifierF = new ModifierFamille(this, PathToSave);
+                                ModifierF.StartPosition = FormStartPosition.CenterParent;
+                                ModifierF.ShowDialog(this);
+                                break;
+                            case SousFamilles sf:
+                                ModifierSousFamille ModifierSf = new ModifierSousFamille(this, PathToSave);
+                                ModifierSf.StartPosition = FormStartPosition.CenterParent;
+                                ModifierSf.ShowDialog(this);
+                                break;
+                            case Marques m:
+                                ModifierMarque ModifierM = new ModifierMarque(this, PathToSave);
+                                ModifierM.StartPosition = FormStartPosition.CenterParent;
+                                ModifierM.ShowDialog(this);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
                     break;
 
-                case "Supprimer article":
+                case "Supprimer":
                     Controller.DeleteSelectedItem(this.treeView1.SelectedNode);
                     break;
 
@@ -173,19 +265,80 @@ namespace Bacchus
         {
             if (this.listView1.SelectedItems.Count > 0)
             {
-                //ouvrir la fenêtre de modification
-            }
-        }
-
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+                switch (this.listView1.SelectedItems[0].Tag)
+                {
+                    case Articles a:
+                        ModifierArticle ModifierA = new ModifierArticle(this, PathToSave);
+                        ModifierA.StartPosition = FormStartPosition.CenterParent;
+                        ModifierA.ShowDialog(this);
+                        break;
+                    case Familles f:
+                        ModifierFamille ModifierF = new ModifierFamille(this, PathToSave);
+                        ModifierF.StartPosition = FormStartPosition.CenterParent;
+                        ModifierF.ShowDialog(this);
+                        break;
+                    case SousFamilles sf:
+                        ModifierSousFamille ModifierSf = new ModifierSousFamille(this, PathToSave);
+                        ModifierSf.StartPosition = FormStartPosition.CenterParent;
+                        ModifierSf.ShowDialog(this);
+                        break;
+                    case Marques m:
+                        ModifierMarque ModifierM = new ModifierMarque(this, PathToSave);
+                        ModifierM.StartPosition = FormStartPosition.CenterParent;
+                        ModifierM.ShowDialog(this);
+                        break;
+                    default:
+                        break;
+                }
+            };
         }
 
         private void listView1_ColumnClickSorting(object sender, ColumnClickEventArgs e)
         {
             Controller.ListViewController listViewController = new ListViewController(this.listView1, this.GetPathToSave());
             listViewController.SortingListView(e.Column);
+        }
+
+        public ListView GetListView()
+        {
+            return this.listView1;
+        }
+
+        private void articleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (PathToSave != null)
+            {
+                MenuAjouterController Menu = new MenuAjouterController(this, "article");
+            }
+        }
+
+        private void marqueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (PathToSave != null)
+            {
+                MenuAjouterController Menu = new MenuAjouterController(this, "marque");
+            }
+        }
+
+        private void familleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (PathToSave != null)
+            {
+                MenuAjouterController Menu = new MenuAjouterController(this, "famille");
+            }
+        }
+
+        private void sousFamilleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (PathToSave != null)
+            {
+                MenuAjouterController Menu = new MenuAjouterController(this, "sous famille");
+            }
+        }
+
+        public Label GetLabelAjouter()
+        {
+            return LabelAjouter;
         }
     }
 }

@@ -2,6 +2,7 @@
 using Bacchus.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -186,6 +187,15 @@ namespace Bacchus.Controller
 
             List.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             List.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+
+        /// <summary>
+        /// Trie la liste en fonction de la colonne sur laquelle on a cliqué
+        /// </summary>
+        /// <param name="ColumnId"> numéro de la colonne </param>
+        public void SortingListView(int ColumnId)
+        {
+            List.ListViewItemSorter = new ListViewItemComparer(ColumnId);
         }
     }
 }

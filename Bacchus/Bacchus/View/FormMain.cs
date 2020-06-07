@@ -67,5 +67,16 @@ namespace Bacchus
         {
 
         }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listView1_ColumnClickSorting(object sender, ColumnClickEventArgs e)
+        {
+            Controller.ListViewController listViewController = new ListViewController(this.listView1, this.GetPathToSave());
+            listViewController.SortingListView(e.Column);
+        }
     }
 }

@@ -171,10 +171,21 @@ namespace Bacchus
         /// <param name="e"></param>
         private void ListView_ItemDoubleClick(object sender, MouseEventArgs e)
         {
-            if(this.listView1.SelectedItems.Count > 0)
+            if (this.listView1.SelectedItems.Count > 0)
             {
                 //ouvrir la fenêtre de modification
             }
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listView1_ColumnClickSorting(object sender, ColumnClickEventArgs e)
+        {
+            Controller.ListViewController listViewController = new ListViewController(this.listView1, this.GetPathToSave());
+            listViewController.SortingListView(e.Column);
         }
     }
 }

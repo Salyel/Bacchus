@@ -2,6 +2,7 @@
 using Bacchus.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -203,7 +204,7 @@ namespace Bacchus.Controller
             ArticlesDAO aDAO = new ArticlesDAO(PathBdd);
             SousFamillesDAO sfDAO = new SousFamillesDAO(PathBdd);
             int nbArticles = 0;
-            
+
             switch (SelectedItem.Tag)
             {
                 case Articles a:
@@ -213,7 +214,7 @@ namespace Bacchus.Controller
 
                 case Familles f:
                     int nbSousFamilles = sfDAO.CountSousFamillesOfFamille(f.GetRefFamille());
-                    if(nbSousFamilles > 0)
+                    if (nbSousFamilles > 0)
                     {
                         MessageBox.Show("Veuillez supprimer les sous-familles de cette famille au prealable.");
                     }
@@ -242,7 +243,7 @@ namespace Bacchus.Controller
 
                 case Marques m:
                     nbArticles = aDAO.CountArticlesOfMarques(m.GetRefMarque());
-                    if(nbArticles > 0)
+                    if (nbArticles > 0)
                     {
                         MessageBox.Show("Veuillez supprimer les articles de cette marque au prealable.");
                     }
@@ -258,7 +259,15 @@ namespace Bacchus.Controller
                 default:
                     break;
             }
-            
+
+        }
+
+        /// Trie la liste en fonction de la colonne sur laquelle on a cliqué
+        /// </summary>
+        /// <param name="ColumnId"> numéro de la colonne </param>
+        public void SortingListView(int ColumnId)
+        {
+            List.ListViewItemSorter = new ListViewItemComparer(ColumnId);
         }
     }
 }

@@ -55,6 +55,28 @@ namespace Bacchus.DAO
         }
 
         /// <summary>
+        /// DAO pour supprimer une marque de la base de donnees.
+        /// </summary>
+        /// <param name="RefMarque"></param>
+        public void SupprimerMarques(int RefMarque)
+        {
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+
+            String Sql = "DELETE FROM Marques WHERE RefMarque = " + RefMarque;
+
+            //Console.WriteLine(Sql);
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                Command.ExecuteNonQuery();
+            }
+
+            M_dbConnection.Close();
+        }
+
+        /// <summary>
         /// DAO pour récupérer la référence d'une marque en fonction de son nom
         /// </summary>
         /// <param name="Nom"> Nom de la marque dont on veut obtenir la référence </param>

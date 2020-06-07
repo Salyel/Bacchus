@@ -59,7 +59,7 @@ namespace Bacchus.Controller
             Tree.Nodes[1].Nodes.Clear();
             foreach(Familles f in Familles)
             {
-                Tree.Nodes[1].Nodes.Add(f.GetNom());
+                Tree.Nodes[1].Nodes.Add(f.GetNom(), f.GetNom());
                 Tree.Nodes[1].LastNode.Tag = f;
             }
             Tree.EndUpdate();
@@ -79,7 +79,7 @@ namespace Bacchus.Controller
             Tree.Nodes[2].Nodes.Clear();
             foreach (Marques m in Marques)
             {
-                Tree.Nodes[2].Nodes.Add(m.GetNom());
+                Tree.Nodes[2].Nodes.Add(m.GetNom(), m.GetNom());
                 Tree.Nodes[2].LastNode.Tag = m;
             }
             Tree.EndUpdate();
@@ -103,7 +103,7 @@ namespace Bacchus.Controller
 
                 foreach(SousFamilles sf in SousFamilles)
                 {
-                    n.Nodes.Add(sf.GetNom());
+                    n.Nodes.Add(sf.GetNom(), sf.GetNom());
                     n.LastNode.Tag = sf;
                 }
                 SousFamilles.Clear();

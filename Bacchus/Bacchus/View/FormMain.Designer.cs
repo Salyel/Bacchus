@@ -159,6 +159,7 @@ namespace Bacchus
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.GridLines = true;
+            this.listView1.MultiSelect = false;
             this.listView1.KeyDown += ListView_KeyDown;
             this.listView1.MouseClick += new MouseEventHandler(this.ListView_ItemClick);
             this.listView1.MouseDoubleClick += new MouseEventHandler(this.ListView_ItemDoubleClick);
@@ -191,11 +192,9 @@ namespace Bacchus
             //
             this.contextMenuStrip1 = new ContextMenuStrip();
             contextMenuStrip1.Items.Add("Ajouter article");
-            contextMenuStrip1.Items[0].Click += new EventHandler(this.ContextMenuStrip_Ajouter);
             contextMenuStrip1.Items.Add("Modifier article");
-            contextMenuStrip1.Items[1].Click += new EventHandler(this.ContextMenuStrip_Modifier);
             contextMenuStrip1.Items.Add("Supprimer article");
-            contextMenuStrip1.Items[2].Click += new EventHandler(this.ContextMenuStrip_Supprimer);
+            contextMenuStrip1.ItemClicked += new ToolStripItemClickedEventHandler(this.ContextMenuStrip_ItemClicked);
         }
 
         private System.Windows.Forms.MenuStrip menuStrip1;

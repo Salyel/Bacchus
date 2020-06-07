@@ -123,9 +123,12 @@ namespace Bacchus.Controller
 
             InitializeColumnNom();
 
+            int Compteur = 0;
             foreach(TreeNode Node in EventNode.Nodes)
             {
                 List.Items.Add(Node.Text);
+                List.Items[Compteur].Tag = Node.Tag;
+                Compteur++;
             }
 
             List.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
@@ -188,6 +191,74 @@ namespace Bacchus.Controller
 
             List.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             List.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+
+        /// <summary>
+        /// Supprime l'item selectionne dans la listview, dans la treeview et dans la base de donnees si cela ne provoque pas de supression en cascade
+        /// </summary>
+        /// <param name="SelectedNode"></param>
+        public void DeleteSelectedItem(TreeNode SelectedNode)
+        {
+            ListViewItem SelectedItem = this.List.SelectedItems[0];
+            ArticlesDAO aDAO = new ArticlesDAO(PathBdd);
+            SousFamillesDAO sfDAO = new SousFamillesDAO(PathBdd);
+            int nbArticles = 0;
+            
+            switch (SelectedItem.Tag)
+            {
+                case Articles a:
+                    this.List.Items.Remove(SelectedItem);
+                    aDAO.SupprimerArticle(a.GetRefArticle());
+                    break;
+
+                case Familles f:
+                    int nbSousFamilles = sfDAO.CountSousFamillesOfFamille(f.GetRefFamille());
+                    if(nbSousFamilles > 0)
+                    {
+                        MessageBox.Show("Veuillez supprimer les sous-familles de cette famille au prealable.");
+                    }
+                    else
+                    {
+                        this.List.Items.Remove(SelectedItem);
+                        FamillesDAO fDAO = new FamillesDAO(PathBdd);
+                        fDAO.SupprimerFamille(f.GetRefFamille());
+                        SelectedNode.Nodes.RemoveByKey(f.GetNom());
+                    }
+                    break;
+
+                case SousFamilles sf:
+                    nbArticles = aDAO.CountArticlesOfSousFamille(sf.GetRefSousFamille());
+                    if (nbArticles > 0)
+                    {
+                        MessageBox.Show("Veuillez supprimer les articles de cette sous-famille au prealable.");
+                    }
+                    else
+                    {
+                        this.List.Items.Remove(SelectedItem);
+                        sfDAO.SupprimerSousFamille(sf.GetRefSousFamille());
+                        SelectedNode.Nodes.RemoveByKey(sf.GetNom());
+                    }
+                    break;
+
+                case Marques m:
+                    nbArticles = aDAO.CountArticlesOfMarques(m.GetRefMarque());
+                    if(nbArticles > 0)
+                    {
+                        MessageBox.Show("Veuillez supprimer les articles de cette marque au prealable.");
+                    }
+                    else
+                    {
+                        MarquesDAO mDAO = new MarquesDAO(PathBdd);
+                        this.List.Items.Remove(SelectedItem);
+                        mDAO.SupprimerMarques(m.GetRefMarque());
+                        SelectedNode.Nodes.RemoveByKey(m.GetNom());
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+            
         }
     }
 }

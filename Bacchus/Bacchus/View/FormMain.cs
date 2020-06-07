@@ -69,6 +69,11 @@ namespace Bacchus
 
         }
 
+        /// <summary>
+        /// Handler pour le click sur les nodes de la treeview. Affiche la listview correspondante.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (PathToSave != null)
@@ -79,30 +84,47 @@ namespace Bacchus
             }
         }
 
+        /// <summary>
+        /// Handler pour l'appui d'une touche sur la listview.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void ListView_KeyDown(object sender, KeyEventArgs e)
         {
             if (PathToSave != null)
             {
+                ListViewController Controller = new ListViewController(this.listView1, PathToSave);
+
                 switch (e.KeyCode)
                 {
                     case Keys.F5:
-                        ListViewController Controller = new ListViewController(this.listView1, PathToSave);
                         Controller.LoadListView(treeView1.SelectedNode);
                         break;
+
                     case Keys.Delete:
-                        Console.WriteLine("Suppr");
-                        //supprimer la ligne
+                        if(this.listView1.SelectedItems.Count > 0)
+                            Controller.DeleteSelectedItem(this.treeView1.SelectedNode);
                         break;
+
                     case Keys.Return:
                         Console.WriteLine("Entree");
-                        //ouvrir la fenêtre de modification
+                        if(this.listView1.SelectedItems.Count > 0)
+                        {
+                            //ouvrir la fenêtre de modification
+                        }
                         break;
+
                     default:
                         break;
                 }
             }
         }
 
+        /// <summary>
+        /// Handler pour le click droit sur un item de la listview. Affiche un menu contextuel.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ListView_ItemClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
@@ -114,29 +136,39 @@ namespace Bacchus
             }
         }
 
-        private void ContextMenuStrip_Ajouter(object sender, EventArgs e)
+        /// <summary>
+        /// Handler pour un click dans le menu contextuel.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ContextMenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            //ouvrir la fenetre d'ajout
-        }
+            ListViewController Controller = new ListViewController(this.listView1, PathToSave);
 
-        private void ContextMenuStrip_Modifier(object sender, EventArgs e)
-        {
-            MouseEventArgs me = (MouseEventArgs)e;
-            if (me.Button == MouseButtons.Left)
+            switch (e.ClickedItem.Text)
             {
-                //ouvrir la fenetre de modification
+                case "Ajouter article":
+                    //ouvrir fenetre d'ajout
+                    break;
+
+                case "Modifier article":
+                    //ouvrir fenetre de modification
+                    break;
+
+                case "Supprimer article":
+                    Controller.DeleteSelectedItem(this.treeView1.SelectedNode);
+                    break;
+
+                default:
+                    break;
             }
         }
 
-        private void ContextMenuStrip_Supprimer(object sender, EventArgs e)
-        {
-            MouseEventArgs me = (MouseEventArgs)e;
-            if(me.Button == MouseButtons.Left)
-            {
-                //supprimer la ligne
-            }
-        }
-
+        /// <summary>
+        /// Handler pour le double click sur un item de la listview. Ouvre la fenêtre de modification.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ListView_ItemDoubleClick(object sender, MouseEventArgs e)
         {
             if(this.listView1.SelectedItems.Count > 0)

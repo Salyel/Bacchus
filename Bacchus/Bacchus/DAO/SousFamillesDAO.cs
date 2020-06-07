@@ -56,6 +56,28 @@ namespace Bacchus.DAO
         }
 
         /// <summary>
+        /// DAO pour supprimer une sous-famille de la base de donnees.
+        /// </summary>
+        /// <param name="RefSousFamille"></param>
+        public void SupprimerSousFamille(int RefSousFamille)
+        {
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+
+            String Sql = "DELETE FROM SousFamilles WHERE RefSousFamille = " + RefSousFamille;
+
+            //Console.WriteLine(Sql);
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                Command.ExecuteNonQuery();
+            }
+
+            M_dbConnection.Close();
+        }
+
+        /// <summary>
         /// DAO pour récupérer la référence d'une sous famille en fonction de son nom
         /// </summary>
         /// <param name="Nom"> Nom de la sous famille dont on veut obtenir la référence </param>
@@ -252,6 +274,37 @@ namespace Bacchus.DAO
             M_dbConnection.Close();
 
             return AllSousFamilles;
+        }
+
+        /// <summary>
+        /// DAO qui renvoie le nombre de sous-familles appartenant à une certaine famille dans la base de donnees.
+        /// </summary>
+        /// <param name="RefFamille"></param>
+        /// <returns></returns>
+        public int CountSousFamillesOfFamille(int RefFamille)
+        {
+            int nbSousFamilles = 0;
+
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+
+            String Sql = "select COUNT(*) from SousFamilles WHERE RefFamille = " + RefFamille;
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                using (SQLiteDataReader Reader = Command.ExecuteReader())
+                {
+                    while (Reader.Read())
+                    {
+                        nbSousFamilles = Reader.GetInt32(0);
+                    }
+                }
+            }
+
+            M_dbConnection.Close();
+
+            return nbSousFamilles;
         }
     }
 }

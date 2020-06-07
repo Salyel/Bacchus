@@ -51,6 +51,28 @@ namespace Bacchus.DAO
         }
 
         /// <summary>
+        /// DAO pour supprimer une famille de la base de donnees.
+        /// </summary>
+        /// <param name="RefFamille"></param>
+        public void SupprimerFamille(int RefFamille)
+        {
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+
+            String Sql = "DELETE FROM Familles WHERE RefFamille = " + RefFamille;
+
+            //Console.WriteLine(Sql);
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                Command.ExecuteNonQuery();
+            }
+
+            M_dbConnection.Close();
+        }
+
+        /// <summary>
         /// DAO pour récupérer la référence d'une famille en fonction de son nom
         /// </summary>
         /// <param name="Nom"> Nom de la famille dont on veut obtenir la référence </param>

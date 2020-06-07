@@ -29,10 +29,6 @@ namespace Bacchus
 
         }
 
-        private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
 
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
         {

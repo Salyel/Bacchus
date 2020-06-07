@@ -306,5 +306,29 @@ namespace Bacchus.DAO
 
             return nbSousFamilles;
         }
+
+        public int CountAllSousFamilles()
+        {
+            int Total = 0;
+
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+
+            String Sql = "select COUNT(*) from SousFamilles";
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                using (SQLiteDataReader Reader = Command.ExecuteReader())
+                {
+                    Reader.Read();
+                    Total = Reader.GetInt32(0);
+                }
+            }
+
+            M_dbConnection.Close();
+
+            return Total;
+        }
     }
 }

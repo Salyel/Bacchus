@@ -205,5 +205,33 @@ namespace Bacchus.DAO
 
             return AllMarques;
         }
+
+        /// <summary>
+        /// Renvoie le nombre de marques présentes dans la bdd
+        /// </summary>
+        /// <returns></returns>
+        public int CountAllMarques()
+        {
+            int Total = 0;
+
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+
+            String Sql = "select COUNT(*) from Marques";
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                using (SQLiteDataReader Reader = Command.ExecuteReader())
+                {
+                    Reader.Read();
+                    Total = Reader.GetInt32(0);
+                }
+            }
+
+            M_dbConnection.Close();
+
+            return Total;
+        }
     }
 }

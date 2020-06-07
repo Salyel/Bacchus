@@ -19,11 +19,12 @@ namespace Bacchus
         private String ButtonsValue = "";
         private string PathToImport = "";
         private string PathToSave = "";
+        private FormMain FormMain;
 
         /*Constructor*/
-        public ModaleImporter()
+        public ModaleImporter(FormMain FormMain)
         {
-            InitializeComponent();
+            InitializeComponent(FormMain);
         }
 
 
@@ -94,6 +95,16 @@ namespace Bacchus
         public void SetPathToImport(string Path)
         {
             PathToImport = Path;
+        }
+
+        public FormMain GetFormMain()
+        {
+            return FormMain;
+        }
+
+        public void SetFormMain(FormMain Form)
+        {
+            FormMain = Form;
         }
 
         private void ModaleImporter_Load(object sender, EventArgs e)

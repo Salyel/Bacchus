@@ -8,11 +8,23 @@ using System.Windows.Forms;
 
 namespace Bacchus.Controller
 {
+    /// <summary>
+    /// Controller pour le menu fichier de la fenetre principal
+    /// </summary>
     class MenuFichierController
     {
+        //Attributs
+
         private FormMain Form;
         private string Type;
 
+        //Constructeur
+
+        /// <summary>
+        /// Controller pour le menu Fichier de la fenetre principale
+        /// </summary>
+        /// <param name="Form"> fenetre principale </param>
+        /// <param name="Type"> nom du bouton </param>
         public MenuFichierController(FormMain Form, string Type)
         {
             this.Form = Form;
@@ -20,7 +32,7 @@ namespace Bacchus.Controller
 
             if(Type.Equals("importer"))
             {
-                ModaleImporter FenetreImporter = new ModaleImporter();
+                ModaleImporter FenetreImporter = new ModaleImporter(Form);
                 FenetreImporter.StartPosition = FormStartPosition.CenterParent;
                 FenetreImporter.ShowDialog(Form);
             }

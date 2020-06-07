@@ -40,7 +40,29 @@ namespace Bacchus.DAO
 
             String Sql = "insert into familles (Nom) values ('" + Famille.GetNom() + "')";
 
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                Command.ExecuteNonQuery();
+            }
+
+            M_dbConnection.Close();
+        }
+
+        /// <summary>
+        /// DAO pour supprimer une famille de la base de donnees.
+        /// </summary>
+        /// <param name="RefFamille"></param>
+        public void SupprimerFamille(int RefFamille)
+        {
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+
+            String Sql = "DELETE FROM Familles WHERE RefFamille = " + RefFamille;
+
+            //Console.WriteLine(Sql);
 
             using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
             {
@@ -62,7 +84,7 @@ namespace Bacchus.DAO
             M_dbConnection.Open();
 
             String Sql = "select RefFamille from familles where Nom= ('" + Nom + "')";
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
 
             int Ref = -1;
 
@@ -89,10 +111,11 @@ namespace Bacchus.DAO
         {
             SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
 
+            Console.WriteLine("database : " + DatabasePath);
             M_dbConnection.Open();
 
             String Sql = "select Nom from Familles where RefFamille=" + Ref;
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
 
             string Nom = "";
 
@@ -122,7 +145,7 @@ namespace Bacchus.DAO
             M_dbConnection.Open();
 
             String Sql = "select RefFamille from familles where Nom= ('" + Nom + "')";
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
 
             bool Exists = true;
 
@@ -141,6 +164,40 @@ namespace Bacchus.DAO
             M_dbConnection.Close();
 
             return Exists;
+        }
+
+        /// <summary>
+        /// Permet de récupérer toutes les familles dans la base de donnees
+        /// </summary>
+        /// <returns> la liste des noms des familles </returns>
+        public List<Familles> GetAllFamilles()
+        {
+            List<Familles> AllFamilles = new List<Familles>();
+
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            //Console.WriteLine("database allfam : "+DatabasePath);
+
+            M_dbConnection.Open();
+
+            String Sql = "select RefFamille, Nom from Familles";
+            //Console.WriteLine(Sql);
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                using (SQLiteDataReader Reader = Command.ExecuteReader())
+                {
+                    while(Reader.Read())
+                    {
+                        Familles f = new Familles(Reader.GetInt32(0), Reader.GetString(1));
+                        AllFamilles.Add(f);
+                    }
+                }
+            }
+
+            M_dbConnection.Close();
+
+            return AllFamilles;
         }
     }
 }

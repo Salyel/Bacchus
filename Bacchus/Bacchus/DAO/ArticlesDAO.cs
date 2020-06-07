@@ -38,7 +38,29 @@ namespace Bacchus.DAO
 
             String Sql = "insert into Articles (RefArticle, Description, RefSousFamille, RefMarque, PrixHT, Quantite) values ('" + Article.GetRefArticle() + "', '" + Article.GetDescription() + "', " + Article.GetRefSousFamille() + ", " + Article.GetRefMarque() + ", '" + Article.GetPrixHT() + "', " + Article.GetQuantite() + ")";
 
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                Command.ExecuteNonQuery();
+            }
+
+            M_dbConnection.Close();
+        }
+
+        /// <summary>
+        /// DAO pour supprimer un article de base de donnees.
+        /// </summary>
+        /// <param name="RefArticle"></param>
+        public void SupprimerArticle(string RefArticle)
+        {
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+
+            String Sql = "DELETE FROM Articles WHERE RefArticle = '" + RefArticle + "'";
+
+            //Console.WriteLine(Sql);
 
             using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
             {
@@ -61,7 +83,7 @@ namespace Bacchus.DAO
 
             String Sql = "select * from Articles where RefArticle='"+RefArt+"'";
 
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
 
             Articles Article = null ;
             using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
@@ -100,7 +122,7 @@ namespace Bacchus.DAO
             M_dbConnection.Open();
 
             String Sql = "select Description from articles where RefArticle= ('" + RefArticle + "')";
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
 
             bool Exists = true;
 
@@ -174,7 +196,7 @@ namespace Bacchus.DAO
 
             String Sql = "update Articles set Description=" + "'" + Description + "'" + ", RefSousFamille=" + RefSousFamille + ", RefMarque=" + RefMarque + ", PrixHT=" + "'" + PrixHT + "'" + ", Quantite=" + Quantite + " where RefArticle=" + "'" + RefArticle + "'";
 
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
 
             using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
             {
@@ -182,6 +204,166 @@ namespace Bacchus.DAO
             }
 
             M_dbConnection.Close();
+        }
+
+        /// <summary>
+        /// Recupere tous les articles dans la base de donnees
+        /// </summary>
+        /// <returns></returns>
+        public List<Articles> GetAllArticles()
+        {
+            List<Articles> AllArticles = new List<Articles>();
+
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+
+            String Sql = "select RefArticle, Description, RefSousFamille, RefMarque, PrixHT, Quantite from Articles";
+            // Console.WriteLine(Sql);
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                using (SQLiteDataReader Reader = Command.ExecuteReader())
+                {
+                    while (Reader.Read())
+                    {
+                        Articles a = new Articles(Reader.GetString(0), Reader.GetString(1), Reader.GetInt32(2), Reader.GetInt32(3), 0, Reader.GetInt32(5));
+                        AllArticles.Add(a);
+                    }
+                }
+            }
+
+            M_dbConnection.Close();
+
+            return AllArticles;
+        }
+
+        /// <summary>
+        /// Recupere dans la base de donnees tous les articles d'une marque
+        /// </summary>
+        /// <param name="RefMarque"></param>
+        /// <returns></returns>
+        public List<Articles> GetArticlesOfMarque(int RefMarque)
+        {
+            List<Articles> AllArticles = new List<Articles>();
+
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+
+            String Sql = "select RefArticle, Description, RefSousFamille, RefMarque, PrixHT, Quantite from Articles WHERE Refmarque = " + RefMarque;
+            // Console.WriteLine(Sql);
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                using (SQLiteDataReader Reader = Command.ExecuteReader())
+                {
+                    while (Reader.Read())
+                    {
+                        Articles a = new Articles(Reader.GetString(0), Reader.GetString(1), Reader.GetInt32(2), Reader.GetInt32(3), 0, Reader.GetInt32(5));
+                        AllArticles.Add(a);
+                    }
+                }
+            }
+
+            M_dbConnection.Close();
+
+            return AllArticles;
+        }
+
+        /// <summary>
+        /// Recupere dans la base de donnees tous les articles d'une sous-famille
+        /// </summary>
+        /// <param name="RefSousFamille"></param>
+        /// <returns></returns>
+        public List<Articles> GetArticlesOfSousFamille(int RefSousFamille)
+        {
+            List<Articles> AllArticles = new List<Articles>();
+
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+
+            String Sql = "select RefArticle, Description, RefSousFamille, RefMarque, PrixHT, Quantite from Articles WHERE RefSousFamille = " + RefSousFamille;
+            // Console.WriteLine(Sql);
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                using (SQLiteDataReader Reader = Command.ExecuteReader())
+                {
+                    while (Reader.Read())
+                    {
+                        Articles a = new Articles(Reader.GetString(0), Reader.GetString(1), Reader.GetInt32(2), Reader.GetInt32(3), 0, Reader.GetInt32(5));
+                        AllArticles.Add(a);
+                    }
+                }
+            }
+
+            M_dbConnection.Close();
+
+            return AllArticles;
+        }
+
+        /// <summary>
+        /// DAO qui renvoie le nombre d'articles appartenant a une certaine marque dans la base de donnees.
+        /// </summary>
+        /// <param name="RefMarque"></param>
+        /// <returns></returns>
+        public int CountArticlesOfMarques(int RefMarque)
+        {
+            int nbArticles = 0;
+
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+
+            String Sql = "select COUNT(*) from Articles WHERE RefMarque = " + RefMarque;
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                using (SQLiteDataReader Reader = Command.ExecuteReader())
+                {
+                    while (Reader.Read())
+                    {
+                        nbArticles = Reader.GetInt32(0);
+                    }
+                }
+            }
+
+            M_dbConnection.Close();
+
+            return nbArticles;
+        }
+
+        /// <summary>
+        /// DAO qui renvoie le nombre d'articles appartenant a une certaine sous-famille dans la base de donnees.
+        /// </summary>
+        /// <param name="RefSousFamille"></param>
+        /// <returns></returns>
+        public int CountArticlesOfSousFamille(int RefSousFamille)
+        {
+            int nbArticles = 0;
+
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+
+            String Sql = "select COUNT(*) from Articles WHERE RefSousFamille = " + RefSousFamille;
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                using (SQLiteDataReader Reader = Command.ExecuteReader())
+                {
+                    while (Reader.Read())
+                    {
+                        nbArticles = Reader.GetInt32(0);
+                    }
+                }
+            }
+
+            M_dbConnection.Close();
+
+            return nbArticles;
         }
     }
 }

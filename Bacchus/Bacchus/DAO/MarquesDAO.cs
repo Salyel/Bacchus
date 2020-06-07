@@ -42,7 +42,7 @@ namespace Bacchus.DAO
             M_dbConnection.Open();
             String Sql = "insert into marques (Nom) values ('" + Marque.GetNom() + "')";
 
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
 
             using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
             {
@@ -51,6 +51,28 @@ namespace Bacchus.DAO
             }
             
             //fermeture de la connexion
+            M_dbConnection.Close();
+        }
+
+        /// <summary>
+        /// DAO pour supprimer une marque de la base de donnees.
+        /// </summary>
+        /// <param name="RefMarque"></param>
+        public void SupprimerMarques(int RefMarque)
+        {
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+
+            String Sql = "DELETE FROM Marques WHERE RefMarque = " + RefMarque;
+
+            //Console.WriteLine(Sql);
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                Command.ExecuteNonQuery();
+            }
+
             M_dbConnection.Close();
         }
 
@@ -68,7 +90,7 @@ namespace Bacchus.DAO
             M_dbConnection.Open();
 
             String Sql = "select RefMarque from marques where Nom= ('" + Nom + "')";
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
 
             int Ref = -1;
 
@@ -101,7 +123,7 @@ namespace Bacchus.DAO
             M_dbConnection.Open();
 
             String Sql = "select Nom from marques where RefMarque=" + Ref;
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
 
             string Nom = "";
 
@@ -131,7 +153,7 @@ namespace Bacchus.DAO
             M_dbConnection.Open();
 
             String Sql = "select RefMarque from marques where Nom= ('" + Nom + "')";
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
 
             bool Exists = true;
 
@@ -150,6 +172,38 @@ namespace Bacchus.DAO
             M_dbConnection.Close();
 
             return Exists;
+        }
+
+        /// <summary>
+        /// DAO pour récupérer toutes les marques dans la base de donnees 
+        /// </summary>
+        /// <returns> la liste de tous les noms </returns>
+        public List<Marques> GetAllMarques()
+        {
+            List<Marques> AllMarques = new List<Marques>();
+
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+
+            String Sql = "select RefMarque, Nom from Marques";
+           // Console.WriteLine(Sql);
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                using (SQLiteDataReader Reader = Command.ExecuteReader())
+                {
+                    while (Reader.Read())
+                    {
+                        Marques m = new Marques(Reader.GetInt32(0), Reader.GetString(1));
+                        AllMarques.Add(m);
+                    }
+                }
+            }
+
+            M_dbConnection.Close();
+
+            return AllMarques;
         }
     }
 }

@@ -45,7 +45,29 @@ namespace Bacchus.DAO
             M_dbConnection.Open();
 
             String Sql = "insert into Sousfamilles (Nom, RefFamille) values ('" + SousFamille.GetNom() + "'" + ", " + SousFamille.GetRefFamille() + ")";
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                Command.ExecuteNonQuery();
+            }
+
+            M_dbConnection.Close();
+        }
+
+        /// <summary>
+        /// DAO pour supprimer une sous-famille de la base de donnees.
+        /// </summary>
+        /// <param name="RefSousFamille"></param>
+        public void SupprimerSousFamille(int RefSousFamille)
+        {
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+
+            String Sql = "DELETE FROM SousFamilles WHERE RefSousFamille = " + RefSousFamille;
+
+            //Console.WriteLine(Sql);
 
             using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
             {
@@ -69,7 +91,7 @@ namespace Bacchus.DAO
             M_dbConnection.Open();
 
             String Sql = "select RefSousFamille from sousfamilles where Nom= ('" + Nom + "')";
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
 
             int Ref = -1;
 
@@ -103,7 +125,7 @@ namespace Bacchus.DAO
             M_dbConnection.Open();
 
             String Sql = "select Nom from sousfamilles where RefSousFamille=" + Ref;
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
 
             string Nom = "";
 
@@ -137,7 +159,7 @@ namespace Bacchus.DAO
             M_dbConnection.Open();
 
             String Sql = "select RefFamille from sousfamilles where RefSousFamille=" + Ref;
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
 
             int RefFamille = -1;
 
@@ -175,7 +197,7 @@ namespace Bacchus.DAO
             M_dbConnection.Open();
 
             String Sql = "select RefSousFamille from SousFamilles where Nom= ('" + Nom + "')";
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
 
             bool Exists = true;
 
@@ -212,7 +234,7 @@ namespace Bacchus.DAO
             M_dbConnection.Open();
 
             String Sql = "update Sousfamilles set RefFamille=" + RefFamille + " where Nom=" + "'" + Nom + "'";
-            Console.WriteLine(Sql);
+            //Console.WriteLine(Sql);
 
             using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
             {
@@ -221,6 +243,68 @@ namespace Bacchus.DAO
 
             //fermeture de la connexion
             M_dbConnection.Close();
+        }
+
+        /// <summary>
+        /// Renvoie toutes les sous familles appartenant à une famille dans la base de donnees
+        /// </summary>
+        /// <param name="idFamille"> ref de la famille dont on vaut connaitre les noms des sous familles </param>
+        /// <returns> les noms des sous familles </returns>
+        public List<SousFamilles> GetSousFamillesByFamilles(int FamillesRef)
+        {
+            List<SousFamilles> AllSousFamilles = new List<SousFamilles>();
+
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+            M_dbConnection.Open();
+            String Sql = "select SF.RefSousFamille, SF.RefFamille, SF.Nom " +
+                            "from SousFamilles SF inner join Familles F on SF.RefFamille = F.RefFamille " +
+                            "where SF.RefFamille = "+ FamillesRef;
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                using (SQLiteDataReader Reader = Command.ExecuteReader())
+                {
+                    while (Reader.Read())
+                    {
+                        SousFamilles sf = new SousFamilles(Reader.GetInt32(0), Reader.GetInt32(1), Reader.GetString(2));
+                        AllSousFamilles.Add(sf);
+                    }
+                }
+            }
+            M_dbConnection.Close();
+
+            return AllSousFamilles;
+        }
+
+        /// <summary>
+        /// DAO qui renvoie le nombre de sous-familles appartenant à une certaine famille dans la base de donnees.
+        /// </summary>
+        /// <param name="RefFamille"></param>
+        /// <returns></returns>
+        public int CountSousFamillesOfFamille(int RefFamille)
+        {
+            int nbSousFamilles = 0;
+
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+
+            String Sql = "select COUNT(*) from SousFamilles WHERE RefFamille = " + RefFamille;
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                using (SQLiteDataReader Reader = Command.ExecuteReader())
+                {
+                    while (Reader.Read())
+                    {
+                        nbSousFamilles = Reader.GetInt32(0);
+                    }
+                }
+            }
+
+            M_dbConnection.Close();
+
+            return nbSousFamilles;
         }
     }
 }

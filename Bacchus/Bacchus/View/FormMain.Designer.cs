@@ -202,13 +202,20 @@ namespace Bacchus
             this.PerformLayout();
 
             //
-            // ContextMenuStrip
+            // ContextMenuStrip1
             //
             this.contextMenuStrip1 = new ContextMenuStrip();
             contextMenuStrip1.Items.Add("Ajouter article");
             contextMenuStrip1.Items.Add("Modifier article");
             contextMenuStrip1.Items.Add("Supprimer article");
-            contextMenuStrip1.ItemClicked += new ToolStripItemClickedEventHandler(this.ContextMenuStrip_ItemClicked);
+            contextMenuStrip1.ItemClicked += new ToolStripItemClickedEventHandler(this.ContextMenuStrip1_ItemClicked);
+
+            //
+            // ContextMenuStrip2
+            //
+            this.contextMenuStrip2 = new ContextMenuStrip();
+            contextMenuStrip2.Items.Add("Ajouter article");
+            contextMenuStrip2.ItemClicked += new ToolStripItemClickedEventHandler(this.ContextMenuStrip2_ItemClicked);
         }
 
         private System.Windows.Forms.MenuStrip menuStrip1;
@@ -221,6 +228,7 @@ namespace Bacchus
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
 
 
         public TreeView GetTreeView()

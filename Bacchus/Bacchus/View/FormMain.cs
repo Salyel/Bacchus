@@ -141,7 +141,7 @@ namespace Bacchus
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ContextMenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void ContextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             ListViewController Controller = new ListViewController(this.listView1, PathToSave);
 
@@ -162,6 +162,11 @@ namespace Bacchus
                 default:
                     break;
             }
+        }
+
+        private void ContextMenuStrip2_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            //ouvrir la fenetre d'ajout
         }
 
         /// <summary>

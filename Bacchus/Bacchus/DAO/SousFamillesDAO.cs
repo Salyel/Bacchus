@@ -346,9 +346,8 @@ namespace Bacchus.DAO
             M_dbConnection.Open();
 
             String Sql = "select RefSousFamille, RefFamille, Nom from SousFamilles";
-            //Console.WriteLine(Sql);
-
-            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+			
+			using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
             {
                 using (SQLiteDataReader Reader = Command.ExecuteReader())
                 {
@@ -357,12 +356,34 @@ namespace Bacchus.DAO
                         SousFamilles Sf = new SousFamilles(Reader.GetInt32(0), Reader.GetInt32(1), Reader.GetString(2));
                         AllSousFamilles.Add(Sf);
                     }
+				}	
+			}
+			return AllSousFamilles;
+		}
+
+        public int CountAllSousFamilles()
+        {
+            int Total = 0;
+
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();
+
+            String Sql = "select COUNT(*) from SousFamilles";
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                using (SQLiteDataReader Reader = Command.ExecuteReader())
+                {
+
+                    Reader.Read();
+                    Total = Reader.GetInt32(0);
                 }
             }
 
             M_dbConnection.Close();
-
-            return AllSousFamilles;
+			
+            return Total;
         }
     }
 }

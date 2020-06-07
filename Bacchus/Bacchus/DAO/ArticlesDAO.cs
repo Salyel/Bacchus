@@ -407,10 +407,10 @@ namespace Bacchus.DAO
         public void ModifierArticle(String AncienneDescription, String NouvelleDescription, SousFamilles SousFamille, Marques Marque, int Quantite)
         {
             //ouverture de la connexion avec la bdd & creation de la requete
-
             SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
 
             M_dbConnection.Open();
+
             String Sql = "update articles set description='" + NouvelleDescription + "', RefSousFamille=" + SousFamille.GetRefSousFamille() + ", RefMarque=" + Marque.GetRefMarque() + ", Quantite=" + Quantite +  " where description='" + AncienneDescription + "'";
 
             Console.WriteLine(Sql);
@@ -423,6 +423,35 @@ namespace Bacchus.DAO
 
             //fermeture de la connexion
             M_dbConnection.Close();
+		}
+
+
+		/// Renvoie le nombre d'articles présents dans la bdd
+        /// </summary>
+        /// <returns></returns>
+        public int CountAllArticles()
+        {
+			int Total = 0;
+			
+			//ouverture de la connexion avec la bdd & creation de la requete
+            SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
+
+            M_dbConnection.Open();   
+
+            String Sql = "select COUNT(*) from Articles";
+
+            using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
+            {
+                using (SQLiteDataReader Reader = Command.ExecuteReader())
+                {
+                    Reader.Read();
+                    Total = Reader.GetInt32(0);
+                }
+            }
+
+            M_dbConnection.Close();
+
+            return Total;
         }
     }
 }

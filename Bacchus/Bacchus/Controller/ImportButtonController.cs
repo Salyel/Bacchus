@@ -55,6 +55,24 @@ namespace Bacchus.Controller
 
                 //stockage du chemin de la bdd
                 Modale.GetFormMain().SetPathToSave(Modale.GetPathToSave());
+
+                //mise à jour du statusStrip
+                ToolStatusStripController FamilleStripControl = new ToolStatusStripController(Modale.GetFormMain().GetToolStatusStrip("Familles"));
+                ToolStatusStripController ArticleStripControl = new ToolStatusStripController(Modale.GetFormMain().GetToolStatusStrip("Article"));
+                ToolStatusStripController SousFamilleStripControl = new ToolStatusStripController(Modale.GetFormMain().GetToolStatusStrip("SousFamilles"));
+                ToolStatusStripController MarqueStripControl = new ToolStatusStripController(Modale.GetFormMain().GetToolStatusStrip("Marques"));
+
+                ArticlesDAO ArticlesDAO = new ArticlesDAO(Modale.GetPathToSave());
+                MarquesDAO MarquesDAO = new MarquesDAO(Modale.GetPathToSave());
+                FamillesDAO FamillesDAO = new FamillesDAO(Modale.GetPathToSave());
+                SousFamillesDAO SousFamillesDAO = new SousFamillesDAO(Modale.GetPathToSave());
+
+                ArticleStripControl.ChangeNumber(ArticlesDAO.CountAllArticles());
+                FamilleStripControl.ChangeNumber(FamillesDAO.CountAllFamilles());
+                SousFamilleStripControl.ChangeNumber(SousFamillesDAO.CountAllSousFamilles());
+                MarqueStripControl.ChangeNumber(MarquesDAO.CountAllMarques());
+
+                
             }
         }
     }

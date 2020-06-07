@@ -46,6 +46,10 @@ namespace Bacchus
             this.importerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exporterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusArticle = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusFamilles = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusSousFamilles = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusMarques = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.listView1 = new System.Windows.Forms.ListView();
@@ -57,6 +61,7 @@ namespace Bacchus
             this.sousFamilleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LabelAjouter = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -111,12 +116,40 @@ namespace Bacchus
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Location = new System.Drawing.Point(0, 326);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusArticle,
+            this.toolStripStatusFamilles,
+            this.toolStripStatusSousFamilles,
+            this.toolStripStatusMarques});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 527);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(493, 22);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(882, 26);
             this.statusStrip1.TabIndex = 1;
-            this.statusStrip1.Text = "statusStrip1";
-            this.statusStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.statusStrip1_ItemClicked);
+            // 
+            // toolStripStatusArticle
+            // 
+            this.toolStripStatusArticle.Name = "toolStripStatusArticle";
+            this.toolStripStatusArticle.Size = new System.Drawing.Size(146, 20);
+            this.toolStripStatusArticle.Text = "Nombre d\'articles : 0";
+            // 
+            // toolStripStatusFamilles
+            // 
+            this.toolStripStatusFamilles.Name = "toolStripStatusFamilles";
+            this.toolStripStatusFamilles.Size = new System.Drawing.Size(160, 20);
+            this.toolStripStatusFamilles.Text = "Nombre de familles : 0";
+            // 
+            // toolStripStatusSousFamilles
+            // 
+            this.toolStripStatusSousFamilles.Name = "toolStripStatusSousFamilles";
+            this.toolStripStatusSousFamilles.Size = new System.Drawing.Size(195, 20);
+            this.toolStripStatusSousFamilles.Text = "Nombre de sous-familles : 0";
+            // 
+            // toolStripStatusMarques
+            // 
+            this.toolStripStatusMarques.Name = "toolStripStatusMarques";
+            this.toolStripStatusMarques.Size = new System.Drawing.Size(165, 20);
+            this.toolStripStatusMarques.Text = "Nombre de marques : 0";
             // 
             // splitContainer1
             // 
@@ -136,6 +169,7 @@ namespace Bacchus
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
             this.splitContainer1.Size = new System.Drawing.Size(493, 302);
             this.splitContainer1.SplitterDistance = 234;
+            this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 2;
             // 
             // treeView1
@@ -168,14 +202,16 @@ namespace Bacchus
             this.listView1.GridLines = true;
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(0, 0);
+            this.listView1.Size = new System.Drawing.Size(255, 302);
+            this.listView1.Margin = new System.Windows.Forms.Padding(4);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(255, 302);
             this.listView1.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listView1_ColumnClickSorting);
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             this.listView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ListView_ItemClick);
             this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ListView_ItemDoubleClick);
             // 
@@ -231,14 +267,23 @@ namespace Bacchus
             this.LabelAjouter.Size = new System.Drawing.Size(371, 21);
             this.LabelAjouter.TabIndex = 3;
             this.LabelAjouter.Text = "Veuillez ouvrir une base (en important un fichier csv) avant d\'ajouter";
-            this.LabelAjouter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LabelAjouter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;        
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
+            this.contextMenuStrip2.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ContextMenuStrip2_ItemClicked);
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+
             this.ClientSize = new System.Drawing.Size(493, 348);
             this.Controls.Add(this.LabelAjouter);
+
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -248,12 +293,15 @@ namespace Bacchus
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         private System.Windows.Forms.MenuStrip menuStrip1;
@@ -267,6 +315,10 @@ namespace Bacchus
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private ToolStripStatusLabel toolStripStatusArticle;
+        private ToolStripStatusLabel toolStripStatusFamilles;
+        private ToolStripStatusLabel toolStripStatusSousFamilles;
+        private ToolStripStatusLabel toolStripStatusMarques;
 
 
         public TreeView GetTreeView()
@@ -290,6 +342,31 @@ namespace Bacchus
         private ToolStripMenuItem familleToolStripMenuItem;
         private ToolStripMenuItem sousFamilleToolStripMenuItem;
         private Label LabelAjouter;
+        public StatusStrip GetStatusStrip()
+        {
+            return statusStrip1;
+        }
+
+        public ToolStripStatusLabel GetToolStatusStrip(string Name)
+        {
+            switch(Name)
+            {
+                case "Familles":
+                    return toolStripStatusFamilles;
+
+                case "SousFamilles":
+                    return toolStripStatusSousFamilles;
+
+                case "Article":
+                    return toolStripStatusArticle;
+
+                case "Marques":
+                    return toolStripStatusMarques;
+
+                default:
+                    return null;
+            }
+        }
     }
 }
 

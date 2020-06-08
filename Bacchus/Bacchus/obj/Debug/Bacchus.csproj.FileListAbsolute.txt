@@ -75,3 +75,11 @@ D:\Programmes Visual\Bacchus\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.View.Ajou
 D:\Programmes Visual\Bacchus\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.View.AjouterFamille.resources
 D:\Programmes Visual\Bacchus\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.View.AjouterSousFamille.resources
 D:\Programmes Visual\Bacchus\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.View.AjouterArticle.resources
+D:\Félix\Documents\Polytech 4A\S8\.Net\TP\Ressources\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.View.AjouterArticle.resources
+D:\Félix\Documents\Polytech 4A\S8\.Net\TP\Ressources\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.View.AjouterFamille.resources
+D:\Félix\Documents\Polytech 4A\S8\.Net\TP\Ressources\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.View.AjouterMarque.resources
+D:\Félix\Documents\Polytech 4A\S8\.Net\TP\Ressources\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.View.AjouterSousFamille.resources
+D:\Félix\Documents\Polytech 4A\S8\.Net\TP\Ressources\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.View.ModifierArticle.resources
+D:\Félix\Documents\Polytech 4A\S8\.Net\TP\Ressources\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.View.ModifierSousFamille.resources
+D:\Félix\Documents\Polytech 4A\S8\.Net\TP\Ressources\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.View.ModifierFamille.resources
+D:\Félix\Documents\Polytech 4A\S8\.Net\TP\Ressources\Bacchus\Bacchus\Bacchus\obj\Debug\Bacchus.View.ModifierMarque.resources

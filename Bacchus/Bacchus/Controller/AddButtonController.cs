@@ -20,6 +20,8 @@ namespace Bacchus.Controller
         /// <param name="TypeAjouter"> Le String qui permet de déterminer quelles opérations faire </param>
         public AddButtonController(String PathBdd, Form AjouterForm, String TypeAjouter)
         {
+            ToolStatusStripController TSSController;
+
             if (TypeAjouter.Equals("Marques"))
             {
                 AjouterMarque Form = (AjouterMarque)AjouterForm;
@@ -35,6 +37,10 @@ namespace Bacchus.Controller
 
                 ListViewController ListViewInit = new ListViewController(Form.GetFormMain().GetListView(), PathBdd);
                 ListViewInit.LoadListView(Form.GetFormMain().GetTreeView().SelectedNode);
+
+                //maj du status strip
+                TSSController = new ToolStatusStripController(Form.GetFormMain().GetToolStatusStrip("Marques"));
+                TSSController.ChangeNumber(MarquesD.CountAllMarques());
             }
 
             if (TypeAjouter.Equals("Familles"))
@@ -52,6 +58,10 @@ namespace Bacchus.Controller
 
                 ListViewController ListViewInit = new ListViewController(Form.GetFormMain().GetListView(), PathBdd);
                 ListViewInit.LoadListView(Form.GetFormMain().GetTreeView().SelectedNode);
+
+                //maj du status strip
+                TSSController = new ToolStatusStripController(Form.GetFormMain().GetToolStatusStrip("Familles"));
+                TSSController.ChangeNumber(FamillesD.CountAllFamilles());
             }
 
             if (TypeAjouter.Equals("SousFamilles"))
@@ -69,6 +79,10 @@ namespace Bacchus.Controller
 
                 ListViewController ListViewInit = new ListViewController(Form.GetFormMain().GetListView(), PathBdd);
                 ListViewInit.LoadListView(Form.GetFormMain().GetTreeView().SelectedNode);
+
+                //maj du status strip
+                TSSController = new ToolStatusStripController(Form.GetFormMain().GetToolStatusStrip("SousFamilles"));
+                TSSController.ChangeNumber(SousFamillesD.CountAllSousFamilles());
             }
 
             if (TypeAjouter.Equals("Articles"))
@@ -103,6 +117,10 @@ namespace Bacchus.Controller
 
                 ListViewController ListViewInit = new ListViewController(Form.GetFormMain().GetListView(), PathBdd);
                 ListViewInit.LoadListView(Form.GetFormMain().GetTreeView().SelectedNode);
+
+                //maj du status strip
+                TSSController = new ToolStatusStripController(Form.GetFormMain().GetToolStatusStrip("Article"));
+                TSSController.ChangeNumber(ArticlesD.CountAllArticles());
             }
         }
     }

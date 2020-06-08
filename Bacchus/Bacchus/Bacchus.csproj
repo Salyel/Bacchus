@@ -80,6 +80,7 @@
     <Compile Include="Controller\ExportButtonController.cs" />
     <Compile Include="Controller\MenuFichierController.cs" />
     <Compile Include="Controller\SelectCSVButtonImportController.cs" />
+    <Compile Include="Controller\ToolStatusStripController.cs" />
     <Compile Include="DAO\ArticlesDAO.cs" />
     <Compile Include="DAO\ImporterAjout.cs" />
     <Compile Include="DAO\FamillesDAO.cs" />

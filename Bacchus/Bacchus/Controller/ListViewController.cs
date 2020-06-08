@@ -202,11 +202,13 @@ namespace Bacchus.Controller
         /// Supprime l'item selectionne dans la listview, dans la treeview et dans la base de donnees si cela ne provoque pas de supression en cascade
         /// </summary>
         /// <param name="SelectedNode"></param>
-        public void DeleteSelectedItem(TreeNode SelectedNode)
+        public void DeleteSelectedItem(TreeNode SelectedNode, FormMain Form)
         {
             ListViewItem SelectedItem = this.List.SelectedItems[0];
             ArticlesDAO aDAO = new ArticlesDAO(PathBdd);
             SousFamillesDAO sfDAO = new SousFamillesDAO(PathBdd);
+
+            ToolStatusStripController TSSController;
             int nbArticles = 0;
 
             switch (SelectedItem.Tag)
@@ -214,6 +216,10 @@ namespace Bacchus.Controller
                 case Articles a:
                     this.List.Items.Remove(SelectedItem);
                     aDAO.SupprimerArticle(a.GetRefArticle());
+
+                    //maj du status strip
+                    TSSController = new ToolStatusStripController(Form.GetToolStatusStrip("Article"));
+                    TSSController.ChangeNumber(aDAO.CountAllArticles());
                     break;
 
                 case Familles f:
@@ -228,6 +234,10 @@ namespace Bacchus.Controller
                         FamillesDAO fDAO = new FamillesDAO(PathBdd);
                         fDAO.SupprimerFamille(f.GetRefFamille());
                         SelectedNode.Nodes.RemoveByKey(f.GetNom());
+
+                        //maj du statusStrip
+                        TSSController = new ToolStatusStripController(Form.GetToolStatusStrip("Familles"));
+                        TSSController.ChangeNumber(fDAO.CountAllFamilles());
                     }
                     break;
 
@@ -242,6 +252,10 @@ namespace Bacchus.Controller
                         this.List.Items.Remove(SelectedItem);
                         sfDAO.SupprimerSousFamille(sf.GetRefSousFamille());
                         SelectedNode.Nodes.RemoveByKey(sf.GetNom());
+
+                        //maj du status strip
+                        TSSController = new ToolStatusStripController(Form.GetToolStatusStrip("SousFamilles"));
+                        TSSController.ChangeNumber(sfDAO.CountAllSousFamilles());
                     }
                     break;
 
@@ -257,6 +271,10 @@ namespace Bacchus.Controller
                         this.List.Items.Remove(SelectedItem);
                         mDAO.SupprimerMarques(m.GetRefMarque());
                         SelectedNode.Nodes.RemoveByKey(m.GetNom());
+
+                        //maj du status strip
+                        TSSController = new ToolStatusStripController(Form.GetToolStatusStrip("Marques"));
+                        TSSController.ChangeNumber(mDAO.CountAllMarques());
                     }
                     break;
 
@@ -271,7 +289,8 @@ namespace Bacchus.Controller
         /// <param name="ColumnId"> numéro de la colonne </param>
         public void SortingListView(int ColumnId)
         {
-            List.ListViewItemSorter = new ListViewItemComparer(ColumnId);
+            if(List.Items.Count > 0)
+                List.ListViewItemSorter = new ListViewItemComparer(ColumnId);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Bacchus
             contextMenuStrip1.Items.Add("Ajouter");
             contextMenuStrip1.Items.Add("Modifier");
             contextMenuStrip1.Items.Add("Supprimer");
-            contextMenuStrip1.ItemClicked += new ToolStripItemClickedEventHandler(this.ContextMenuStrip_ItemClicked);
+            contextMenuStrip1.ItemClicked += new ToolStripItemClickedEventHandler(this.ContextMenuStrip1_ItemClicked);
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -112,8 +112,12 @@ namespace Bacchus
                         break;
 
                     case Keys.Delete:
-                        if(this.listView1.SelectedItems.Count > 0)
-                            Controller.DeleteSelectedItem(this.treeView1.SelectedNode);
+                        if (this.listView1.SelectedItems.Count > 0)
+                        {
+                            Controller.DeleteSelectedItem(this.treeView1.SelectedNode, this);
+                            InitializeTreeView TreeConstruct = new InitializeTreeView(this.treeView1);
+                            TreeConstruct.ConstructTree(PathToSave);
+                        }
                         break;
 
                     case Keys.Return:
@@ -244,7 +248,9 @@ namespace Bacchus
                     break;
 
                 case "Supprimer":
-                    Controller.DeleteSelectedItem(this.treeView1.SelectedNode);
+                    Controller.DeleteSelectedItem(this.treeView1.SelectedNode, this);
+                    InitializeTreeView TreeConstruct = new InitializeTreeView(this.treeView1);
+                    TreeConstruct.ConstructTree(PathToSave);
                     break;
 
                 default:
@@ -340,6 +346,27 @@ namespace Bacchus
         public Label GetLabelAjouter()
         {
             return LabelAjouter;
+        }
+
+        public ToolStripStatusLabel GetToolStatusStrip(string Name)
+        {
+            switch (Name)
+            {
+                case "Familles":
+                    return toolStripStatusFamilles;
+
+                case "SousFamilles":
+                    return toolStripStatusSousFamilles;
+
+                case "Article":
+                    return toolStripStatusArticle;
+
+                case "Marques":
+                    return toolStripStatusMarques;
+
+                default:
+                    return null;
+            }
         }
     }
 }

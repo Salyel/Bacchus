@@ -211,7 +211,7 @@ namespace Bacchus
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listView1_ColumnClickSorting);
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            //this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView_SelectedIndexChanged);
             this.listView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ListView_ItemClick);
             this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ListView_ItemDoubleClick);
             // 
@@ -219,7 +219,7 @@ namespace Bacchus
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            this.contextMenuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ContextMenuStrip_ItemClicked);
+            this.contextMenuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ContextMenuStrip1_ItemClicked);
             // 
             // ajouterToolStripMenuItem
             // 
@@ -267,14 +267,7 @@ namespace Bacchus
             this.LabelAjouter.Size = new System.Drawing.Size(371, 21);
             this.LabelAjouter.TabIndex = 3;
             this.LabelAjouter.Text = "Veuillez ouvrir une base (en important un fichier csv) avant d\'ajouter";
-            this.LabelAjouter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;        
-            // 
-            // contextMenuStrip2
-            // 
-            this.contextMenuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
-            this.contextMenuStrip2.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ContextMenuStrip2_ItemClicked);
+            this.LabelAjouter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FormMain
             // 
@@ -314,7 +307,6 @@ namespace Bacchus
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private ToolStripStatusLabel toolStripStatusArticle;
         private ToolStripStatusLabel toolStripStatusFamilles;
         private ToolStripStatusLabel toolStripStatusSousFamilles;
@@ -347,26 +339,7 @@ namespace Bacchus
             return statusStrip1;
         }
 
-        public ToolStripStatusLabel GetToolStatusStrip(string Name)
-        {
-            switch(Name)
-            {
-                case "Familles":
-                    return toolStripStatusFamilles;
-
-                case "SousFamilles":
-                    return toolStripStatusSousFamilles;
-
-                case "Article":
-                    return toolStripStatusArticle;
-
-                case "Marques":
-                    return toolStripStatusMarques;
-
-                default:
-                    return null;
-            }
-        }
+        
     }
 }
 

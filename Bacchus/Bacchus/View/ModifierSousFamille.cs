@@ -13,8 +13,13 @@ using System.Windows.Forms;
 
 namespace Bacchus.View
 {
+    /// <summary>
+    /// Classe gérant la vue permettant de modifier une sous-famille
+    /// </summary>
     public partial class ModifierSousFamille : Form
     {
+        //Attributs
+
         private FormMain Form;
         private String PathBdd;
         private String AncienNom;
@@ -35,6 +40,7 @@ namespace Bacchus.View
             List<Familles> FamillesList = FamillesD.GetAllFamilles();
 
             SousFamilles SF = (SousFamilles)Form.GetListView().SelectedItems[0].Tag;
+            //implémentation des combobox
             foreach (Familles f in FamillesList)
             {
                 ComboBox.Items.Add(f);

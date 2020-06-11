@@ -11,8 +11,13 @@ using System.Windows.Forms;
 
 namespace Bacchus.View
 {
+    /// <summary>
+    /// Classe pour gérer la vue permettant d'ajouter une famille
+    /// </summary>
     public partial class AjouterFamille : Form
     {
+        //Attributs
+
         private FormMain Form;
         private String PathBdd;
 

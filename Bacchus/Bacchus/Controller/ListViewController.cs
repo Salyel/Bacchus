@@ -180,6 +180,7 @@ namespace Bacchus.Controller
             SousFamillesDAO sfDAO = new SousFamillesDAO(PathBdd);
             MarquesDAO mDAO = new MarquesDAO(PathBdd);
 
+            //ajout de chaque article dans la listView, chaque article correpond à un objet Item
             foreach (Articles a in AllArticles)
             {
                 ListViewItem Item = new ListViewItem();
@@ -194,6 +195,7 @@ namespace Bacchus.Controller
                 List.Items.Add(Item);
             }
 
+            // permet d'adapter la taille d'une colonne en fonction de son contenu
             List.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             List.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
@@ -204,13 +206,14 @@ namespace Bacchus.Controller
         /// <param name="SelectedNode"></param>
         public void DeleteSelectedItem(TreeNode SelectedNode, FormMain Form)
         {
-            ListViewItem SelectedItem = this.List.SelectedItems[0];
+            ListViewItem SelectedItem = this.List.SelectedItems[0]; 
             ArticlesDAO aDAO = new ArticlesDAO(PathBdd);
             SousFamillesDAO sfDAO = new SousFamillesDAO(PathBdd);
 
             ToolStatusStripController TSSController;
             int nbArticles = 0;
 
+            //on effectue la suppression en fonction de la classe de l'objet présent dans le Tag
             switch (SelectedItem.Tag)
             {
                 case Articles a:
@@ -289,6 +292,7 @@ namespace Bacchus.Controller
         /// <param name="ColumnId"> numéro de la colonne </param>
         public void SortingListView(int ColumnId)
         {
+            //on fait le tri uniquement si la liste n'est pas vide
             if(List.Items.Count > 0)
                 List.ListViewItemSorter = new ListViewItemComparer(ColumnId);
         }

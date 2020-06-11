@@ -59,9 +59,8 @@ namespace Bacchus.Controller
             Tree.Nodes[1].Nodes.Clear();
             foreach(Familles f in Familles)
             {
-                Tree.Nodes[1].Nodes.Add(f.GetNom(), f.GetNom());
-                Tree.Nodes[1].LastNode.Tag = f;
-                //Tree.Nodes[1].Nodes.Find(f.GetNom(), false)[0].Tag = f;
+                Tree.Nodes[1].Nodes.Add(f.GetNom(), f.GetNom()); //ajout du noeud
+                Tree.Nodes[1].LastNode.Tag = f; //on associe le noeud à l'objet de la classe Familles correspondant
             }
             Tree.EndUpdate();
         }
@@ -146,8 +145,6 @@ namespace Bacchus.Controller
             CreateFamillesNodes(Path);
             CreateMarquesNodes(Path);
             CreateSousFamillesNodes(Path);
-
-            //PrintTreeView();
         }
     }
 }

@@ -11,20 +11,42 @@ using System.Windows.Forms;
 
 namespace Bacchus.View
 {
+    /// <summary>
+    /// Classe gérant la fenetre d'importation
+    /// </summary>
     public partial class ModaleExporter : Form
     {
+        //Attributs
+
         private string PathToSave = "";
         private string PathToExport = "";
 
+        /// <summary>
+        /// Constructeur par défaut
+        /// </summary>
         public ModaleExporter()
         {
             InitializeComponent();
         }
 
+        //fonction chargées dans les handler
+
         private void Button_Click(object sender, EventArgs e)
         {
             ChooseSQLButtonControllerExport Controller = new ChooseSQLButtonControllerExport(this);
         }
+
+        private void CsvButton_Click(object sender, EventArgs e)
+        {
+            ChooseCSVButtonControllerExport Controller = new ChooseCSVButtonControllerExport(this);
+        }
+
+        private void ExportButton_Click(object sender, EventArgs e)
+        {
+            ExportButtonController Controller = new ExportButtonController(this);
+        }
+
+        //Getters & setters
 
         public void SetProgressBarValue(int Value)
         {
@@ -44,17 +66,13 @@ namespace Bacchus.View
         public Label GetLabelExport()
         {
             return LabelExport;
-        }
-
-        private void CsvButton_Click(object sender, EventArgs e)
-        {
-            ChooseCSVButtonControllerExport Controller = new ChooseCSVButtonControllerExport(this);
-        }
+        }      
 
         public string GetPathToSave()
         {
             return PathToSave;
         }
+
         public void SetPathToSave(string Path)
         {
             PathToSave = Path;
@@ -64,14 +82,11 @@ namespace Bacchus.View
         {
             return PathToExport;
         }
+
         public void SetPathToExport(string Path)
         {
             PathToExport = Path;
         }
 
-        private void ExportButton_Click(object sender, EventArgs e)
-        {
-            ExportButtonController Controller = new ExportButtonController(this);
-        }
     }
 }

@@ -22,6 +22,11 @@ namespace Bacchus
         private FormMain FormMain;
 
         /*Constructor*/
+
+        /// <summary>
+        /// Constructeur initialisant la fenetre d'importation
+        /// </summary>
+        /// <param name="FormMain"> fenetre principale </param>
         public ModaleImporter(FormMain FormMain)
         {
             InitializeComponent(FormMain);
@@ -53,6 +58,8 @@ namespace Bacchus
         {
             ButtonsValue = "Ajout";
         }
+
+        //Getters & setters
 
         public void SetProgressBarValue(int Value)
         {
@@ -105,11 +112,6 @@ namespace Bacchus
         public void SetFormMain(FormMain Form)
         {
             FormMain = Form;
-        }
-
-        private void ModaleImporter_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

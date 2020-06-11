@@ -16,6 +16,9 @@ namespace Bacchus
 {
     public partial class FormMain : Form
     {
+        /// <summary>
+        /// Constructeur pour créer la fenêtre principale
+        /// </summary>
         public FormMain()
         {
             InitializeComponent();
@@ -30,31 +33,7 @@ namespace Bacchus
             contextMenuStrip1.ItemClicked += new ToolStripItemClickedEventHandler(this.ContextMenuStrip1_ItemClicked);
         }
 
-        private void FormMain_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-
-        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-
-        }
+        //sous ce commentaire on retrouve toutes les fonctions qui seront ajoutées dans les handler pour la gestion des interactions avec la vue
 
         private void actualiserToolStripMenuItem_Click(object sender, EventArgs e)
         {

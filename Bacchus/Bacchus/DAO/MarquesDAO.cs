@@ -42,8 +42,6 @@ namespace Bacchus.DAO
             M_dbConnection.Open();
             String Sql = "insert into marques (Nom) values ('" + Marque.GetNom() + "')";
 
-            //Console.WriteLine(Sql);
-
             using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
             {
                 //ajout de la marque
@@ -63,10 +61,7 @@ namespace Bacchus.DAO
             SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
 
             M_dbConnection.Open();
-
             String Sql = "DELETE FROM Marques WHERE RefMarque = " + RefMarque;
-
-            //Console.WriteLine(Sql);
 
             using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
             {
@@ -90,8 +85,6 @@ namespace Bacchus.DAO
             M_dbConnection.Open();
             String Sql = "update marques set nom='" + NouveauNom + "' where nom='" + AncienNom + "'";
 
-            //Console.WriteLine(Sql);
-
             using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
             {
                 //ajout de la marque
@@ -114,9 +107,7 @@ namespace Bacchus.DAO
             SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
 
             M_dbConnection.Open();
-
             String Sql = "select RefMarque from marques where Nom= ('" + Nom + "')";
-            //Console.WriteLine(Sql);
 
             int Ref = -1;
 
@@ -147,9 +138,7 @@ namespace Bacchus.DAO
             SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
 
             M_dbConnection.Open();
-
             String Sql = "select Nom from marques where RefMarque=" + Ref;
-            //Console.WriteLine(Sql);
 
             string Nom = "";
 
@@ -177,9 +166,7 @@ namespace Bacchus.DAO
             SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
 
             M_dbConnection.Open();
-
             String Sql = "select RefMarque from marques where Nom= ('" + Nom + "')";
-            //Console.WriteLine(Sql);
 
             bool Exists = true;
 
@@ -211,9 +198,7 @@ namespace Bacchus.DAO
             SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
 
             M_dbConnection.Open();
-
             String Sql = "select RefMarque, Nom from Marques";
-           // Console.WriteLine(Sql);
 
             using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))
             {
@@ -243,7 +228,6 @@ namespace Bacchus.DAO
             SQLiteConnection M_dbConnection = new SQLiteConnection("Data Source=" + DatabasePath);
 
             M_dbConnection.Open();
-
             String Sql = "select COUNT(*) from Marques";
 
             using (SQLiteCommand Command = new SQLiteCommand(Sql, M_dbConnection))

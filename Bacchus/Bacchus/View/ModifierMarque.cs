@@ -12,8 +12,13 @@ using System.Windows.Forms;
 
 namespace Bacchus.View
 {
+    /// <summary>
+    /// Classe gérant la vue permettant de modifier une marque
+    /// </summary>
     public partial class ModifierMarque : Form
     {
+        //Attributs
+
         private FormMain Form;
         private String PathBdd;
         private String AncienNom;

@@ -13,6 +13,9 @@ using System.Windows.Forms;
 
 namespace Bacchus.View
 {
+    /// <summary>
+    /// Classe gérant la vue permettant de modifier un article
+    /// </summary>
     public partial class ModifierArticle : Form
     {
         private FormMain Form;
@@ -37,6 +40,7 @@ namespace Bacchus.View
             SousFamillesDAO SousFamillesD = new SousFamillesDAO(PathBdd);
             List<SousFamilles> SousFamillesList = SousFamillesD.GetAllSousFamilles();
 
+            //implémentation des combobox
             String SF = Form.GetListView().SelectedItems[0].SubItems[3].Text;
             foreach (SousFamilles Sf in SousFamillesList)
             {

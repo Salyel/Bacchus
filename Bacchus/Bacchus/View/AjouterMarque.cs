@@ -11,8 +11,13 @@ using System.Windows.Forms;
 
 namespace Bacchus.View
 {
+    /// <summary>
+    /// Classe gérant la vue qui permet d'ajouter une marque
+    /// </summary>
     public partial class AjouterMarque : Form
     {
+        //Attributs
+
         private FormMain Form;
         private String PathBdd;
 

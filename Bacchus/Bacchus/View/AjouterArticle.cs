@@ -13,8 +13,13 @@ using System.Windows.Forms;
 
 namespace Bacchus.View
 {
+    /// <summary>
+    /// Classe pour gérer la vue des ajout d'articles
+    /// </summary>
     public partial class AjouterArticle : Form
     {
+        //Attributs
+
         private FormMain Form;
         private String PathBdd;
 
@@ -31,6 +36,7 @@ namespace Bacchus.View
             SousFamillesDAO SousFamillesD = new SousFamillesDAO(PathBdd);
             List<SousFamilles> SousFamillesList = SousFamillesD.GetAllSousFamilles();
 
+            //remplissage des combobox
             foreach (SousFamilles Sf in SousFamillesList)
             {
                 ComboBoxSousFamille.Items.Add(Sf);

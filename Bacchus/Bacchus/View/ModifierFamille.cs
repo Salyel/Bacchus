@@ -11,6 +11,9 @@ using System.Windows.Forms;
 
 namespace Bacchus.View
 {
+    /// <summary>
+    /// Classe gérant la vue permettant de modifier une famille
+    /// </summary>
     public partial class ModifierFamille : Form
     {
         private FormMain Form;

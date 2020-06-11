@@ -86,7 +86,7 @@ namespace Bacchus.DAO
             }
             //Maintenant on crée tout en base 
             Modale.SetProgressBarValue(50);
-            for (int Index = 0; Index < AllMarques.Count; Index++)
+            for (int Index = 0; Index < AllMarques.Count; Index++) //ajout des marques
             {
                 if(!MarquesD.CheckIfExists(AllMarques[Index]))
                 {
@@ -95,7 +95,7 @@ namespace Bacchus.DAO
                 }
             }
             Modale.SetProgressBarValue(60);
-            for (int Index = 0; Index < AllFamilles.Count; Index++)
+            for (int Index = 0; Index < AllFamilles.Count; Index++) //ajout des familles
             {
                 if(!FamillesD.CheckIfExists(AllFamilles[Index]))
                 {
@@ -104,7 +104,7 @@ namespace Bacchus.DAO
                 }
             }
             Modale.SetProgressBarValue(70);
-            for (int Index = 0; Index < AllSousFamilles.Count; Index++)
+            for (int Index = 0; Index < AllSousFamilles.Count; Index++) // ajout des sous familles
             {
                 //Là je devais m'occuper d'ajouter la sous famille si elle était pas là, ou la modifier si sa famille avait changé (jsp si c'est possible)
                 if(!SousFamillesD.CheckIfExists(AllSousFamilles[Index]))
@@ -118,7 +118,7 @@ namespace Bacchus.DAO
                 }
             }
             Modale.SetProgressBarValue(80);
-            for (int Index = 0; Index < AllArticlesRefArticle.Count; Index++)
+            for (int Index = 0; Index < AllArticlesRefArticle.Count; Index++) //ajout des articles
             {
                 if(!ArticlesD.CheckIfExists(AllArticlesRefArticle[Index]))
                 {
@@ -147,7 +147,7 @@ namespace Bacchus.DAO
             const string caption = "Intégration en mode Ajout terminé !";
             var result = MessageBox.Show(message, caption,
                                          MessageBoxButtons.OK,
-                                         MessageBoxIcon.Information);
+                                         MessageBoxIcon.Information); //affichage d'une messageBox pour indiquer que tout s'est bien passé
         }
     }
 }
